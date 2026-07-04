@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MeshLearn — Offline Education | Olabisi Adigun</title>
+<meta name="description" content="MeshLearn is a decentralized offline learning app using BLE mesh networking so coursework keeps moving without an internet connection.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+
+<nav class="sub-nav">
+  <a href="../index.html" class="back-link">← Back to Portfolio</a>
+  <span class="site-name">Olabisi Adigun</span>
+  <button id="themeBtn" class="theme-btn">☀ Light</button>
+</nav>
+
+<div class="page-header">
+  <div class="tag-row">
+    <span class="tag">Education</span>
+    <span class="tag">Founder</span>
+    <span class="tag">Beta</span>
+    <span class="tag">2025</span>
+  </div>
+  <h1>MeshLearn</h1>
+  <p class="lead">A decentralized offline learning platform that uses Bluetooth Low Energy mesh networking to keep coursework moving — even when there is no internet connection at all.</p>
+  <div class="meta-strip">
+    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-val">Founder, Full-stack, ML</span></div>
+    <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
+    <div class="meta-item"><span class="meta-label">Status</span><span class="meta-val">Beta</span></div>
+    <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-val">React Native · BLE · Python · TensorFlow Lite</span></div>
+  </div>
+</div>
+
+<div class="cover-wrap">
+  <img class="cover-img" src="https://picsum.photos/seed/meshlearn/1600/900" alt="MeshLearn — Offline Education">
+</div>
+
+<div class="page-body">
+  <h2>Why MeshLearn?</h2>
+  <p>Nigeria has over 200 universities and polytechnics. A significant percentage of students studying outside major cities have unreliable or prohibitively expensive internet access. During my own studies at KWASU, I watched classmates struggle to download lecture materials, submit assignments, or access e-learning portals — not because the content wasn't there, but because the infrastructure wasn't.</p>
+  <p>The existing solutions — downloaded PDFs, WhatsApp groups, USB drives passed around — were fragile, unsearchable, and impossible to track for progress. I wanted to build something better.</p>
+
+  <h2>How the Mesh Works</h2>
+  <p>MeshLearn uses <strong>Bluetooth Low Energy (BLE)</strong> to create a peer-to-peer content distribution network across a campus or classroom. When one device downloads or receives content, it automatically becomes a node that can serve that content to other nearby devices.</p>
+  <p>This means a single device with connectivity can bootstrap an entire classroom of learners. Content propagates across the mesh in chunks, verified by hash, so corrupted or incomplete chunks are automatically requested from another peer.</p>
+
+  <div class="callout">
+    <h4>Key Insight</h4>
+    <p>The BLE mesh isn't just a data transfer mechanism. It also enables a local social graph — students can see who else in their mesh has completed a module, forming organic study accountability pairs without any server involvement.</p>
+  </div>
+
+  <h2>The ML Layer</h2>
+  <p>MeshLearn includes a lightweight on-device recommendation engine built with <strong>TensorFlow Lite</strong>. It runs entirely on the student's phone and learns from their engagement patterns to surface the most relevant content modules next.</p>
+  <p>Training data never leaves the device. The model is updated via a federated learning mechanism — when two devices exchange content over BLE, they also exchange anonymized gradient updates, allowing the model to improve across the mesh without centralizing personal data.</p>
+
+  <h2>Tech Stack</h2>
+  <div class="tech-stack">
+    <span class="tech-chip">React Native</span>
+    <span class="tech-chip">Expo</span>
+    <span class="tech-chip">BLE (react-native-ble-plx)</span>
+    <span class="tech-chip">Python</span>
+    <span class="tech-chip">TensorFlow Lite</span>
+    <span class="tech-chip">Federated Learning</span>
+    <span class="tech-chip">SQLite</span>
+    <span class="tech-chip">Node.js (sync server)</span>
+  </div>
+
+  <h2>Current State & Roadmap</h2>
+  <p>MeshLearn is currently in closed beta with a cohort of students at KWASU. The core BLE content-sharing and progress-tracking features are stable. Active work is ongoing on:</p>
+  <ul>
+    <li>Improving BLE range and connection stability in crowded environments</li>
+    <li>Adding instructor dashboards for offline-first progress monitoring</li>
+    <li>Expanding the content format support beyond video and PDF to include interactive quizzes</li>
+    <li>Partnerships with other West African universities for a broader beta</li>
+  </ul>
+
+  <h2>What I Learned</h2>
+  <p>MeshLearn was my first serious encounter with the constraints of mobile hardware. BLE is finicky — Bluetooth stacks vary wildly across Android manufacturers, power management kills background processes unexpectedly, and the mesh topology needs to adapt dynamically as users move around.</p>
+  <p>It also taught me that <strong>the user experience of "it just works offline"</strong> is an extraordinarily hard engineering problem. Every assumption you make about connectivity, state synchronization, and data freshness has to be revisited from scratch.</p>
+</div>
+
+<div class="page-cta">
+  <h2>Want to collaborate?</h2>
+  <p>Looking for institutional partners, investors, and NGOs interested in offline-first EdTech in Africa.</p>
+  <div class="cta-btns">
+    <a href="mailto:hello@olabisiadigun.dev?subject=MeshLearn Collaboration" class="btn-primary">Let's Talk ↗</a>
+    <a href="../index.html#products" class="btn-outline">← Back to Works</a>
+  </div>
+</div>
+
+<footer class="sub-footer">
+  <span class="copy">© 2026 Olabisi Adigun</span>
+  <a href="../index.html" class="back-home">olabisiadigun.xyz ↗</a>
+</footer>
+
+<script src="../shared.js"></script>
+</body>
+</html>

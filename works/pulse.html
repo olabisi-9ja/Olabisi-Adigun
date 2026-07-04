@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulse — AI Music Discovery | Olabisi Adigun</title>
+<meta name="description" content="Pulse is a fintech infrastructure protocol for emerging markets — offline payment guarantees secured with ECDSA across a seven-layer architecture.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+
+<nav class="sub-nav">
+  <a href="../index.html" class="back-link">← Back to Portfolio</a>
+  <span class="site-name">Olabisi Adigun</span>
+  <button id="themeBtn" class="theme-btn">☀ Light</button>
+</nav>
+
+<div class="page-header">
+  <div class="tag-row">
+    <span class="tag">Fintech</span>
+    <span class="tag">Founder</span>
+    <span class="tag">Live</span>
+    <span class="tag">2026</span>
+  </div>
+  <h1>Pulse</h1>
+  <p class="lead">A fintech infrastructure protocol for emerging markets — delivering offline payment guarantees secured with ECDSA signatures across a resilient seven-layer architecture.</p>
+  <div class="meta-strip">
+    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-val">Founder, Engineer, Designer</span></div>
+    <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2026</span></div>
+    <div class="meta-item"><span class="meta-label">Status</span><span class="meta-val">Live</span></div>
+    <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-val">Node.js · React · PostgreSQL · ECDSA</span></div>
+  </div>
+</div>
+
+<div class="cover-wrap">
+  <img class="cover-img" src="https://picsum.photos/seed/pulse-protocol/1600/900" alt="Pulse — Fintech Protocol">
+</div>
+
+<div class="page-body">
+  <h2>The Problem</h2>
+  <p>In Nigeria and across Sub-Saharan Africa, unreliable internet connectivity is a constant reality. Millions of people are locked out of digital financial services every day — not because they don't have a phone, or a bank account — but because a 3G tower went down, or USSD is congested, or the POS machine has no signal.</p>
+  <p>Existing fintech infrastructure assumes a persistent connection. That assumption fails constantly in emerging markets, and it costs real money for real people.</p>
+
+  <h2>The Solution</h2>
+  <p>Pulse is a seven-layer offline payment protocol. It allows two parties to execute a financially guaranteed transaction — even with zero internet connectivity — using cryptographic proofs that are reconciled with the network when connectivity is restored.</p>
+
+  <blockquote>
+    <p>"The goal was never to build a payment app. The goal was to build the layer that all payment apps in low-connectivity environments should be built on top of."</p>
+  </blockquote>
+
+  <h2>Architecture Overview</h2>
+  <p>The protocol is structured in seven distinct layers, each responsible for a single concern:</p>
+  <ul>
+    <li><strong>Layer 1 — Identity:</strong> Cryptographic key-pair generation per device using secp256k1 (the same curve as Bitcoin).</li>
+    <li><strong>Layer 2 — Authorization:</strong> ECDSA-signed transaction intents. The payer signs an intent; the payee verifies the signature locally without a server.</li>
+    <li><strong>Layer 3 — Escrow:</strong> A deterministic local escrow mechanism that locks sender funds at initiation time, preventing double-spends.</li>
+    <li><strong>Layer 4 — Transport:</strong> Transactions are encoded as QR codes or NFC payloads for zero-connectivity peer-to-peer transfer.</li>
+    <li><strong>Layer 5 — Queuing:</strong> Unreconciled transactions are queued in a local SQLite store with a priority ordering algorithm.</li>
+    <li><strong>Layer 6 — Reconciliation:</strong> When connectivity is restored, queued transactions are batched and submitted to the settlement network in chronological order.</li>
+    <li><strong>Layer 7 — Dispute:</strong> Cryptographic proof chains allow the system to adjudicate disputes without requiring both parties to be online simultaneously.</li>
+  </ul>
+
+  <div class="callout">
+    <h4>Engineering Challenge</h4>
+    <p>The hardest part was designing the escrow mechanism to prevent double-spending without access to a shared ledger. The solution was a deterministic nonce system tied to the device clock plus a monotonic counter — making replay attacks computationally infeasible even in offline conditions.</p>
+  </div>
+
+  <h2>Tech Stack</h2>
+  <div class="tech-stack">
+    <span class="tech-chip">Node.js</span>
+    <span class="tech-chip">React Native</span>
+    <span class="tech-chip">PostgreSQL</span>
+    <span class="tech-chip">SQLite (offline)</span>
+    <span class="tech-chip">ECDSA / secp256k1</span>
+    <span class="tech-chip">QR Transport</span>
+    <span class="tech-chip">NFC</span>
+    <span class="tech-chip">Supabase (sync)</span>
+  </div>
+
+  <h2>What I Learned</h2>
+  <p>Building Pulse taught me that the most challenging engineering problems are not about writing clever code — they are about designing systems that remain correct when all your assumptions break down. Network reliability is an assumption. Clock synchronization is an assumption. Even the user having a fully-charged phone is an assumption.</p>
+  <p>The discipline of <strong>adversarial thinking</strong> — asking "what if this component is unavailable?" at every layer — is something I now apply to every system I design, regardless of whether it touches payments.</p>
+</div>
+
+<div class="page-cta">
+  <h2>Interested in Pulse?</h2>
+  <p>I'm actively looking for partners and early adopters in the fintech and emerging markets space.</p>
+  <div class="cta-btns">
+    <a href="mailto:hello@olabisiadigun.dev?subject=Pulse Inquiry" class="btn-primary">Get in Touch ↗</a>
+    <a href="../index.html#products" class="btn-outline">← Back to Works</a>
+  </div>
+</div>
+
+<footer class="sub-footer">
+  <span class="copy">© 2026 Olabisi Adigun</span>
+  <a href="../index.html" class="back-home">olabisiadigun.xyz ↗</a>
+</footer>
+
+<script src="../shared.js"></script>
+</body>
+</html>

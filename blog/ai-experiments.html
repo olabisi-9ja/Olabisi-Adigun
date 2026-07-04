@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Experiments in the Browser | Olabisi Adigun</title>
+<meta name="description" content="Notes from six months of running machine learning models directly in the browser — what works, what doesn't, and what surprised me most.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+
+<nav class="sub-nav">
+  <a href="../index.html#drafts" class="back-link">← Back to Drafts</a>
+  <span class="site-name">Olabisi Adigun</span>
+  <button id="themeBtn" class="theme-btn">☀ Light</button>
+</nav>
+
+<div class="page-header">
+  <div class="tag-row">
+    <span class="tag">Technical</span>
+    <span class="tag">AI</span>
+    <span class="tag">Browser</span>
+    <span class="tag">05.28.2026</span>
+  </div>
+  <h1>AI Experiments in the Browser</h1>
+  <p class="lead">Notes from six months of running machine learning models directly in the browser using TensorFlow.js, ONNX Runtime Web, and WebGPU — what works, what doesn't, and what genuinely surprised me.</p>
+</div>
+
+<div class="page-body">
+  <p>The browser is becoming a legitimate ML inference environment. That sentence would have sounded absurd five years ago. Today, with WebGPU shipping in major browsers and quantized model formats that compress a 7B parameter model into something that fits in a few gigabytes of GPU memory, it's increasingly real.</p>
+  <p>Over the last six months, I've been running experiments — mostly in the context of MeshLearn's on-device recommendation system, but also as standalone explorations. Here's what I've learned.</p>
+
+  <h2>The Stack That Actually Works</h2>
+  <p>I've tried three primary approaches:</p>
+  <ul>
+    <li><strong>TensorFlow.js</strong> — The most mature ecosystem. Great documentation. Backend options include WebGL (widely supported), WebGPU (faster, newer), and WASM (CPU fallback). The main limitation is that the TF.js model format (TFJS) requires conversion from the original TensorFlow SavedModel format, which adds friction.</li>
+    <li><strong>ONNX Runtime Web</strong> — Increasingly my preference. ONNX is a cross-framework interchange format, so I can export from PyTorch or TensorFlow and run the same model everywhere. The WebGPU execution provider is fast. The WebAssembly SIMD backend is a surprisingly good CPU fallback.</li>
+    <li><strong>Transformers.js (Hugging Face)</strong> — For NLP tasks specifically, this is now the easiest path. Pre-quantized models from the Hugging Face Hub, a familiar API if you've used the Python transformers library. Ran a sentiment classification model at ~20ms per inference on a mid-range laptop.</li>
+  </ul>
+
+  <h2>What WebGPU Changes</h2>
+  <p>The arrival of WebGPU in Chrome 113 and Firefox Nightly is genuinely significant. WebGL was designed for graphics, not compute — it works for ML inference but it's a workaround. WebGPU exposes compute shaders directly, which is the right primitive for matrix multiplication at scale.</p>
+  <p>In my benchmarks, the same ONNX model running with WebGPU is roughly 3–4× faster than WebGL on an M1 MacBook. On machines with dedicated GPUs, the gap is larger.</p>
+
+  <div class="callout">
+    <h4>Benchmark: Sentiment Classification</h4>
+    <p>Model: DistilBERT-base-uncased-finetuned-sst-2 (quantized INT8, 67MB)<br>
+    WebGL backend: ~185ms per inference<br>
+    WebGPU backend: ~48ms per inference<br>
+    WebAssembly SIMD (CPU): ~320ms per inference<br>
+    <em>Tested on M1 MacBook Air, Chrome 124</em></p>
+  </div>
+
+  <h2>The Size Problem</h2>
+  <p>The biggest practical barrier to client-side ML isn't performance — it's model size. Even quantized models are large by web standards. A quantized DistilBERT is 67MB. A quantized Whisper base is 150MB. Users aren't used to web applications that require a 150MB download before they do anything useful.</p>
+  <p>Approaches that help:</p>
+  <ul>
+    <li><strong>Progressive loading</strong> — Load a smaller, faster model first. Use it for the common case. Load the larger model in the background for edge cases that need it.</li>
+    <li><strong>Model caching with Cache API</strong> — Once downloaded, a model should never download again. Cache API allows byte-range storage that persists across sessions.</li>
+    <li><strong>Task-specific distillation</strong> — Train a tiny model (10MB or less) on your specific task using a large model as teacher. For narrow tasks, a well-distilled small model outperforms a large general model.</li>
+  </ul>
+
+  <h2>The Privacy Angle</h2>
+  <p>This is the part that actually excites me most about browser-side ML. When inference happens on the client, user data never leaves the device. For applications where the input is sensitive — health data, private communications, financial information — this is not just a privacy win, it's a competitive advantage.</p>
+  <p>MeshLearn's recommendation engine works this way by design. Your study patterns, your completion rates, your engagement signals — they stay on your phone. The model improves via federated learning, but the raw data never moves. That's a meaningful commitment that purely cloud-based EdTech cannot make.</p>
+
+  <h2>What I'll Keep Exploring</h2>
+  <p>The area I'm most excited about right now is <strong>retrieval-augmented generation (RAG) in the browser</strong>. The pieces are coming together: small embedding models (all-MiniLM-L6-v2 is 23MB quantized), client-side vector stores like LanceDB-WASM, and small language models that can run inference at reasonable speeds on modern hardware.</p>
+  <p>The vision: a web application that can perform sophisticated contextual retrieval and generation entirely on the client, with no API calls, no data leaving the device, and no usage costs. For certain categories of application, this is now buildable.</p>
+</div>
+
+<div class="page-cta">
+  <h2>Experimenting with something similar?</h2>
+  <p>I love talking about ML in constrained environments. Let's compare notes.</p>
+  <div class="cta-btns">
+    <a href="https://x.com/olabisi_9ja" target="_blank" rel="noopener" class="btn-primary">Find me on X ↗</a>
+    <a href="../index.html#drafts" class="btn-outline">← More Drafts</a>
+  </div>
+</div>
+
+<footer class="sub-footer">
+  <span class="copy">© 2026 Olabisi Adigun</span>
+  <a href="../index.html" class="back-home">olabisiadigun.xyz ↗</a>
+</footer>
+
+<script src="../shared.js"></script>
+</body>
+</html>

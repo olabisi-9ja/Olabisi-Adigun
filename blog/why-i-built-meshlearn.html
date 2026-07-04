@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why I Built MeshLearn | Olabisi Adigun</title>
+<meta name="description" content="The story behind MeshLearn — why I decided to solve the offline education problem in Nigerian universities using BLE mesh networking.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+
+<nav class="sub-nav">
+  <a href="../index.html#drafts" class="back-link">← Back to Drafts</a>
+  <span class="site-name">Olabisi Adigun</span>
+  <button id="themeBtn" class="theme-btn">☀ Light</button>
+</nav>
+
+<div class="page-header">
+  <div class="tag-row">
+    <span class="tag">Essay</span>
+    <span class="tag">Education</span>
+    <span class="tag">Product</span>
+    <span class="tag">07.04.2026</span>
+  </div>
+  <h1>Why I Built MeshLearn</h1>
+  <p class="lead">The honest story of how a frustrating lecture-download problem at KWASU turned into the most technically challenging project of my life — and what I learned about building for people who are truly underserved.</p>
+</div>
+
+<div class="page-body">
+  <p>It started with a 200MB video lecture that took six hours to download.</p>
+  <p>We were deep into the second semester of second year, and the university's e-learning portal had just been updated with a new batch of recorded lectures for our Data Structures course. Great. Except the campus network was essentially unusable by 9am because hundreds of students were all trying to pull the same files simultaneously.</p>
+  <p>By the time my laptop finished downloading, it was past midnight. I'd spent the whole day in the library waiting. Not studying. Waiting. And I was one of the lucky ones — I had a laptop and a reliable enough connection that the download eventually completed. Many of my classmates just gave up and found someone's WhatsApp group where a single student had compressed the video into a grainy 40MB file that looked like it was filmed through a jar of petroleum jelly.</p>
+  <p>That was the moment I started paying serious attention to the problem.</p>
+
+  <h2>The Real Scale of It</h2>
+  <p>I started talking to students across different faculties and departments. Same story, different details. Engineering students downloading CAD software packages. Medical students trying to access virtual lab simulations. Law students pulling down case libraries.</p>
+  <p>The shared theme was always: <strong>the content exists, the device exists, the desire to learn exists — but the pipe is broken.</strong></p>
+
+  <blockquote>
+    <p>"The most dangerous kind of poverty isn't not having access to content. It's being close enough to touch it but unable to grab it."</p>
+  </blockquote>
+
+  <p>Nigeria has 170+ universities. A significant portion are in cities where 4G is unreliable and 5G is nonexistent. The government's answer has been to upgrade campus networks — but that's slow, expensive, and has been "coming soon" for years at many institutions.</p>
+  <p>I didn't want to wait for the infrastructure to catch up. I wanted to build something that worked with the hardware that already existed in every student's pocket.</p>
+
+  <h2>The First Bad Idea</h2>
+  <p>My first instinct was an offline-first progressive web app. Download lectures when you have connectivity, consume them offline later. Standard stuff. I built a prototype in about two weeks.</p>
+  <p>It worked. But it didn't solve the real problem. It still required each student to independently find connectivity and download content. If you lived off-campus, or your device died before you could sync, or you simply didn't know a lecture had been uploaded — you were still stuck.</p>
+  <p>The insight I was missing was this: <strong>the problem isn't individual access, it's collective distribution.</strong> On any given campus, a handful of students with decent connectivity are accidentally gatekeeping content from the students around them.</p>
+
+  <h2>Bluetooth as a Network</h2>
+  <p>The idea of using Bluetooth for content distribution came from an unlikely source — I was reading about how protest movements in Hong Kong used Bluetooth-based apps like Bridgefy to communicate when the government throttled cellular networks. If Bluetooth could carry protest communications, it could definitely carry lecture PDFs.</p>
+  <p>I spent two weeks reading everything I could about BLE (Bluetooth Low Energy) — how it works, what its throughput limits are, how Android and iOS handle BLE differently, what background scanning limitations exist on each platform.</p>
+  <p>BLE is slow. Maximum throughput in ideal conditions is around 250kbps on a single connection. But the key insight is that in a mesh topology, you're not relying on a single connection — you're pipelining data across multiple hops. One device seeds to five nearby devices simultaneously, each of which becomes a seed node for the next five.</p>
+
+  <h2>What I Got Wrong</h2>
+  <p>I got a lot wrong initially. The list is long:</p>
+  <ul>
+    <li>I underestimated how aggressively Android kills background Bluetooth processes to save battery. The first version of the mesh collapsed every time a user locked their phone.</li>
+    <li>I assumed all Bluetooth stacks behave the same across Android manufacturers. They do not. Samsung, Xiaomi, and Tecno all have slightly different BLE implementations.</li>
+    <li>I built the content chunking algorithm to optimise for speed, not resilience. Chunks arrived out of order, and reassembly failed silently. Students got corrupted files with no feedback about why.</li>
+    <li>I assumed students would keep the app open. They don't. I had to rebuild the entire transfer queue system around the assumption that the app could be killed at any point.</li>
+  </ul>
+  <p>Each of these failures cost me weeks. But I kept going, because every time I showed a working version to a student who actually needed it — watching their face when a video loaded without them having to hunt for connectivity — I felt the pull of the problem too strongly to quit.</p>
+
+  <h2>Where It Is Now</h2>
+  <p>MeshLearn is in closed beta with about 60 students at KWASU across three departments. The BLE mesh is stable. Content propagation works. The ML recommendation engine is live but still rough around the edges.</p>
+  <p>The most surprising result of the beta has been the social dynamics it creates. Students have started forming informal study groups around the app — they meet physically because the mesh works best when devices are in close proximity, and those in-person meetings have been more effective than anything a digital tool alone could engineer.</p>
+  <p>Sometimes the best outcome of a technology is the human behaviour it accidentally enables.</p>
+
+  <h2>What This Taught Me About Product Building</h2>
+  <p>Building MeshLearn taught me that the most important product skill is not knowing how to build things — it's knowing <em>why</em> things are the way they are before you try to change them. I spent months assuming the problem was a technology problem. It's actually a distribution problem, which requires a technology solution — but those are very different framings, and they lead to very different products.</p>
+  <p>The version of MeshLearn that exists today bears almost no resemblance to the version I imagined in that library at midnight, watching a progress bar crawl. And that's exactly how it should be.</p>
+</div>
+
+<div class="page-cta">
+  <h2>Want to read more?</h2>
+  <p>I write about building, design, and engineering from the perspective of someone doing it in West Africa.</p>
+  <div class="cta-btns">
+    <a href="../index.html#drafts" class="btn-primary">← More Drafts</a>
+    <a href="../works/meshlearn.html" class="btn-outline">See MeshLearn →</a>
+  </div>
+</div>
+
+<footer class="sub-footer">
+  <span class="copy">© 2026 Olabisi Adigun</span>
+  <a href="../index.html" class="back-home">olabisiadigun.xyz ↗</a>
+</footer>
+
+<script src="../shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How I Design Systems | Olabisi Adigun</title>
+<meta name="description" content="My approach to building design systems — from tokens and primitives to the decisions I've changed my mind about after building several production systems.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+
+<nav class="sub-nav">
+  <a href="../index.html#drafts" class="back-link">← Back to Drafts</a>
+  <span class="site-name">Olabisi Adigun</span>
+  <button id="themeBtn" class="theme-btn">☀ Light</button>
+</nav>
+
+<div class="page-header">
+  <div class="tag-row">
+    <span class="tag">Design</span>
+    <span class="tag">Systems</span>
+    <span class="tag">Engineering</span>
+    <span class="tag">04.10.2026</span>
+  </div>
+  <h1>How I Design Systems</h1>
+  <p class="lead">My approach to building design systems — from tokens and primitives to the decisions I've reversed after building several production systems, and the single question that makes every design system decision easier.</p>
+</div>
+
+<div class="page-body">
+  <p>A design system is a bet. You're betting that the investment in consistency, documentation, and abstraction will pay off more than the time it costs to build and maintain. For small projects, that bet is often wrong. For anything beyond a single landing page, it's almost always right.</p>
+  <p>I've built design systems from scratch for three projects now, inherited a poorly documented one, and contributed to a larger team's system. Here's what I've learned.</p>
+
+  <h2>Start with the Question, Not the Tokens</h2>
+  <p>The most common mistake I see when people start building design systems — including early me — is jumping straight into token definitions. What's the spacing scale? What are the brand colours? What's the type ramp?</p>
+  <p>These are important questions. But they're not the first question. The first question is: <strong>what is this system for?</strong></p>
+  <p>Specifically:</p>
+  <ul>
+    <li>Who will use it? Developers? Designers? Both?</li>
+    <li>What are the products it needs to serve? One app? A family of products?</li>
+    <li>What's the primary axis of variation? Themes? Brands? Accessibility levels?</li>
+    <li>What's the governance model? Who can add to it? Who approves changes?</li>
+  </ul>
+  <p>The answers to these questions determine the architecture of the system before you've written a single token. Get them wrong and you'll spend months rebuilding.</p>
+
+  <h2>The Token Hierarchy That Actually Scales</h2>
+  <p>After experimenting with several approaches, the hierarchy I keep returning to has three layers:</p>
+
+  <h3>Primitive Tokens</h3>
+  <p>The raw values. These should be named for what they <em>are</em>, not what they <em>do</em>.</p>
+  <div class="tech-stack">
+    <span class="tech-chip">color-blue-500: #346BF1</span>
+    <span class="tech-chip">spacing-4: 1rem</span>
+    <span class="tech-chip">font-size-lg: 1.125rem</span>
+  </div>
+
+  <h3>Semantic Tokens</h3>
+  <p>Aliases that map primitives to purpose. These are what components reference.</p>
+  <div class="tech-stack">
+    <span class="tech-chip">color-action-primary → color-blue-500</span>
+    <span class="tech-chip">spacing-component-padding → spacing-4</span>
+    <span class="tech-chip">font-size-body → font-size-lg</span>
+  </div>
+
+  <h3>Component Tokens</h3>
+  <p>Scoped tokens for specific components. Optional, but useful when a component has many configurable properties.</p>
+
+  <blockquote>
+    <p>"The semantic layer is where the real design system lives. Primitives are facts. Semantics are decisions."</p>
+  </blockquote>
+
+  <h2>The Decision I've Changed My Mind About: Spacing</h2>
+  <p>I used to advocate hard for 4px base spacing grids. Multiples of 4. Everything divisible by 4. It felt rigorous and mathematical.</p>
+  <p>I've softened on this. The 4px grid is excellent for component-level spacing — padding, gaps, border radii. But applying it rigidly to layout-level spacing creates strange constraints. Layout spacing is not the same problem as component spacing, and trying to solve both with the same scale produces either a scale with too many steps (hard to choose from) or one with too few (too coarse).</p>
+  <p>My current approach: 4px base for component spacing, a separate geometric scale for layout spacing (0.5rem, 1rem, 2rem, 4rem, 8rem, 12rem).</p>
+
+  <h2>The Decision I've Changed My Mind About: Component Abstraction Level</h2>
+  <p>Early on, I built systems with very granular primitives. A <code>Text</code> component. A <code>Box</code> component. A <code>Stack</code> component. Every UI element assembled from these atoms.</p>
+  <p>The problem: the abstraction is leaky in every direction. The "atoms" are too low-level for designers to think in, and too high-level for engineers who need fine-grained control. You end up with a system that nobody actually wants to use, because it doesn't match anyone's mental model.</p>
+  <p>Now I build systems that match the <em>vocabulary the team already uses</em>. If the team says "card," there's a Card component. If they say "toolbar," there's a Toolbar. The design system is documentation of the team's shared language, not an abstract architecture.</p>
+
+  <h2>On Documentation</h2>
+  <p>The most underinvested part of every design system is documentation. And the most valuable kind of documentation is not "here's the API" — it's "here's when to use this, and here's when not to."</p>
+  <p>Decision criteria are more valuable than specifications. A specification tells you what a component does. Decision criteria tell you when to reach for it.</p>
+
+  <h2>The Single Question</h2>
+  <p>When I'm stuck on a design system decision — whether to add a new component, whether to break a token out of a parent token, whether a variant should be a prop or a separate component — I ask a single question:</p>
+  <p><strong>Does this make it easier to do the right thing and harder to do the wrong thing?</strong></p>
+  <p>A design system is a set of constraints. Good constraints liberate. They narrow the decision space to the point where doing good work becomes the path of least resistance. If an addition makes it easier to build consistent, accessible, performant UI — it belongs in the system. If it increases complexity without a proportional benefit, it doesn't.</p>
+</div>
+
+<div class="page-cta">
+  <h2>Building a design system?</h2>
+  <p>I consult on design system architecture and implementation through Greene Studios.</p>
+  <div class="cta-btns">
+    <a href="mailto:hello@olabisiadigun.dev?subject=Design System Consultation" class="btn-primary">Get in Touch ↗</a>
+    <a href="../index.html#drafts" class="btn-outline">← More Drafts</a>
+  </div>
+</div>
+
+<footer class="sub-footer">
+  <span class="copy">© 2026 Olabisi Adigun</span>
+  <a href="../index.html" class="back-home">olabisiadigun.xyz ↗</a>
+</footer>
+
+<script src="../shared.js"></script>
+</body>
+</html>
