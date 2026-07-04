@@ -34,8 +34,8 @@ h1,h2,h3{font-family:var(--font-head);font-weight:700;line-height:1.0;letter-spa
 #cursor{position:fixed;top:0;left:0;width:9px;height:9px;border-radius:50%;background:#FFFFFF;
   z-index:700;pointer-events:none;transform:translate(-50%,-50%);transition:transform .15s ease-out, width .3s, height .3s, background .3s;
   mix-blend-mode:difference; display:flex; align-items:center; justify-content:center; overflow:hidden;}
-#cursor.hoverable{width:64px;height:64px;background:#FFFFFF; mix-blend-mode:difference;}
-#cursor-text{position:fixed;top:0;left:0;transform:translate(-50%,-50%);z-index:701;pointer-events:none;color:#FFFFFF;font-family:var(--font-label);font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;opacity:0;transition:opacity .3s;mix-blend-mode:difference;}
+#cursor.hoverable{width:64px;height:64px;background:rgba(52,107,241,0.15); border:1px solid var(--accent); mix-blend-mode:normal; backdrop-filter: blur(2px);}
+#cursor-text{position:fixed;top:0;left:0;transform:translate(-50%,-50%);z-index:701;pointer-events:none;color:var(--ink);font-family:var(--font-label);font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;opacity:0;transition:opacity .3s;mix-blend-mode:normal;}
 #cursor.hoverable + #cursor-text.show{opacity:1;}
 @media (pointer:coarse){ #cursor, #cursor-text{display:none;} body{cursor:auto;} }
 
@@ -113,10 +113,7 @@ h1.headline .word:nth-child(2) span{transition-delay:.08s;}
 .hero-photo img{width:100%;height:auto;display:block;filter:contrast(1.06) saturate(0.95);
   -webkit-mask-image:linear-gradient(to bottom, black 70%, transparent 100%);
   mask-image:linear-gradient(to bottom, black 70%, transparent 100%);}
-html[data-theme="light"] .hero-photo img{
-  -webkit-mask-image:linear-gradient(to bottom, black 30%, transparent 75%);
-  mask-image:linear-gradient(to bottom, black 30%, transparent 75%);
-}
+
 @media(max-width:900px){
   .hero-photo, .hero-photo.right-aligned{position:static;transform:translateY(12px);margin:1.5rem auto 0;width:min(320px,85vw);left:auto;right:auto;}
   .hero-photo.in, .hero-photo.right-aligned.in{transform:translateY(0);}
