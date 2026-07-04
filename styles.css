@@ -183,10 +183,22 @@ h1.headline .word:nth-child(2) span{transition-delay:.08s;}
 }
 
 /* Sticky Timeline */
-#journey{background:var(--bg-alt);}
-.timeline-container{display:grid;grid-template-columns:100px 1fr;gap:4rem;position:relative;}
-.timeline-dates{position:sticky;top:120px;display:flex;flex-direction:column;gap:1.5rem;height:max-content;border-right:2px solid var(--line-strong);padding-right:2rem;}
-.date-item{font-family:var(--font-head);font-size:1.8rem;font-weight:700;color:var(--line-strong);cursor:pointer;transition:color 0.3s, transform 0.3s;text-align:right;}
+#journey{background:var(--bg-alt); max-width:none; padding-left:0; padding-right:0;}
+#journey > * { max-width:1400px; margin:0 auto; padding-left:clamp(1.5rem,5vw,4rem); padding-right:clamp(1.5rem,5vw,4rem); }
+#journey > .timeline-container { max-width:1400px; padding-left:clamp(1.5rem,5vw,4rem); padding-right:clamp(1.5rem,5vw,4rem); }
+.timeline-container{display:grid;grid-template-columns:140px 1fr;gap:4rem;align-items:start;}
+.timeline-dates{
+  position:sticky;
+  top:120px;
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+  height:max-content;
+  border-right:2px solid var(--line-strong);
+  padding-right:2rem;
+  align-self:start;
+}
+.date-item{font-family:var(--font-head);font-size:1.8rem;font-weight:700;color:var(--line-strong);cursor:pointer;transition:color 0.3s, transform 0.3s;text-align:right;line-height:1;}
 .date-item.active{color:var(--accent);transform:translateX(10px);}
 .timeline-content{display:flex;flex-direction:column;gap:6rem;padding-bottom:10vh;}
 .timeline-beat h3{font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:1rem;color:var(--ink);}
@@ -194,7 +206,7 @@ h1.headline .word:nth-child(2) span{transition-delay:.08s;}
 @media(max-width:768px){
   .timeline-container{grid-template-columns:1fr;gap:2rem;width:100%;min-width:0;}
   .timeline-dates{position:sticky;top:60px;z-index:20;background:var(--bg-alt);flex-direction:row;overflow-x:auto;border-right:none;border-bottom:2px solid var(--line-strong);padding:1rem 0;margin-top:-1rem;gap:2rem;max-width:100%;}
-  .date-item.active{transform:translateY(-5px);}
+  .date-item.active{transform:translateY(-5px) !important;}
 }
 
 /* About & Skills */
