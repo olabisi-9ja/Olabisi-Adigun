@@ -121,6 +121,13 @@ const timelineObserver = new IntersectionObserver((entries) => {
         item.classList.remove('active');
         if (item.getAttribute('data-target') === entry.target.id) {
           item.classList.add('active');
+          if(window.innerWidth <= 768){
+            const container = item.parentElement;
+            container.scrollTo({
+              left: item.offsetLeft - container.offsetWidth / 2 + item.offsetWidth / 2,
+              behavior: 'smooth'
+            });
+          }
         }
       });
     }
