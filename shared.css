@@ -21,7 +21,7 @@ svg.icon{fill:currentColor;}
 
 /* NAV */
 .sub-nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;
-  padding:1.2rem clamp(1.5rem,5vw,4rem);z-index:500;background:var(--nav-bg);backdrop-filter:blur(12px);
+  padding:1.2rem 2rem;z-index:500;background:var(--nav-bg);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line);}
 .sub-nav .back-link{font-family:var(--font-label);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;
   color:var(--muted);display:flex;align-items:center;gap:0.5rem;transition:color 0.3s;}

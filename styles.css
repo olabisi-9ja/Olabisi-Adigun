@@ -42,7 +42,7 @@ h1,h2,h3{font-family:var(--font-head);font-weight:700;line-height:1.0;letter-spa
 
 /* Navigation */
 nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;
-  padding:1.4rem clamp(1.5rem,5vw,4rem);z-index:500;background:var(--nav-bg);backdrop-filter:blur(10px);
+  padding:1.4rem 2rem;z-index:500;background:var(--nav-bg);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);}
 nav .name{font-family:var(--font-head);font-weight:600;font-size:0.85rem;letter-spacing:0.04em;color:var(--ink);}
 #hamburger{width:34px;height:22px;position:relative;background:none;border:none;padding:0;z-index:900;}
