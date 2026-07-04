@@ -147,11 +147,7 @@ dateItems.forEach(item => {
 });
 
 
-// theme toggle
-document.getElementById('themeToggle').addEventListener('click', () => {
-  const isLight = document.documentElement.dataset.theme === 'light';
-  document.documentElement.dataset.theme = isLight ? 'dark' : 'light';
-});
+
 
 // hamburger / sidebar
 const hamburger = document.getElementById('hamburger');
@@ -231,13 +227,19 @@ document.getElementById('backtotop').addEventListener('click', () => {
 
   let mx = 0, my = 0;
   let isClicking = false;
+  let isVisible = true;
+  
+  const observer = new IntersectionObserver((entries) => {
+    isVisible = entries[0].isIntersecting;
+  });
+  observer.observe(canvas);
   
   window.addEventListener('mousemove', (e) => {
     mx = (e.clientX / window.innerWidth - 0.5);
     my = (e.clientY / window.innerHeight - 0.5);
   });
   
-  window.addEventListener('mousedown', () => {
+  canvas.addEventListener('mousedown', () => {
     isClicking = true;
     meshes.forEach((mesh, i) => {
       mesh.userData.targetY = mesh.userData.baseY + (Math.random() - 0.5) * 4;
@@ -255,6 +257,7 @@ document.getElementById('backtotop').addEventListener('click', () => {
 
   function animate(){
     requestAnimationFrame(animate);
+    if (!isVisible) return;
     if (!reduceMotion){
       group.rotation.y += 0.0015;
       group.rotation.y += (-0.5 + mx * 0.5 - group.rotation.y) * 0.02;

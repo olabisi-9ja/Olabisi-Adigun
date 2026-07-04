@@ -2,19 +2,13 @@
    SHARED SUB-PAGE STYLES
    ========================================= */
 :root{
-  --bg:#FDFBF7; --bg-alt:#F2EFE9; --ink:#1F1F1F; --muted:#6B6B6B;
-  --accent:#346BF1; --accent-ink:#FFFFFF; --tertiary:#FF4641;
-  --line:rgba(31,31,31,0.1); --line-strong:rgba(31,31,31,0.2);
-  --nav-bg:rgba(253,251,247,0.9);
-  --font-head: 'Hanken Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-label: 'JetBrains Mono', monospace;
-}
-html[data-theme="dark"]{
   --bg:#151515; --bg-alt:#212121; --ink:#FDFBF7; --muted:#9A9A9A;
   --accent:#346BF1; --accent-ink:#FFFFFF; --tertiary:#FF4641;
   --line:rgba(253,251,247,0.1); --line-strong:rgba(253,251,247,0.2);
   --nav-bg:rgba(21,21,21,0.9);
+  --font-head: 'Hanken Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-label: 'JetBrains Mono', monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{background:var(--bg);scroll-behavior:smooth;overflow-x:hidden;}
@@ -33,10 +27,7 @@ svg.icon{fill:currentColor;}
   color:var(--muted);display:flex;align-items:center;gap:0.5rem;transition:color 0.3s;}
 .sub-nav .back-link:hover{color:var(--accent);}
 .sub-nav .site-name{font-family:var(--font-head);font-weight:700;font-size:0.9rem;letter-spacing:0.02em;}
-.sub-nav .theme-btn{background:none;border:1px solid var(--line-strong);border-radius:20px;padding:0.4rem 0.8rem;
-  font-family:var(--font-label);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);
-  cursor:pointer;transition:border-color 0.3s,color 0.3s;}
-.sub-nav .theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+
 
 /* HERO HEADER */
 .page-header{padding:10rem clamp(1.5rem,5vw,4rem) 5rem;max-width:1400px;margin:0 auto;}
