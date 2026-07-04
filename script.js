@@ -26,7 +26,7 @@ const io = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // section counter
-const mainSections = ['hero','now','products','client-work','journey','drafts','contact'];
+const mainSections = ['hero','products','client-work','now','journey','drafts','contact'];
 const counterEl = document.getElementById('sectionCounter');
 const secObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
