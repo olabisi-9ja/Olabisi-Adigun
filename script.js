@@ -25,6 +25,34 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+// count up animation
+const countUpObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const counters = entry.target.querySelectorAll('.count-up');
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        let count = 0;
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        const updateCount = () => {
+          count += increment;
+          if (count < target) {
+            counter.innerText = Math.ceil(count);
+            requestAnimationFrame(updateCount);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        updateCount();
+      });
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+const metricsSection = document.querySelector('.hero-metrics');
+if (metricsSection) countUpObserver.observe(metricsSection);
+
 // section counter
 const mainSections = ['hero','products','client-work','now','journey','drafts','contact'];
 const counterEl = document.getElementById('sectionCounter');

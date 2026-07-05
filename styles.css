@@ -112,7 +112,7 @@ h1.headline .word:nth-child(2) span{transition-delay:.08s;}
   .hero-stack{display:flex;flex-direction:column;}
   .hero-photo, .hero-photo.right-aligned{position:static;transform:translateY(12px);margin:1.5rem auto 0;width:min(320px,85vw);left:auto;right:auto;order:1;}
   .hero-photo.in, .hero-photo.right-aligned.in{transform:translateY(0);}
-  h1.headline{font-size:clamp(2.5rem,12vw,4.5rem); letter-spacing:-0.04em; order:2;}
+  h1.headline{font-size:clamp(3.2rem,14vw,5rem); letter-spacing:-0.04em; order:2;}
   #hero { padding-top: 6rem; min-height: 85svh; }
 }
 
