@@ -1,23 +1,25 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = window.matchMedia('(pointer: fine)').matches;
 
-window.addEventListener('load', () => {
-  const curtain = document.getElementById('curtain');
-  setTimeout(() => {
-    curtain.classList.add('gone');
-    document.getElementById('heroHeadline').classList.add('in');
-    document.getElementById('heroPhoto').classList.add('in');
-    
-    const tagline = document.getElementById('heroTagline');
-    if(tagline) tagline.classList.add('in');
-    
-    const metrics = document.querySelector('.hero-below');
-    if(metrics) metrics.classList.add('in');
-    
-    document.getElementById('heroMeta').classList.add('in');
-    setTimeout(() => curtain.remove(), 1100);
-  }, 500);
-});
+const curtain = document.getElementById('curtain');
+if (curtain) {
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      curtain.classList.add('gone');
+      document.getElementById('heroHeadline')?.classList.add('in');
+      document.getElementById('heroPhoto')?.classList.add('in');
+      
+      const tagline = document.getElementById('heroTagline');
+      if(tagline) tagline.classList.add('in');
+      
+      const metrics = document.querySelector('.hero-below');
+      if(metrics) metrics.classList.add('in');
+      
+      document.getElementById('heroMeta')?.classList.add('in');
+      setTimeout(() => curtain.remove(), 1100);
+    }, 50);
+  });
+}
 
 // reveals
 const io = new IntersectionObserver((entries) => {
@@ -195,7 +197,11 @@ document.getElementById('backtotop').addEventListener('click', () => {
 });
 
 // ---- three.js hero scene: interactive functional data planes ----
-(function heroScene(){
+function initHeroScene(){
+  if (typeof THREE === 'undefined') {
+    setTimeout(initHeroScene, 50);
+    return;
+  }
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
@@ -299,4 +305,5 @@ document.getElementById('backtotop').addEventListener('click', () => {
     renderer.render(scene, camera);
   }
   animate();
-})();
+}
+initHeroScene();
