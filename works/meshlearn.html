@@ -9,7 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" href="../shared.css" as="style">
 <link rel="stylesheet" href="../shared.css">
+<script defer src="../shared.js"></script>
 </head>
 <body>
 
@@ -37,7 +39,7 @@
 </div>
 
 <div class="cover-wrap">
-  <img class="cover-img" src="https://picsum.photos/seed/meshlearn/1600/900" alt="MeshLearn — Offline Education">
+  <img class="cover-img" src="https://picsum.photos/seed/meshlearn/1600/900" alt="MeshLearn — Offline Education" loading="lazy">
 </div>
 
 <div class="page-body">
@@ -70,6 +72,13 @@
     <span class="tech-chip">Node.js (sync server)</span>
   </div>
 
+  <h2>Recognition & Impact</h2>
+  <p>MeshLearn was recognized as the <strong>Runner-Up</strong> at the KWASU Tech Conference Hackathon 2026. Pitching this offline-first architecture to a panel of judges validated the immense need for decentralized educational tools in areas with poor connectivity.</p>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2.5rem 0 3.5rem;">
+    <img src="../assets/meshlearn-hackathon-1.jpg" alt="Presenting MeshLearn at KWASU Tech Conference" style="width: 100%; border-radius: 12px; object-fit: cover; aspect-ratio: 4/3; border: 1px solid var(--line-strong);">
+    <img src="../assets/meshlearn-hackathon-2.jpg" alt="Pitching MeshLearn offline-first architecture" style="width: 100%; border-radius: 12px; object-fit: cover; aspect-ratio: 4/3; border: 1px solid var(--line-strong);">
+  </div>
   <h2>Current State & Roadmap</h2>
   <p>MeshLearn is currently in closed beta with a cohort of students at KWASU. The core BLE content-sharing and progress-tracking features are stable. Active work is ongoing on:</p>
   <ul>
@@ -98,6 +107,5 @@
   <a href="../index.html" class="back-home">olabisiadigun.xyz ↗</a>
 </footer>
 
-<script src="../shared.js"></script>
 </body>
 </html>

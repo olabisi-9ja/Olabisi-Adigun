@@ -18,8 +18,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" href="styles.css" as="style">
+<link rel="preload" href="assets/new-hero.webp" as="image">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <link rel="stylesheet" href="styles.css">
+<script defer src="script.js"></script>
 </head>
 <body>
 
@@ -56,7 +59,7 @@
 <div id="backdrop"></div>
 <aside id="sidebar">
   <button class="close" id="closeSidebar">Close ✕</button>
-  <div class="avatar"><img src="assets/avatar.jpeg" alt="Olabisi Adigun"></div>
+  <div class="avatar"><img src="assets/avatar.jpeg" alt="Olabisi Adigun" loading="lazy"></div>
   <h3>Olabisi Adigun</h3>
   <div class="role">Founder & Engineer</div>
   <a class="email" href="mailto:abeladigun11@gmail.com">abeladigun11@gmail.com</a>
@@ -85,7 +88,7 @@
         <span class="word"><span>Adigun</span></span>
       </h1>
       <div class="hero-photo right-aligned" id="heroPhoto">
-        <img src="assets/new-hero.png" alt="Olabisi Adigun" fetchpriority="high">
+        <img src="assets/new-hero.webp" alt="Olabisi Adigun" fetchpriority="high">
       </div>
     </div>
     <p class="hero-tagline reveal" id="heroTagline">I design brands, build software, and launch products from zero to production.</p>
@@ -489,8 +492,6 @@
   <div class="wordmark">Olabisi Adigun</div>
   <div class="footer-year">© 2026</div>
 </footer>
-
-<script src="script.js"></script>
 
 </body>
 </html>
