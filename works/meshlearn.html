@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MeshLearn — Offline Education | Olabisi Adigun</title>
 <meta name="description" content="MeshLearn is a decentralized offline learning app using BLE mesh networking so coursework keeps moving without an internet connection.">
+<script>
+  (function(){
+    var theme = localStorage.getItem('theme');
+    if(theme) document.documentElement.dataset.theme = theme;
+  })();
+</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,8 +82,8 @@
   <p>MeshLearn was recognized as the <strong>Runner-Up</strong> at the KWASU Tech Conference Hackathon 2026. Pitching this offline-first architecture to a panel of judges validated the immense need for decentralized educational tools in areas with poor connectivity.</p>
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2.5rem 0 3.5rem;">
-    <img src="../assets/meshlearn-hackathon-1.jpg" alt="Presenting MeshLearn at KWASU Tech Conference" style="width: 100%; border-radius: 12px; object-fit: cover; aspect-ratio: 4/3; border: 1px solid var(--line-strong);">
-    <img src="../assets/meshlearn-hackathon-2.jpg" alt="Pitching MeshLearn offline-first architecture" style="width: 100%; border-radius: 12px; object-fit: cover; aspect-ratio: 4/3; border: 1px solid var(--line-strong);">
+    <img src="../assets/meshlearn-hackathon-1.webp" alt="Presenting MeshLearn at KWASU Tech Conference" loading="lazy" style="width: 100%; border-radius: 12px; object-fit: cover; aspect-ratio: 4/3; border: 1px solid var(--line-strong);">
+    <img src="../assets/meshlearn-hackathon-2.webp" alt="Pitching MeshLearn offline-first architecture" loading="lazy" style="width: 100%; border-radius: 12px; object-fit: cover; aspect-ratio: 4/3; border: 1px solid var(--line-strong);">
   </div>
   <h2>Current State & Roadmap</h2>
   <p>MeshLearn is currently in closed beta with a cohort of students at KWASU. The core BLE content-sharing and progress-tracking features are stable. Active work is ongoing on:</p>

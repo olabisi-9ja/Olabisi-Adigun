@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>STRĪKE — Premium Streetwear Platform | Olabisi Adigun</title>
 <meta name="description" content="STRĪKE is a premium streetwear e-commerce platform, built as a single, tightly composed React application with a focus on high-fidelity visual design.">
+<script>
+  (function(){
+    var theme = localStorage.getItem('theme');
+    if(theme) document.documentElement.dataset.theme = theme;
+  })();
+</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -92,3 +92,22 @@ svg.icon{fill:currentColor;}
   .page-header{padding-top:8rem;}
   .meta-strip{gap:1.5rem;}
 }
+
+/* ── THEME TOGGLE BUTTON ──────────────────── */
+.theme-btn{
+  background:none;border:1px solid var(--line-strong);border-radius:20px;padding:0.4rem 0.9rem;
+  font-family:var(--font-label);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);cursor:pointer;transition:border-color 0.3s,color 0.3s;
+}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ── LIGHT THEME ──────────────────── */
+html[data-theme="light"]{
+  --bg:#F8F8F8; --bg-alt:#FFFFFF; --ink:#111111; --muted:#666666;
+  --accent:#346BF1; --accent-ink:#FFFFFF; --tertiary:#FF4641;
+  --line:rgba(17,17,17,0.1); --line-strong:rgba(17,17,17,0.2);
+  --nav-bg:rgba(248,248,248,0.9);
+}
+html[data-theme="light"] .page-header .tag {
+  background:rgba(52,107,241,0.08);
+}

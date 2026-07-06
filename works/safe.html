@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>S.A.F.E. — Campus Emergency System | Olabisi Adigun</title>
 <meta name="description" content="Smart Alert and Field Emergency — campus-wide crime reporting and emergency dispatch for KWASU, powered by AI triage and offline mesh networking.">
+<script>
+  (function(){
+    var theme = localStorage.getItem('theme');
+    if(theme) document.documentElement.dataset.theme = theme;
+  })();
+</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -647,11 +653,18 @@ html[data-theme="light"] body::before{mix-blend-mode:multiply;opacity:0.03;}
 <script>
 /* ── THEME TOGGLE ──────────────────── */
 const themeBtn = document.getElementById('themeBtn');
-themeBtn.addEventListener('click', () => {
+if (themeBtn) {
   const isLight = document.documentElement.dataset.theme === 'light';
-  document.documentElement.dataset.theme = isLight ? 'dark' : 'light';
-  themeBtn.textContent = isLight ? '☀ Light' : '🌙 Dark';
-});
+  themeBtn.textContent = isLight ? '🌙 Dark' : '☀ Light';
+
+  themeBtn.addEventListener('click', () => {
+    const currentIsLight = document.documentElement.dataset.theme === 'light';
+    const newTheme = currentIsLight ? 'dark' : 'light';
+    document.documentElement.dataset.theme = newTheme;
+    localStorage.setItem('theme', newTheme);
+    themeBtn.textContent = newTheme === 'light' ? '🌙 Dark' : '☀ Light';
+  });
+}
 
 /* ── REVEAL ON SCROLL ─────────────── */
 const revealObs = new IntersectionObserver((entries) => {
