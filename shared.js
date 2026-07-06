@@ -15,4 +15,12 @@ if (themeBtn) {
     localStorage.setItem('theme', newTheme);
     themeBtn.textContent = newTheme === 'light' ? '🌙 Dark' : '☀ Light';
   });
+
+  // Sync theme across multiple tabs
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'theme') {
+      document.documentElement.dataset.theme = e.newValue;
+      themeBtn.textContent = e.newValue === 'light' ? '🌙 Dark' : '☀ Light';
+    }
+  });
 }
