@@ -18,6 +18,10 @@
 <link rel="preload" href="../shared.css" as="style">
 <link rel="stylesheet" href="../shared.css">
 <script defer src="../shared.js"></script>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark', background: 'transparent' });
+</script>
 </head>
 <body>
 
@@ -49,52 +53,62 @@
 </div>
 
 <div class="page-body">
-  <h2>Why MeshLearn?</h2>
+  <h2>Problem</h2>
   <p>Nigeria has over 200 universities and polytechnics. A significant percentage of students studying outside major cities have unreliable or prohibitively expensive internet access. During my own studies at KWASU, I watched classmates struggle to download lecture materials, submit assignments, or access e-learning portals — not because the content wasn't there, but because the infrastructure wasn't.</p>
-  <p>The existing solutions — downloaded PDFs, WhatsApp groups, USB drives passed around — were fragile, unsearchable, and impossible to track for progress. I wanted to build something better.</p>
+  <p>The existing solutions — downloaded PDFs, WhatsApp groups, USB drives passed around — were fragile, unsearchable, and impossible to track for progress.</p>
 
-  <h2>How the Mesh Works</h2>
-  <p>MeshLearn uses <strong>Bluetooth Low Energy (BLE)</strong> to create a peer-to-peer content distribution network across a campus or classroom. When one device downloads or receives content, it automatically becomes a node that can serve that content to other nearby devices.</p>
-  <p>This means a single device with connectivity can bootstrap an entire classroom of learners. Content propagates across the mesh in chunks, verified by hash, so corrupted or incomplete chunks are automatically requested from another peer.</p>
+  <h2>Research</h2>
+  <p>I investigated how students naturally shared information and found that physical proximity was the strongest network they had. We needed a system that leveraged this proximity. The opportunity was clear: Can learning continue without the internet by utilizing device-to-device connections?</p>
 
+  <h2>Challenges</h2>
   <div class="callout">
-    <h4>Key Insight</h4>
-    <p>The BLE mesh isn't just a data transfer mechanism. It also enables a local social graph — students can see who else in their mesh has completed a module, forming organic study accountability pairs without any server involvement.</p>
+    <h4>State Synchronization</h4>
+    <p>The hardest challenge was ensuring that progress tracking and content updates synchronized correctly when a device reconnected to the internet, without overwriting newer offline progress. We had to build a robust conflict-resolution layer on top of a decentralized local mesh.</p>
   </div>
 
-  <h2>The ML Layer</h2>
-  <p>MeshLearn includes a lightweight on-device recommendation engine built with <strong>TensorFlow Lite</strong>. It runs entirely on the student's phone and learns from their engagement patterns to surface the most relevant content modules next.</p>
-  <p>Training data never leaves the device. The model is updated via a federated learning mechanism — when two devices exchange content over BLE, they also exchange anonymized gradient updates, allowing the model to improve across the mesh without centralizing personal data.</p>
+  <h2>My Role</h2>
+  <p>As the founder and full-stack engineer, I built the entire platform end-to-end. I developed the React Native application, implemented the BLE mesh networking logic, and trained the TensorFlow Lite recommendation model.</p>
 
-  <h2>Tech Stack</h2>
-  <div class="tech-stack">
+  <h2>Architecture</h2>
+  <p>MeshLearn uses <strong>Bluetooth Low Energy (BLE)</strong> to create a peer-to-peer content distribution network. When one device downloads content, it automatically becomes a node that serves that content to other nearby devices.</p>
+  
+  <div class="mermaid-container" style="background: var(--surface); padding: 2rem; border-radius: 12px; margin: 2rem 0; overflow-x: auto;">
+    <pre class="mermaid">
+flowchart LR
+  A[Student] -->|Requests Material| B(BLE Mesh)
+  B -->|Finds Peer| C(Nearby Node)
+  C -->|Transfers| D(Chunk Verification)
+  D -->|Saves| E(SQLite)
+  E -->|Internet Restored| F(Sync Server)
+    </pre>
+  </div>
+
+  <p>Content propagates across the mesh in chunks, verified by hash, so corrupted or incomplete chunks are automatically requested from another peer.</p>
+
+  <h2>Design Process</h2>
+  <p>The interface was designed to feel like a modern, premium learning platform, despite operating entirely offline. I focused on making the "mesh status" visible and understandable, so students could see when they were connected to peers and actively sharing or receiving chunks.</p>
+
+  <h2>Development</h2>
+  <p>The platform required a complex mix of mobile engineering, native module integration, and on-device machine learning:</p>
+  <div class="tech-stack" style="margin-bottom: 2rem;">
     <span class="tech-chip">React Native</span>
     <span class="tech-chip">Expo</span>
     <span class="tech-chip">BLE (react-native-ble-plx)</span>
     <span class="tech-chip">Python</span>
     <span class="tech-chip">TensorFlow Lite</span>
-    <span class="tech-chip">Federated Learning</span>
     <span class="tech-chip">SQLite</span>
-    <span class="tech-chip">Node.js (sync server)</span>
+    <span class="tech-chip">Node.js</span>
   </div>
 
-  <h2>Recognition & Impact</h2>
-  <p>MeshLearn was recognized as the <strong>Runner-Up</strong> at the KWASU Tech Conference Hackathon 2026. Pitching this offline-first architecture to a panel of judges validated the immense need for decentralized educational tools in areas with poor connectivity.</p>
+  <h2>Results</h2>
+  <p>MeshLearn was recognized as the <strong>Runner-Up</strong> at the KWASU Tech Conference Hackathon 2026. It is currently in closed beta with a cohort of students, successfully demonstrating that a single connected device can bootstrap an entire classroom of learners.</p>
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2.5rem 0 3.5rem;">
     <img src="../assets/meshlearn-hackathon-1.webp" alt="Presenting MeshLearn at KWASU Tech Conference" loading="lazy" style="width: 100%; border-radius: 12px; object-fit: cover; aspect-ratio: 4/3; border: 1px solid var(--line-strong);">
     <img src="../assets/meshlearn-hackathon-2.webp" alt="Pitching MeshLearn offline-first architecture" loading="lazy" style="width: 100%; border-radius: 12px; object-fit: cover; aspect-ratio: 4/3; border: 1px solid var(--line-strong);">
   </div>
-  <h2>Current State & Roadmap</h2>
-  <p>MeshLearn is currently in closed beta with a cohort of students at KWASU. The core BLE content-sharing and progress-tracking features are stable. Active work is ongoing on:</p>
-  <ul>
-    <li>Improving BLE range and connection stability in crowded environments</li>
-    <li>Adding instructor dashboards for offline-first progress monitoring</li>
-    <li>Expanding the content format support beyond video and PDF to include interactive quizzes</li>
-    <li>Partnerships with other West African universities for a broader beta</li>
-  </ul>
 
-  <h2>What I Learned</h2>
+  <h2>Lessons Learned</h2>
   <p>MeshLearn was my first serious encounter with the constraints of mobile hardware. BLE is finicky — Bluetooth stacks vary wildly across Android manufacturers, power management kills background processes unexpectedly, and the mesh topology needs to adapt dynamically as users move around.</p>
   <p>It also taught me that <strong>the user experience of "it just works offline"</strong> is an extraordinarily hard engineering problem. Every assumption you make about connectivity, state synchronization, and data freshness has to be revisited from scratch.</p>
 </div>
