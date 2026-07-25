@@ -1,134 +1,131 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pulse — Fintech Protocol | Olabisi Adigun</title>
-<meta name="description" content="Pulse is a fintech infrastructure protocol for emerging markets — offline payment guarantees secured with ECDSA across a seven-layer architecture.">
+<title>Pulse - Fintech Protocol | Olabisi Adigun</title>
+<meta name="description" content="Pulse is a fintech infrastructure protocol for emerging markets - offline payment guarantees secured with ECDSA across a seven-layer architecture.">
 <script>
-  (function(){
-    var theme = localStorage.getItem('theme');
-    if(theme) document.documentElement.dataset.theme = theme;
-  })();
+ (function(){
+  var theme = localStorage.getItem('theme');
+  if(theme) document.documentElement.dataset.theme = theme;
+ })();
 </script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="preload" href="../shared.css" as="style">
 <link rel="stylesheet" href="../shared.css">
 <script defer src="../shared.js"></script>
 <script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true, theme: 'dark', background: 'transparent' });
+ import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+ mermaid.initialize({ startOnLoad: true, theme: 'dark', background: 'transparent' });
 </script>
 </head>
 <body>
 
 <nav class="sub-nav">
-  <a href="../" class="back-link">← Back to Portfolio</a>
-  <span class="site-name">Olabisi Adigun</span>
-  <button id="themeBtn" class="theme-btn">☀ Light</button>
+ <a href="../" class="back-link">Back to portfolio</a>
+ <span class="site-name">Olabisi Adigun</span>
+ <button id="themeBtn" class="theme-btn" type="button">Theme</button>
 </nav>
 
 <div class="page-header">
-  <div class="tag-row">
-    <span class="tag">Fintech</span>
-    <span class="tag">Founder</span>
-    <span class="tag">Live</span>
-    <span class="tag">2026</span>
-  </div>
-  <h1>Pulse</h1>
-  <p class="lead">A fintech infrastructure protocol for emerging markets — delivering offline payment guarantees secured with ECDSA signatures across a resilient seven-layer architecture.</p>
-  <div class="meta-strip">
-    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-val">Founder, Engineer, Designer</span></div>
-    <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2026</span></div>
-    <div class="meta-item"><span class="meta-label">Status</span><span class="meta-val">Live</span></div>
-    <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-val">Node.js · React · PostgreSQL · ECDSA</span></div>
-  </div>
+ <div class="tag-row">
+  <span class="tag">Fintech</span>
+  <span class="tag">Founder</span>
+  <span class="tag">Live</span>
+  <span class="tag">2026</span>
+ </div>
+ <h1>Pulse</h1>
+ <p class="lead">A fintech infrastructure protocol for emerging markets - delivering offline payment guarantees secured with ECDSA signatures across a resilient seven-layer architecture.</p>
+ <div class="meta-strip">
+  <div class="meta-item"><span class="meta-label">Role</span><span class="meta-val">Founder, Engineer, Designer</span></div>
+  <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2026</span></div>
+  <div class="meta-item"><span class="meta-label">Status</span><span class="meta-val">Live</span></div>
+  <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-val">Node.js, React, PostgreSQL, ECDSA</span></div>
+ </div>
 </div>
 
 <div class="cover-wrap">
-  <img class="cover-img" src="https://picsum.photos/seed/pulse-protocol/1600/900" alt="Pulse — Fintech Protocol" loading="lazy">
+ <img class="cover-img" src="../assets/pulse-visual.webp" alt="Pulse - Fintech Protocol" width="1312" height="816" loading="lazy">
 </div>
 
 <div class="page-body">
-  <h2>Problem</h2>
-  <p>In Nigeria and across Sub-Saharan Africa, unreliable internet connectivity is a constant reality. Millions of people are locked out of digital financial services every day — not because they don't have a phone, or a bank account — but because a 3G tower went down, or USSD is congested, or the POS machine has no signal.</p>
-  <p>Existing fintech infrastructure assumes a persistent connection. That assumption fails constantly in emerging markets, and it costs real money for real people.</p>
+ <h2>Problem</h2>
+ <p>In Nigeria and across Sub-Saharan Africa, unreliable internet connectivity is a constant reality. Millions of people are locked out of digital financial services every day - not because they don't have a phone, or a bank account - but because a 3G tower went down, or USSD is congested, or the POS machine has no signal.</p>
+ <p>Existing fintech infrastructure assumes a persistent connection. That assumption fails constantly in emerging markets, and it costs real money for real people.</p>
 
-  <h2>Research</h2>
-  <p>Before writing any code, I spent weeks talking to local merchants and analyzing existing payment methods. The research highlighted that while mobile money (USSD) exists, it is highly prone to network timeouts. We needed a solution that was entirely decoupled from real-time network availability, relying instead on cryptographic trust established between two nearby devices.</p>
+ <h2>Research</h2>
+ <p>Before writing any code, I spent weeks talking to local merchants and analyzing existing payment methods. The research highlighted that while mobile money (USSD) exists, it is highly prone to network timeouts. We needed a solution that was entirely decoupled from real-time network availability, relying instead on cryptographic trust established between two nearby devices.</p>
 
-  <h2>Challenges</h2>
-  <div class="callout">
-    <h4>The Double-Spend Problem</h4>
-    <p>The hardest engineering challenge was designing the escrow mechanism to prevent double-spending without access to a shared ledger. The solution was a deterministic nonce system tied to the device clock plus a monotonic counter — making replay attacks computationally infeasible even in offline conditions.</p>
-  </div>
+ <h2>Challenges</h2>
+ <div class="callout">
+  <h4>The Double-Spend Problem</h4>
+  <p>The hardest engineering challenge was designing the escrow mechanism to prevent double-spending without access to a shared ledger. The solution was a deterministic nonce system tied to the device clock plus a monotonic counter - making replay attacks computationally infeasible even in offline conditions.</p>
+ </div>
 
-  <h2>My Role</h2>
-  <p>As the founder and lead engineer, I was responsible for the entire product lifecycle. I designed the architecture, built the frontend interfaces, and implemented the core Node.js payment layer and cryptographic validation engine.</p>
+ <h2>My Role</h2>
+ <p>As the founder and lead engineer, I was responsible for the entire product lifecycle. I designed the architecture, built the frontend interfaces, and implemented the core Node.js payment layer and cryptographic validation engine.</p>
 
-  <h2>Architecture</h2>
-  <p>Pulse is a seven-layer offline payment protocol. It allows two parties to execute a financially guaranteed transaction using cryptographic proofs that are reconciled with the network when connectivity is restored.</p>
-  
-  <div class="mermaid-container" style="background: var(--surface); padding: 2rem; border-radius: 12px; margin: 2rem 0; overflow-x: auto;">
-    <pre class="mermaid">
+ <h2>Architecture</h2>
+ <p>Pulse is a seven-layer offline payment protocol. It allows two parties to execute a financially guaranteed transaction using cryptographic proofs that are reconciled with the network when connectivity is restored.</p>
+
+ <div class="mermaid-container" style="background: var(--surface); padding: 2rem; border-radius: 12px; margin: 2rem 0; overflow-x: auto;">
+  <pre class="mermaid">
 flowchart LR
-  A[User] -->|Signs Intent| B(Authorization)
-  B -->|Locks Funds| C(Escrow)
-  C -->|Encodes Txn| D(Transport)
-  D -->|Scans QR/NFC| E(Peer Device)
-  E -->|Stores Txn| F(Queue)
-  F -->|Connectivity Restored| G(Settlement)
-    </pre>
-  </div>
+ A[User] -->|Signs Intent| B(Authorization)
+ B -->|Locks Funds| C(Escrow)
+ C -->|Encodes Txn| D(Transport)
+ D -->|Scans QR/NFC| E(Peer Device)
+ E -->|Stores Txn| F(Queue)
+ F -->|Connectivity Restored| G(Settlement)
+  </pre>
+ </div>
 
-  <p>The protocol is structured in distinct layers, including:</p>
-  <ul>
-    <li><strong>Identity & Authorization:</strong> Cryptographic key-pair generation using secp256k1. The payer signs an intent; the payee verifies the signature locally without a server.</li>
-    <li><strong>Transport & Queuing:</strong> Transactions are encoded as QR codes or NFC payloads, then queued in a local SQLite store with a priority ordering algorithm.</li>
-    <li><strong>Reconciliation:</strong> When connectivity is restored, queued transactions are batched and submitted to the settlement network.</li>
-  </ul>
+ <p>The protocol is structured in distinct layers, including:</p>
+ <ul>
+  <li><strong>Identity & Authorization:</strong> Cryptographic key-pair generation using secp256k1. The payer signs an intent; the payee verifies the signature locally without a server.</li>
+  <li><strong>Transport & Queuing:</strong> Transactions are encoded as QR codes or NFC payloads, then queued in a local SQLite store with a priority ordering algorithm.</li>
+  <li><strong>Reconciliation:</strong> When connectivity is restored, queued transactions are batched and submitted to the settlement network.</li>
+ </ul>
 
-  <h2>Design Process</h2>
-  <p>The UX had to be foolproof. Since users might be offline, the interface needed to communicate transaction finality without a network confirmation. I designed clear, color-coded states and deterministic loading indicators to build trust in the offline process.</p>
+ <h2>Design Process</h2>
+ <p>The UX had to be foolproof. Since users might be offline, the interface needed to communicate transaction finality without a network confirmation. I designed clear, color-coded states and deterministic loading indicators to build trust in the offline process.</p>
 
-  <h2>Development</h2>
-  <p>The stack focused on performance and reliability on low-end devices:</p>
-  <div class="tech-stack" style="margin-bottom: 2rem;">
-    <span class="tech-chip">Node.js</span>
-    <span class="tech-chip">React Native</span>
-    <span class="tech-chip">PostgreSQL</span>
-    <span class="tech-chip">SQLite (offline)</span>
-    <span class="tech-chip">ECDSA / secp256k1</span>
-    <span class="tech-chip">Supabase</span>
-  </div>
+ <h2>Development</h2>
+ <p>The stack focused on performance and reliability on low-end devices:</p>
+ <div class="tech-stack" style="margin-bottom: 2rem;">
+  <span class="tech-chip">Node.js</span>
+  <span class="tech-chip">React Native</span>
+  <span class="tech-chip">PostgreSQL</span>
+  <span class="tech-chip">SQLite (offline)</span>
+  <span class="tech-chip">ECDSA / secp256k1</span>
+  <span class="tech-chip">Supabase</span>
+ </div>
 
-  <h2>Results</h2>
-  <ul>
-    <li><strong>Transactions:</strong> 10,000+ processed offline successfully.</li>
-    <li><strong>Uptime:</strong> Operates reliably even with 0% internet coverage.</li>
-    <li><strong>Growth:</strong> Piloted at 5 local markets, proving the viability of the protocol.</li>
-  </ul>
+ <h2>Results</h2>
+ <ul>
+  <li><strong>Transactions:</strong> 10,000+ processed offline successfully.</li>
+  <li><strong>Uptime:</strong> Operates reliably even with 0% internet coverage.</li>
+  <li><strong>Growth:</strong> Piloted at 5 local markets, proving the viability of the protocol.</li>
+ </ul>
 
-  <h2>Lessons Learned</h2>
-  <p>Building Pulse taught me that the most challenging engineering problems are not about writing clever code — they are about designing systems that remain correct when all your assumptions break down. Network reliability is an assumption. Clock synchronization is an assumption.</p>
-  <p>The discipline of <strong>adversarial thinking</strong> — asking "what if this component is unavailable?" at every layer — is something I now apply to every system I design, regardless of whether it touches payments.</p>
+ <h2>Lessons Learned</h2>
+ <p>Building Pulse taught me that the most challenging engineering problems are not about writing clever code - they are about designing systems that remain correct when all your assumptions break down. Network reliability is an assumption. Clock synchronization is an assumption.</p>
+ <p>The discipline of <strong>adversarial thinking</strong> - asking "what if this component is unavailable?" at every layer - is something I now apply to every system I design, regardless of whether it touches payments.</p>
 </div>
 
 <div class="page-cta">
-  <h2>Interested in Pulse?</h2>
-  <p>I'm actively looking for partners and early adopters in the fintech and emerging markets space.</p>
-  <div class="cta-btns">
-    <a href="mailto:abeladigun11@gmail.com?subject=Pulse Inquiry" class="btn-primary">Get in Touch ↗</a>
-    <a href="../#products" class="btn-outline">← Back to Works</a>
-  </div>
+ <h2>Interested in Pulse?</h2>
+ <p>I'm actively looking for partners and early adopters in the fintech and emerging markets space.</p>
+ <div class="cta-btns">
+  <a href="mailto:abeladigun11@gmail.com?subject=Pulse Inquiry" class="btn-primary">Email</a>
+  <a href="../#work" class="btn-outline">Back to works</a>
+ </div>
 </div>
 
 <footer class="sub-footer">
-  <span class="copy">© 2026 Olabisi Adigun</span>
-  <a href="../" class="back-home">olabisiadigun.xyz ↗</a>
+ <span class="copy">© 2026 Olabisi Adigun</span>
+ <a href="../" class="back-home">olabisiadigun.xyz</a>
 </footer>
 
 </body>
