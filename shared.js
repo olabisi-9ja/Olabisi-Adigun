@@ -1,37 +1,26 @@
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+// Shared sub-page JS
 
+/* ── THEME TOGGLE ──────────────────── */
 const themeBtn = document.getElementById('themeBtn');
-
-function updateThemeButton() {
- if (!themeBtn) return;
- const current = document.documentElement.dataset.theme;
- if (current === 'light') themeBtn.textContent = 'Dark';
- else if (current === 'dark') themeBtn.textContent = 'Light';
- else themeBtn.textContent = 'Theme';
-}
-
-updateThemeButton();
-
 if (themeBtn) {
- themeBtn.addEventListener('click', () => {
-  const current = document.documentElement.dataset.theme;
-  const next = current === 'light' ? 'dark' : current === 'dark' ? '' : 'light';
-  if (next) {
-   document.documentElement.dataset.theme = next;
-   localStorage.setItem('theme', next);
-  } else {
-   delete document.documentElement.dataset.theme;
-   localStorage.removeItem('theme');
-  }
-  updateThemeButton();
- });
+  // Check the initial state set by the inline head script
+  const isLight = document.documentElement.dataset.theme === 'light';
+  themeBtn.textContent = isLight ? '🌙 Dark' : '☀ Light';
 
- window.addEventListener('storage', (event) => {
-  if (event.key === 'theme') {
-   if (event.newValue) document.documentElement.dataset.theme = event.newValue;
-   else delete document.documentElement.dataset.theme;
-   updateThemeButton();
-  }
- });
+  themeBtn.addEventListener('click', () => {
+    const currentIsLight = document.documentElement.dataset.theme === 'light';
+    const newTheme = currentIsLight ? 'dark' : 'light';
+    
+    document.documentElement.dataset.theme = newTheme;
+    localStorage.setItem('theme', newTheme);
+    themeBtn.textContent = newTheme === 'light' ? '🌙 Dark' : '☀ Light';
+  });
+
+  // Sync theme across multiple tabs
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'theme') {
+      document.documentElement.dataset.theme = e.newValue;
+      themeBtn.textContent = e.newValue === 'light' ? '🌙 Dark' : '☀ Light';
+    }
+  });
 }
