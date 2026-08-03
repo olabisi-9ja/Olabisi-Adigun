@@ -6,13 +6,13 @@
 <meta name="description" content="Olabisi Adigun — Designer, Full-stack Engineer, Product Builder.">
 <meta property="og:title" content="Olabisi Adigun — Full-stack Engineer & Product Builder">
 <meta property="og:description" content="Olabisi Adigun — Designer, Full-stack Engineer, Product Builder.">
-<meta property="og:image" content="https://olabisiadigun.xyz/assets/avatar.jpeg">
+<meta property="og:image" content="https://olabisiadigun.xyz/assets/avatar.webp">
 <meta property="og:url" content="https://olabisiadigun.xyz">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Olabisi Adigun — Full-stack Engineer & Product Builder">
 <meta name="twitter:description" content="Olabisi Adigun — Designer, Full-stack Engineer, Product Builder.">
-<meta name="twitter:image" content="https://olabisiadigun.xyz/assets/avatar.jpeg">
+<meta name="twitter:image" content="https://olabisiadigun.xyz/assets/avatar.webp">
 <title>Olabisi Adigun — Product Builder</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,9 +61,9 @@
 <div id="backdrop"></div>
 <aside id="sidebar">
   <button class="close" id="closeSidebar">Close ✕</button>
-  <div class="avatar"><img src="assets/avatar.jpeg" alt="Olabisi Adigun" loading="lazy"></div>
+  <div class="avatar"><img src="assets/avatar.webp" alt="Olabisi Adigun" loading="lazy"></div>
   <h3>Olabisi Adigun</h3>
-  <div class="role">Founder & Engineer</div>
+  <div class="role">Software Engineer &middot; AI Product Builder &middot; 2&times; Hackathon Winner</div>
   <a class="email" href="mailto:abeladigun11@gmail.com">abeladigun11@gmail.com</a>
   <ul class="menu-links">
     <li><a href="#products" class="sidebar-link">Works</a></li>
@@ -83,7 +83,7 @@
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-inner">
-    <div class="hero-top eyebrow">Designer <em>·</em> Full-stack Engineer <em>·</em> Product Builder</div>
+    <div class="hero-top eyebrow">Software Engineer <em>·</em> AI Product Builder <em>·</em> 2× Hackathon Winner</div>
     <div class="hero-stack">
       <h1 class="headline" id="heroHeadline">
         <span class="word"><span>Olabisi</span></span>
@@ -163,6 +163,31 @@
     <div class="eyebrow reveal">Products</div>
     <h2 class="reveal">Featured Work.</h2>
     <p class="reveal" style="margin-top:1rem;font-size:1.1rem;color:var(--muted);max-width:640px;">Selected products I’ve designed, engineered, and helped bring to life.</p>
+  </div>
+
+  <div class="project premium-card reveal">
+    <div class="img-wrap" data-cursor-text="View"><img src="assets/sentry-og.webp" alt="Sentry Interface" loading="lazy">
+      <div class="status-badge" style="background-color: var(--primary); color: white;">🏆 Winner</div>
+      <div class="overlay-text"><div class="tag">AI for Good</div><h3>Sentry</h3></div>
+    </div>
+    <div class="details">
+      <div class="desc">
+        <p><strong>Hackathon Winner – Build with Gemma (Google DeepMind)</strong><br><br>An AI-powered community safety and emergency intelligence platform that uses Gemma to analyze incident reports, generate actionable insights, and improve emergency response.</p>
+      </div>
+      <div class="meta-cols">
+        <div class="meta-col" style="flex: 2;">
+          <span class="meta-label">Stack & Features</span>
+          <span class="meta-val">React, FastAPI, Gemma 4, WhatsApp, Mobile + Web</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Links</span>
+          <span class="meta-val"><a href="https://sentry-7r67.onrender.com/" target="_blank" style="text-decoration:underline;">Live App</a> · <a href="https://github.com/olabisi-9ja/Sentry" target="_blank" style="text-decoration:underline;">GitHub</a></span>
+        </div>
+        <div class="meta-col btn-col">
+          <a href="works/sentry" class="view-project-btn" data-magnetic>View Case Study ↗</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="project premium-card reveal">
@@ -275,6 +300,47 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<section id="design">
+  <div class="section-head">
+    <div class="eyebrow reveal">Design & Branding</div>
+    <h2 class="reveal">Visual Identity.</h2>
+    <p class="reveal" style="margin-top:1rem;font-size:1.1rem;color:var(--muted);max-width:640px;">Selected logos and brand identities crafted for various products.</p>
+  </div>
+  <style>
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .logo-card {
+      border: 1px solid var(--line2);
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s;
+    }
+    .logo-card:hover {
+      transform: translateY(-4px);
+    }
+    .logo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+  <div class="logo-grid reveal">
+    <div class="logo-card"><img src="assets/raster-logo.webp" alt="Raster Logo" loading="lazy"></div>
+    <div class="logo-card"><img src="assets/payvault-logo.webp" alt="Payvault Logo" loading="lazy"></div>
+    <div class="logo-card"><img src="assets/strike-logo.webp" alt="Strike Logo" loading="lazy"></div>
+    <div class="logo-card"><img src="assets/terra-logo.webp" alt="Terra Organic Coffee Logo" loading="lazy"></div>
   </div>
 </section>
 
@@ -413,7 +479,7 @@
     </div>
     <div class="proof-card">
       <div class="proof-icon"><svg class="icon" width="32" height="32"><use href="#icon-react"></use></svg></div>
-      <div class="proof-num">3</div>
+      <div class="proof-num">2</div>
       <div class="proof-label">Hackathons</div>
     </div>
     <div class="proof-card">
