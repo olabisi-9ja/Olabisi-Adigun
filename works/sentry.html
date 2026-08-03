@@ -475,10 +475,14 @@ html[data-theme="light"] body::before{mix-blend-mode:multiply;opacity:0.03;}
       <h2>Engineered for Reliability</h2>
       <p>The Sentry dashboard offers a clear, dark-mode-first aesthetic for security personnel, combining AI intelligence with rapid response workflows.</p>
     </div>
-    <div class="showcase-visual reveal delay-1" style="border-top: 1px solid var(--line2); padding: 2rem; background: var(--bg-card); display: flex; flex-direction: column; gap: 2rem;">
-      <img src="../assets/sentry-ui-1.webp" alt="Sentry Main UI" style="border-radius: 12px; border: 1px solid var(--line2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); max-width: 100%;">
-      <img src="../assets/sentry-ui-2.webp" alt="Sentry Analytics" style="border-radius: 12px; border: 1px solid var(--line2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); max-width: 100%;">
-      <img src="../assets/sentry-ui-3.webp" alt="Sentry Mobile View" style="border-radius: 12px; border: 1px solid var(--line2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); max-width: 100%;">
+    <div class="showcase-visual reveal delay-1" style="border-top: 1px solid var(--line2); padding: 2rem; background: var(--bg-card); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 2rem;">
+        <img src="../assets/sentry-ui-1.webp" alt="Sentry Main UI" style="border-radius: 12px; border: 1px solid var(--line2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); max-width: 100%; width: 100%;">
+        <img src="../assets/sentry-ui-2.webp" alt="Sentry Analytics" style="border-radius: 12px; border: 1px solid var(--line2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); max-width: 100%; width: 100%;">
+      </div>
+      <div>
+        <img src="../assets/sentry-ui-3.webp" alt="Sentry Mobile View" style="border-radius: 12px; border: 1px solid var(--line2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); max-width: 100%; width: 100%;">
+      </div>
     </div>
   </div>
 </div>
