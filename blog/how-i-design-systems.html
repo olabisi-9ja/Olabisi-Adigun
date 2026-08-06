@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How I Design Systems | Olabisi Adigun</title>
-<meta name="description" content="My approach to building design systems — from tokens and primitives to the decisions I've changed my mind about after building several production systems.">
+<meta name="description" content="My approach to building design systems from tokens and primitives to the decisions I've changed my mind about after building several production systems.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
     <span class="tag">04.10.2026</span>
   </div>
   <h1>How I Design Systems</h1>
-  <p class="lead">My approach to building design systems — from tokens and primitives to the decisions I've reversed after building several production systems, and the single question that makes every design system decision easier.</p>
+  <p class="lead">My approach to building design systems from tokens and primitives to the decisions I've reversed after building several production systems, and the single question that makes every design system decision easier.</p>
 </div>
 
 <div class="page-body">
@@ -35,7 +35,7 @@
   <p>I've built design systems from scratch for three projects now, inherited a poorly documented one, and contributed to a larger team's system. Here's what I've learned.</p>
 
   <h2>Start with the Question, Not the Tokens</h2>
-  <p>The most common mistake I see when people start building design systems — including early me — is jumping straight into token definitions. What's the spacing scale? What are the brand colours? What's the type ramp?</p>
+  <p>The most common mistake I see when people start building design systems including early me is jumping straight into token definitions. What's the spacing scale? What are the brand colours? What's the type ramp?</p>
   <p>These are important questions. But they're not the first question. The first question is: <strong>what is this system for?</strong></p>
   <p>Specifically:</p>
   <ul>
@@ -74,7 +74,7 @@
 
   <h2>The Decision I've Changed My Mind About: Spacing</h2>
   <p>I used to advocate hard for 4px base spacing grids. Multiples of 4. Everything divisible by 4. It felt rigorous and mathematical.</p>
-  <p>I've softened on this. The 4px grid is excellent for component-level spacing — padding, gaps, border radii. But applying it rigidly to layout-level spacing creates strange constraints. Layout spacing is not the same problem as component spacing, and trying to solve both with the same scale produces either a scale with too many steps (hard to choose from) or one with too few (too coarse).</p>
+  <p>I've softened on this. The 4px grid is excellent for component-level spacing padding, gaps, border radii. But applying it rigidly to layout-level spacing creates strange constraints. Layout spacing is not the same problem as component spacing, and trying to solve both with the same scale produces either a scale with too many steps (hard to choose from) or one with too few (too coarse).</p>
   <p>My current approach: 4px base for component spacing, a separate geometric scale for layout spacing (0.5rem, 1rem, 2rem, 4rem, 8rem, 12rem).</p>
 
   <h2>The Decision I've Changed My Mind About: Component Abstraction Level</h2>
@@ -83,13 +83,13 @@
   <p>Now I build systems that match the <em>vocabulary the team already uses</em>. If the team says "card," there's a Card component. If they say "toolbar," there's a Toolbar. The design system is documentation of the team's shared language, not an abstract architecture.</p>
 
   <h2>On Documentation</h2>
-  <p>The most underinvested part of every design system is documentation. And the most valuable kind of documentation is not "here's the API" — it's "here's when to use this, and here's when not to."</p>
+  <p>The most underinvested part of every design system is documentation. And the most valuable kind of documentation is not "here's the API" it's "here's when to use this, and here's when not to."</p>
   <p>Decision criteria are more valuable than specifications. A specification tells you what a component does. Decision criteria tell you when to reach for it.</p>
 
   <h2>The Single Question</h2>
-  <p>When I'm stuck on a design system decision — whether to add a new component, whether to break a token out of a parent token, whether a variant should be a prop or a separate component — I ask a single question:</p>
+  <p>When I'm stuck on a design system decision whether to add a new component, whether to break a token out of a parent token, whether a variant should be a prop or a separate component I ask a single question:</p>
   <p><strong>Does this make it easier to do the right thing and harder to do the wrong thing?</strong></p>
-  <p>A design system is a set of constraints. Good constraints liberate. They narrow the decision space to the point where doing good work becomes the path of least resistance. If an addition makes it easier to build consistent, accessible, performant UI — it belongs in the system. If it increases complexity without a proportional benefit, it doesn't.</p>
+  <p>A design system is a set of constraints. Good constraints liberate. They narrow the decision space to the point where doing good work becomes the path of least resistance. If an addition makes it easier to build consistent, accessible, performant UI it belongs in the system. If it increases complexity without a proportional benefit, it doesn't.</p>
 </div>
 
 <div class="page-cta">
@@ -109,3 +109,4 @@
 <script src="../shared.js"></script>
 </body>
 </html>
+

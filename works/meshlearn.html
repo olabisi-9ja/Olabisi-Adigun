@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MeshLearn — Offline Education | Olabisi Adigun</title>
+<title>MeshLearn Offline Education | Olabisi Adigun</title>
 <meta name="description" content="MeshLearn is a decentralized offline learning app using BLE mesh networking so coursework keeps moving without an internet connection.">
 <script>
   (function(){
@@ -39,7 +39,7 @@
     <span class="tag">2025</span>
   </div>
   <h1>MeshLearn</h1>
-  <p class="lead">A decentralized offline learning platform that uses Bluetooth Low Energy mesh networking to keep coursework moving — even when there is no internet connection at all.</p>
+  <p class="lead">A decentralized offline learning platform that uses Bluetooth Low Energy mesh networking to keep coursework moving even when there is no internet connection at all.</p>
   <div class="meta-strip">
     <div class="meta-item"><span class="meta-label">Role</span><span class="meta-val">Founder, Full-stack, ML</span></div>
     <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
@@ -49,13 +49,13 @@
 </div>
 
 <div class="cover-wrap">
-  <img class="cover-img" src="https://picsum.photos/seed/meshlearn/1600/900" alt="MeshLearn — Offline Education" loading="lazy">
+  <img class="cover-img" src="../assets/MeshLearn-og.webp" alt="MeshLearn Offline Education" loading="lazy">
 </div>
 
 <div class="page-body">
   <h2>Problem</h2>
-  <p>Nigeria has over 200 universities and polytechnics. A significant percentage of students studying outside major cities have unreliable or prohibitively expensive internet access. During my own studies at KWASU, I watched classmates struggle to download lecture materials, submit assignments, or access e-learning portals — not because the content wasn't there, but because the infrastructure wasn't.</p>
-  <p>The existing solutions — downloaded PDFs, WhatsApp groups, USB drives passed around — were fragile, unsearchable, and impossible to track for progress.</p>
+  <p>Nigeria has over 200 universities and polytechnics. A significant percentage of students studying outside major cities have unreliable or prohibitively expensive internet access. During my own studies at KWASU, I watched classmates struggle to download lecture materials, submit assignments, or access e-learning portals not because the content wasn't there, but because the infrastructure wasn't.</p>
+  <p>The existing solutions downloaded PDFs, WhatsApp groups, USB drives passed around were fragile, unsearchable, and impossible to track for progress.</p>
 
   <h2>Research</h2>
   <p>I investigated how students naturally shared information and found that physical proximity was the strongest network they had. We needed a system that leveraged this proximity. The opportunity was clear: Can learning continue without the internet by utilizing device-to-device connections?</p>
@@ -87,6 +87,9 @@ flowchart LR
 
   <h2>Design Process</h2>
   <p>The interface was designed to feel like a modern, premium learning platform, despite operating entirely offline. I focused on making the "mesh status" visible and understandable, so students could see when they were connected to peers and actively sharing or receiving chunks.</p>
+  <div style="margin: 2rem 0;">
+    <img src="../assets/MeshLearn-2.webp" alt="MeshLearn User Flow and Interface" loading="lazy" style="width: 100%; border-radius: 12px; object-fit: cover; border: 1px solid var(--line-strong);">
+  </div>
 
   <h2>Development</h2>
   <p>The platform required a complex mix of mobile engineering, native module integration, and on-device machine learning:</p>
@@ -109,7 +112,7 @@ flowchart LR
   </div>
 
   <h2>Lessons Learned</h2>
-  <p>MeshLearn was my first serious encounter with the constraints of mobile hardware. BLE is finicky — Bluetooth stacks vary wildly across Android manufacturers, power management kills background processes unexpectedly, and the mesh topology needs to adapt dynamically as users move around.</p>
+  <p>MeshLearn was my first serious encounter with the constraints of mobile hardware. BLE is finicky Bluetooth stacks vary wildly across Android manufacturers, power management kills background processes unexpectedly, and the mesh topology needs to adapt dynamically as users move around.</p>
   <p>It also taught me that <strong>the user experience of "it just works offline"</strong> is an extraordinarily hard engineering problem. Every assumption you make about connectivity, state synchronization, and data freshness has to be revisited from scratch.</p>
 </div>
 
@@ -129,3 +132,4 @@ flowchart LR
 
 </body>
 </html>
+

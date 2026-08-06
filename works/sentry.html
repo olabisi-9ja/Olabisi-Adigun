@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sentry — AI Campus Security | Olabisi Adigun</title>
+<title>Sentry AI Campus Security | Olabisi Adigun</title>
 <meta name="description" content="An AI-powered community safety and emergency intelligence platform that uses Gemma 4 to analyze incident reports.">
 <script>
   (function(){
@@ -546,8 +546,8 @@ window.addEventListener('load', () => {
 document.querySelectorAll('.feature-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const r = card.getBoundingClientRect();
-    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    card.style.setProperty('--mx', ((e.clientX r.left) / r.width * 100) + '%');
+    card.style.setProperty('--my', ((e.clientY r.top) / r.height * 100) + '%');
   });
 });
 
@@ -570,8 +570,8 @@ document.querySelectorAll('.feature-card').forEach(card => {
     particles.push({
       x: Math.random() * 1000,
       y: Math.random() * 1000,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
+      vx: (Math.random() 0.5) * 0.3,
+      vy: (Math.random() 0.5) * 0.3,
       r: Math.random() * 1.5 + 0.5,
       alpha: Math.random() * 0.4 + 0.1
     });
@@ -603,14 +603,14 @@ document.querySelectorAll('.feature-card').forEach(card => {
     // draw connecting lines
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
+        const dx = particles[i].x particles[j].x;
+        const dy = particles[i].y particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 120) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          const alpha = (1 - dist / 120) * (isDark() ? 0.15 : 0.07);
+          const alpha = (1 dist / 120) * (isDark() ? 0.15 : 0.07);
           ctx.strokeStyle = `rgba(52,107,241,${alpha})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
@@ -623,3 +623,4 @@ document.querySelectorAll('.feature-card').forEach(card => {
 </script>
 </body>
 </html>
+
