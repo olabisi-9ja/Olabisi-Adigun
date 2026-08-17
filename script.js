@@ -176,6 +176,40 @@ dateItems.forEach(item => {
   });
 });
 
+// Methodology timeline: fill the bar with the accent color as you scroll
+const methTrack = document.querySelector('.methodology-container');
+const methFill = document.querySelector('.meth-progress-fill');
+if (methTrack && methFill) {
+  const methSteps = Array.from(methTrack.querySelectorAll('.meth-step'));
+  let methTicking = false;
+
+  const updateMethFill = () => {
+    methTicking = false;
+    const rect = methTrack.getBoundingClientRect();
+    // Fill follows a "read line" a bit below the viewport middle
+    const anchor = window.innerHeight * 0.55;
+    const progress = Math.min(1, Math.max(0, (anchor - rect.top) / rect.height));
+    methFill.style.height = (progress * 100).toFixed(2) + '%';
+
+    // Light up each step once the fill reaches its marker (markers sit 10px below each step's top)
+    methSteps.forEach(step => {
+      const markerY = step.getBoundingClientRect().top + 10;
+      step.classList.toggle('lit', markerY <= anchor);
+    });
+  };
+
+  const requestMethUpdate = () => {
+    if (!methTicking) {
+      methTicking = true;
+      requestAnimationFrame(updateMethFill);
+    }
+  };
+
+  window.addEventListener('scroll', requestMethUpdate, { passive: true });
+  window.addEventListener('resize', requestMethUpdate);
+  updateMethFill();
+}
+
 
 
 
