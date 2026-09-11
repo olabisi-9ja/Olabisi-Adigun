@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pulse Fintech Protocol | Olabisi Adigun</title>
-<meta name="description" content="Pulse is a fintech infrastructure protocol for emerging markets offline payment guarantees secured with ECDSA across a seven-layer architecture.">
+<title>Pulse — Offline Payment Protocol Case Study | Olabisi Adigun</title>
+<meta name="description" content="A case study exploring Pulse, an offline payment protocol concept for emerging markets: escrow, ECDSA signatures, and a seven-layer architecture. Design work — not a deployed product.">
 <script>
   (function(){
     var theme = localStorage.getItem('theme');
@@ -34,17 +34,17 @@
 <div class="page-header">
   <div class="tag-row">
     <span class="tag">Fintech</span>
-    <span class="tag">Founder</span>
-    <span class="tag">Live</span>
+    <span class="tag">Case Study</span>
+    <span class="tag">Protocol Design</span>
     <span class="tag">2026</span>
   </div>
   <h1>Pulse</h1>
-  <p class="lead">A fintech infrastructure protocol for emerging markets delivering offline payment guarantees secured with ECDSA signatures across a resilient seven-layer architecture.</p>
+  <p class="lead">A case study in offline-first fintech infrastructure: a protocol concept for emerging markets that would deliver offline payment guarantees using ECDSA signatures across a resilient seven-layer architecture.</p>
   <div class="meta-strip">
-    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-val">Founder, Engineer, Designer</span></div>
+    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-val">Case Study Author &middot; Design &amp; Architecture</span></div>
     <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2026</span></div>
-    <div class="meta-item"><span class="meta-label">Status</span><span class="meta-val">Live</span></div>
-    <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-val">Node.js · React · PostgreSQL · ECDSA</span></div>
+    <div class="meta-item"><span class="meta-label">Status</span><span class="meta-val">Concept &mdash; Not Deployed</span></div>
+    <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-val">Node.js · React · PostgreSQL · ECDSA (design target)</span></div>
   </div>
 </div>
 
@@ -53,24 +53,32 @@
 </div>
 
 <div class="page-body">
+  <div class="callout">
+    <h4>About this case study</h4>
+    <p>Pulse is a <strong>concept and case study</strong>, not a shipped product. It has never been deployed, has no production users, and no real transaction volume — so there are no measured results to report. What follows is the design thinking: the problem, the protocol architecture, the trade-offs, and what a real pilot would have to prove.</p>
+  </div>
+
   <h2>Problem</h2>
   <p>In Nigeria and across Sub-Saharan Africa, unreliable internet connectivity is a constant reality. Millions of people are locked out of digital financial services every day not because they don't have a phone, or a bank account but because a 3G tower went down, or USSD is congested, or the POS machine has no signal.</p>
   <p>Existing fintech infrastructure assumes a persistent connection. That assumption fails constantly in emerging markets, and it costs real money for real people.</p>
 
   <h2>Research</h2>
-  <p>Before writing any code, I spent weeks talking to local merchants and analyzing existing payment methods. The research highlighted that while mobile money (USSD) exists, it is highly prone to network timeouts. We needed a solution that was entirely decoupled from real-time network availability, relying instead on cryptographic trust established between two nearby devices.</p>
+  <p>The starting point was an analysis of the payment rails already available to people without reliable connectivity. Mobile money over USSD exists, but every transaction depends on a live round-trip to the network, and that round-trip is precisely the thing that fails: sessions time out, USSD channels get congested, and the merchant is left guessing whether the money actually moved.</p>
+  <p>That failure mode drove the entire design. The transaction has to be settled between two nearby devices first, with no real-time network call at all, and reconciled with the settlement network later. Which means trust has to come from cryptography rather than from a server being reachable at the moment of payment.</p>
+  <p><em>This is desk research and reasoning about known failure modes, not field research — the case study stopped short of the merchant and user study a real launch would need.</em></p>
 
   <h2>Challenges</h2>
   <div class="callout">
     <h4>The Double-Spend Problem</h4>
-    <p>The hardest engineering challenge was designing the escrow mechanism to prevent double-spending without access to a shared ledger. The solution was a deterministic nonce system tied to the device clock plus a monotonic counter making replay attacks computationally infeasible even in offline conditions.</p>
+    <p>The hardest problem in the case study was designing an escrow mechanism that prevents double-spending without access to a shared ledger. The proposed approach is a deterministic nonce tied to the device clock plus a monotonic counter, so a captured transaction cannot be replayed even while both devices are offline.</p>
+    <p>This is a design position, not a validated one: the scheme has never been load-tested, adversarially tested, or reviewed by a cryptographer, and clock drift on low-end devices is an open risk I flag rather than solve here.</p>
   </div>
 
   <h2>My Role</h2>
-  <p>As the founder and lead engineer, I was responsible for the entire product lifecycle. I designed the architecture, built the frontend interfaces, and implemented the core Node.js payment layer and cryptographic validation engine.</p>
+  <p>I scoped the problem, designed the seven-layer architecture, specified the payment layer and the cryptographic validation rules, and worked through the interface states an offline flow would have to communicate. This was design and systems work rather than a shipped build — there is no production codebase behind it.</p>
 
   <h2>Architecture</h2>
-  <p>Pulse is a seven-layer offline payment protocol. It allows two parties to execute a financially guaranteed transaction using cryptographic proofs that are reconciled with the network when connectivity is restored.</p>
+  <p>Pulse is designed as a seven-layer offline payment protocol. The intent is to let two parties commit to a transaction using cryptographic proofs while fully offline, then reconcile those proofs with the settlement network once connectivity returns.</p>
   
   <div class="mermaid-container" style="background: var(--surface); padding: 2rem; border-radius: 12px; margin: 2rem 0; overflow-x: auto;">
     <pre class="mermaid">
@@ -94,8 +102,8 @@ flowchart LR
   <h2>Design Process</h2>
   <p>The UX had to be foolproof. Since users might be offline, the interface needed to communicate transaction finality without a network confirmation. I designed clear, color-coded states and deterministic loading indicators to build trust in the offline process.</p>
 
-  <h2>Development</h2>
-  <p>The stack focused on performance and reliability on low-end devices:</p>
+  <h2>Stack (Design Target)</h2>
+  <p>The stack the protocol was designed around, chosen for performance and reliability on low-end devices. None of it is deployed:</p>
   <div class="tech-stack" style="margin-bottom: 2rem;">
     <span class="tech-chip">Node.js</span>
     <span class="tech-chip">React Native</span>
@@ -105,21 +113,30 @@ flowchart LR
     <span class="tech-chip">Supabase</span>
   </div>
 
-  <h2>Results</h2>
+  <h2>What This Case Study Produced</h2>
+  <p>Pulse was never deployed, so there are no production metrics to report — no transaction volume, no uptime figure, no market pilots. What the work produced is design artefacts:</p>
   <ul>
-    <li><strong>Transactions:</strong> 10,000+ processed offline successfully.</li>
-    <li><strong>Uptime:</strong> Operates reliably even with 0% internet coverage.</li>
-    <li><strong>Growth:</strong> Piloted at 5 local markets, proving the viability of the protocol.</li>
+    <li><strong>Protocol architecture:</strong> a seven-layer model that separates signing, escrow, transport, queuing, and settlement, so each layer can be replaced or audited on its own.</li>
+    <li><strong>A double-spend argument:</strong> a nonce plus monotonic counter scheme intended to make offline replay impractical, written down together with the cases it does not yet cover.</li>
+    <li><strong>Offline UX rules:</strong> the states the interface has to express &mdash; signed, queued, reconciled, failed &mdash; without a network round-trip available to confirm any of them.</li>
+  </ul>
+
+  <h2>What a Real Pilot Would Have to Prove</h2>
+  <p>If Pulse were taken past the whiteboard, these are the numbers I would insist on measuring before trusting it with other people's money:</p>
+  <ul>
+    <li><strong>Settlement integrity:</strong> the share of queued offline transactions that reconcile correctly once connectivity returns, including after device loss, app reinstall, or a stalled queue.</li>
+    <li><strong>Replay resistance:</strong> whether a captured QR or NFC payload can be replayed by a second device, tested under deliberate clock manipulation rather than assumed away.</li>
+    <li><strong>Offline usability:</strong> time to complete a payment and merchant comprehension, measured on the low-end Android hardware the target market actually uses.</li>
   </ul>
 
   <h2>Lessons Learned</h2>
-  <p>Building Pulse taught me that the most challenging engineering problems are not about writing clever code they are about designing systems that remain correct when all your assumptions break down. Network reliability is an assumption. Clock synchronization is an assumption.</p>
+  <p>Designing Pulse taught me that the most challenging engineering problems are not about writing clever code they are about designing systems that remain correct when all your assumptions break down. Network reliability is an assumption. Clock synchronization is an assumption.</p>
   <p>The discipline of <strong>adversarial thinking</strong> asking "what if this component is unavailable?" at every layer is something I now apply to every system I design, regardless of whether it touches payments.</p>
 </div>
 
 <div class="page-cta">
-  <h2>Interested in Pulse?</h2>
-  <p>I'm actively looking for partners and early adopters in the fintech and emerging markets space.</p>
+  <h2>Want to take Pulse further?</h2>
+  <p>Pulse is an open concept, not a product. I'd like to talk to fintech engineers, cryptographers, or emerging-markets teams who want to push this protocol design towards a real pilot.</p>
   <div class="cta-btns">
     <a href="mailto:abeladigun11@gmail.com?subject=Pulse Inquiry" class="btn-primary">Get in Touch ↗</a>
     <a href="../#products" class="btn-outline">← Back to Works</a>
