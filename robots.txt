@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Crawl politely: heavy assets don't need indexing
+Disallow: /assets/
+
+Sitemap: https://olabisiadigun.xyz/sitemap.xml

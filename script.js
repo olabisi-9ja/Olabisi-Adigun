@@ -69,7 +69,10 @@ const secObserver = new IntersectionObserver((entries) => {
 mainSections.forEach(id => { const el = document.getElementById(id); if (el) secObserver.observe(el); });
 
 // custom cursor
+// Only hide the native cursor once we know the custom cursor will actually run,
+// so a JS failure never leaves pointer users with an invisible cursor.
 if (fine){
+  document.documentElement.classList.add('cc');
   const cursor = document.getElementById('cursor');
   const cursorText = document.getElementById('cursor-text');
   
@@ -230,114 +233,58 @@ document.getElementById('backtotop').addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ---- three.js hero scene: interactive functional data planes ----
-function initHeroScene(){
-  if (typeof THREE === 'undefined') {
-    setTimeout(initHeroScene, 50);
-    return;
-  }
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.set(0, 0, 9);
-
-  function resize(){
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  const group = new THREE.Group();
-  const layerCount = 7;
-  const meshes = [];
-  
-  for (let i = 0; i < layerCount; i++){
-    const geo = new THREE.PlaneGeometry(3.6, 2.2);
-    const isAlt = i % 2 !== 0;
-    const mat = new THREE.MeshBasicMaterial({
-      color: isAlt ? 0xFF4641 : 0x346BF1,
-      transparent: true,
-      opacity: 0.05 + (i * 0.008),
-      side: THREE.DoubleSide
-    });
-    const mesh = new THREE.Mesh(geo, mat);
-    
-    mesh.userData = {
-      baseY: (i - layerCount / 2) * 0.42,
-      baseZ: (i - layerCount / 2) * 0.25,
-      targetY: (i - layerCount / 2) * 0.42,
-      targetZ: (i - layerCount / 2) * 0.25
-    };
-    
-    mesh.position.y = mesh.userData.baseY;
-    mesh.position.z = mesh.userData.baseZ;
-
-    const edges = new THREE.EdgesGeometry(geo);
-    const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ 
-      color: isAlt ? 0xFF4641 : 0x346BF1, 
-      transparent: true, 
-      opacity: 0.25 
-    }));
-    mesh.add(line);
-
-    group.add(mesh);
-    meshes.push(mesh);
-  }
-  group.rotation.x = 0.45;
-  group.rotation.y = -0.5;
-  group.position.x = window.innerWidth < 768 ? 0 : 2.6;
-  scene.add(group);
-
-  let mx = 0, my = 0;
-  let isClicking = false;
-  let isVisible = true;
-  
-  const observer = new IntersectionObserver((entries) => {
-    isVisible = entries[0].isIntersecting;
+/* ── THEME TOGGLE (index) ─────────────────────── */
+const idxThemeBtn = document.getElementById('themeBtn');
+if (idxThemeBtn) {
+  const syncThemeBtn = () => {
+    const isLight = document.documentElement.dataset.theme === 'light';
+    idxThemeBtn.textContent = isLight ? 'Dark mode' : 'Light mode';
+    idxThemeBtn.setAttribute('aria-pressed', String(isLight));
+  };
+  syncThemeBtn();
+  idxThemeBtn.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    syncThemeBtn();
   });
-  observer.observe(canvas);
-  
-  window.addEventListener('mousemove', (e) => {
-    mx = (e.clientX / window.innerWidth - 0.5);
-    my = (e.clientY / window.innerHeight - 0.5);
-  });
-  
-  canvas.addEventListener('mousedown', () => {
-    isClicking = true;
-    meshes.forEach((mesh, i) => {
-      mesh.userData.targetY = mesh.userData.baseY + (Math.random() - 0.5) * 4;
-      mesh.userData.targetZ = mesh.userData.baseZ + (Math.random() - 0.5) * 4;
-    });
-  });
-  
-  window.addEventListener('mouseup', () => {
-    isClicking = false;
-    meshes.forEach(mesh => {
-      mesh.userData.targetY = mesh.userData.baseY;
-      mesh.userData.targetZ = mesh.userData.baseZ;
-    });
-  });
-
-  function animate(){
-    requestAnimationFrame(animate);
-    if (!isVisible) return;
-    if (!reduceMotion){
-      group.rotation.y += 0.0015;
-      group.rotation.y += (-0.5 + mx * 0.5 - group.rotation.y) * 0.02;
-      group.rotation.x += (0.45 - my * 0.4 - group.rotation.x) * 0.02;
-      
-      meshes.forEach(mesh => {
-        mesh.position.y += (mesh.userData.targetY - mesh.position.y) * (isClicking ? 0.1 : 0.05);
-        mesh.position.z += (mesh.userData.targetZ - mesh.position.z) * (isClicking ? 0.1 : 0.05);
-      });
-    }
-    renderer.render(scene, camera);
-  }
-  animate();
 }
-initHeroScene();
+
+/* ── DYNAMIC COPYRIGHT YEAR ───────────────────── */
+document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+
+/* ── SCROLL PROGRESS BAR ──────────────────────── */
+const scrollBar = document.getElementById('scroll-progress');
+if (scrollBar) {
+  let ticking = false;
+  const updateBar = () => {
+    ticking = false;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    scrollBar.style.transform = `scaleX(${(pct / 100).toFixed(4)})`;
+  };
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(updateBar); } }, { passive: true });
+  updateBar();
+}
+
+/* ── COPY EMAIL BUTTON ────────────────────────── */
+document.querySelectorAll('[data-copy-email]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const email = btn.getAttribute('data-copy-email');
+    try {
+      await navigator.clipboard.writeText(email);
+      const old = btn.textContent;
+      btn.textContent = 'Copied ✓';
+      setTimeout(() => { btn.textContent = old; }, 1600);
+    } catch (e) { /* clipboard unavailable (permissions/insecure) */ }
+  });
+});
+
+/* ── MOBILE STICKY CTA (hide when contact visible) ── */
+const mobileCta = document.getElementById('mobile-cta');
+const contactSec = document.getElementById('contact');
+if (mobileCta && contactSec && 'IntersectionObserver' in window) {
+  new IntersectionObserver((entries) => {
+    mobileCta.classList.toggle('hidden', entries[0].isIntersecting);
+  }, { threshold: 0.15 }).observe(contactSec);
+}

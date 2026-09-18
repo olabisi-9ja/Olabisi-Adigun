@@ -24,3 +24,6 @@ if (themeBtn) {
     }
   });
 }
+
+/* ── DYNAMIC COPYRIGHT YEAR ──────────────────── */
+document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });

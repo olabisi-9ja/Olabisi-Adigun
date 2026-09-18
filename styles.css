@@ -10,7 +10,8 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{background:var(--bg); scroll-behavior:smooth;}
 body{position:relative;background:var(--bg);color:var(--ink);font-family:var(--font-body);transition:background-color .4s ease, color .4s ease;}
-@media (pointer:fine){ body{cursor:none;} a,button{cursor:none;} }
+@media (pointer:fine){ html.cc body{cursor:none;} html.cc a,html.cc button{cursor:none;} }
+html,body{overflow-x:clip;}
 ::selection{background:var(--accent);color:var(--accent-ink);}
 a{color:inherit;text-decoration:none;}
 svg.icon{fill:currentColor;}
@@ -517,3 +518,97 @@ footer .footer-year{text-align:center;margin-top:0.6rem;font-size:0.68rem;color:
 }
 
 @media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important; animation-duration:0.01ms !important;}}
+
+/* =========================================
+   ACCESSIBILITY & UTILITIES
+   ========================================= */
+/* Skip link: visually hidden until focused */
+.skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--accent);color:var(--accent-ink);
+  padding:0.7rem 1.2rem;border-radius:6px;font-family:var(--font-label);font-size:0.75rem;letter-spacing:0.1em;
+  text-transform:uppercase;transition:top 0.2s ease;}
+.skip-link:focus{top:1rem;}
+
+/* Visible focus for keyboard users */
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+
+/* Scroll progress bar */
+#scroll-progress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:900;background:var(--accent);
+  transform-origin:0 50%;transform:scaleX(0);pointer-events:none;}
+
+/* Theme toggle in nav */
+.theme-toggle{background:none;border:1px solid var(--line-strong);border-radius:20px;padding:0.4rem 0.9rem;
+  font-family:var(--font-label);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);
+  cursor:pointer;transition:border-color 0.3s,color 0.3s;white-space:nowrap;}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent);}
+
+/* Services grid */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1.5rem;}
+.service-card{position:relative;display:block;padding:2rem;border:1px solid var(--line-strong);border-radius:8px;
+  background:var(--bg-alt);transition:border-color 0.3s,transform 0.3s;overflow:hidden;}
+.service-card:hover{border-color:var(--accent);transform:translateY(-4px);}
+.service-num{font-family:var(--font-label);font-size:0.7rem;color:var(--accent);letter-spacing:0.12em;}
+.service-card h3{font-size:1.25rem;margin:0.8rem 0 0.6rem;color:var(--ink);}
+.service-card p{color:var(--muted);font-size:0.95rem;line-height:1.5;}
+.service-arrow{position:absolute;top:1.4rem;right:1.4rem;color:var(--accent);font-size:1.2rem;opacity:0;transform:translateX(-8px);transition:opacity 0.3s,transform 0.3s;}
+.service-card:hover .service-arrow{opacity:1;transform:translateX(0);}
+
+/* FAQ accordion */
+.faq-list{border-top:1px solid var(--line-strong);max-width:820px;}
+.faq-item{border-bottom:1px solid var(--line-strong);}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:1.6rem 0;font-family:var(--font-head);font-weight:600;font-size:1.15rem;color:var(--ink);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:'+';font-size:1.5rem;color:var(--accent);transition:transform 0.3s;flex-shrink:0;}
+.faq-item[open] summary::after{transform:rotate(45deg);}
+.faq-item p{color:var(--muted);font-size:1rem;line-height:1.7;padding:0 0 1.6rem;max-width:720px;}
+
+/* Contact meta */
+.contact-meta{margin-top:2.5rem;display:flex;flex-direction:column;gap:0.9rem;align-items:center;}
+.contact-promise{font-size:1rem;color:var(--ink);}
+.contact-line{display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;justify-content:center;}
+.contact-email{color:var(--accent);font-weight:600;border-bottom:1px solid var(--line-strong);}
+.copy-btn{background:none;border:1px solid var(--line-strong);border-radius:20px;padding:0.35rem 0.9rem;
+  font-family:var(--font-label);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color .3s,border-color .3s;}
+.copy-btn:hover{color:var(--accent);border-color:var(--accent);}
+.contact-line.muted{font-size:0.85rem;color:var(--muted);}
+.contact-line.muted a{color:var(--muted);border-bottom:1px solid var(--line);}
+.contact-line.muted a:hover{color:var(--accent);}
+
+/* Mobile sticky CTA */
+.mobile-cta{position:fixed;left:0;right:0;bottom:0;z-index:600;display:none;padding:0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom));
+  background:var(--nav-bg);backdrop-filter:blur(12px);border-top:1px solid var(--line-strong);transition:transform 0.3s ease;}
+.mobile-cta a{display:block;text-align:center;background:var(--accent);color:var(--accent-ink);border-radius:8px;
+  padding:0.9rem 1rem;font-weight:600;font-size:0.95rem;}
+.mobile-cta.hidden{transform:translateY(100%);}
+@media(max-width:768px){.mobile-cta{display:block;}}
+
+/* =========================================
+   LIGHT THEME (index)
+   ========================================= */
+html[data-theme="light"]{
+  --bg:#F8F8F8; --bg-alt:#FFFFFF; --ink:#111111; --muted:#5f5f5f;
+  --line:rgba(17,17,17,0.1); --line-strong:rgba(17,17,17,0.2);
+  --nav-bg:rgba(248,248,248,0.85);
+}
+html[data-theme="light"] #grain{mix-blend-mode:multiply;opacity:0.03;}
+html[data-theme="light"] .proof-card{border-color:var(--line);}
+html[data-theme="light"] .proof-card:hover{background:var(--bg);}
+html[data-theme="light"] .proof-sub{color:var(--muted);}
+html[data-theme="light"] .lab-card{border-color:var(--line);}
+html[data-theme="light"] .methodology-container::before{background:var(--line-strong);}
+html[data-theme="light"] .meth-num{color:var(--line-strong);}
+html[data-theme="light"] .meth-step.lit .meth-num{color:var(--accent);opacity:0.8;}
+html[data-theme="light"] #curtain{background:var(--bg);}
+html[data-theme="light"] .premium-card .img-wrap::before{background:rgba(248,248,248,0.6);}
+
+/* =========================================
+   PRINT
+   ========================================= */
+@media print{
+  nav,#grid-lines,#grain,#cursor,#cursor-text,#curtain,#backdrop,#sidebar,#backtotop-wrap,
+  #scroll-progress,.mobile-cta,.skip-link,#hero-canvas,.marquee-row{display:none !important;}
+  body,html{background:#fff !important;color:#000 !important;}
+  section{padding:1rem 0;}
+  .reveal{opacity:1 !important;transform:none !important;}
+  a{color:#000;text-decoration:underline;}
+}
