@@ -33,6 +33,11 @@
   --ease: cubic-bezier(.16,1,.3,1);
   --icon-sun:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/%3E%3C/svg%3E");
   --icon-moon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
+  --icon-arrow-ne:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7'/%3E%3Cpath d='M8 7h9v9'/%3E%3C/svg%3E");
+  --icon-arrow-right:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m13 6 6 6-6 6'/%3E%3C/svg%3E");
+  --icon-arrow-left:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5'/%3E%3Cpath d='m11 18-6-6 6-6'/%3E%3C/svg%3E");
+  --icon-arrow-up:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19V5'/%3E%3Cpath d='m6 11 6-6 6 6'/%3E%3C/svg%3E");
+
 }
 
 /* ── RESET ───────────────────────────── */
@@ -83,6 +88,13 @@ html[data-theme="light"] .theme-btn::before{
   mask:var(--icon-moon) center / contain no-repeat;
 }
 .theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+
+.i-arrow{display:inline-block;width:.9em;height:.9em;background:currentColor;vertical-align:-.1em;flex-shrink:0;
+  -webkit-mask:var(--icon-arrow-ne) center / contain no-repeat;mask:var(--icon-arrow-ne) center / contain no-repeat;}
+.i-arrow.right{-webkit-mask-image:var(--icon-arrow-right);mask-image:var(--icon-arrow-right);}
+.i-arrow.left{-webkit-mask-image:var(--icon-arrow-left);mask-image:var(--icon-arrow-left);}
+.i-arrow.up{-webkit-mask-image:var(--icon-arrow-up);mask-image:var(--icon-arrow-up);}
 
 /* ── HERO ────────────────────────── */
 .hero{
@@ -477,7 +489,7 @@ html[data-theme="light"] body::before{mix-blend-mode:multiply;opacity:0.03;}
 
 <!-- NAV -->
 <nav class="sub-nav">
-  <a href="../../" class="back-link"><span>←</span> Portfolio</a>
+  <a href="../../" class="back-link"><span class="i-arrow left" aria-hidden="true"></span> Portfolio</a>
   <span class="site-name">Olabisi Adigun</span>
   <button id="themeBtn" class="theme-btn" type="button" aria-label="Switch to light mode">Light</button>
 </nav>
@@ -502,7 +514,7 @@ html[data-theme="light"] body::before{mix-blend-mode:multiply;opacity:0.03;}
           Smart Alert and Field Emergency a <em>campus-wide safety platform</em> built for KWASU, with AI triage, real-time dispatch, and offline mesh networking.
         </p>
         <div>
-          <a href="https://safe-kwasu.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 0.8rem 1.8rem; font-size: 0.9rem;">View Live Platform ↗</a>
+          <a href="https://safe-kwasu.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 0.8rem 1.8rem; font-size: 0.9rem;">View Live Platform <span class="i-arrow" aria-hidden="true"></span></a>
         </div>
       </div>
       <div class="hero-stat-row">
@@ -740,16 +752,16 @@ html[data-theme="light"] body::before{mix-blend-mode:multiply;opacity:0.03;}
   <h2 class="cta-heading reveal">Want a system<br>like <em>this?</em></h2>
   <p class="cta-sub reveal">I build custom safety and emergency management systems for institutions and organizations.</p>
   <div class="cta-btns reveal">
-    <a href="mailto:abeladigun11@gmail.com?subject=Safety System Inquiry" class="btn-primary">Start a Conversation ↗</a>
-    <a href="../../#client-work" class="btn-outline">← Back to Works</a>
+    <a href="mailto:abeladigun11@gmail.com?subject=Safety System Inquiry" class="btn-primary">Start a Conversation <span class="i-arrow" aria-hidden="true"></span></a>
+    <a href="../../#client-work" class="btn-outline"><span class="i-arrow left" aria-hidden="true"></span> Back to Works</a>
   </div>
 </section>
 
 <p class="last-updated" style="max-width:760px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem);">Last updated <time datetime="2026-03-12">2026-03-12</time></p>
-<nav class="post-nav" aria-label="Continue reading"><a href="../../works/sentry/"><span class="dir">← Previous</span><span class="ttl">Sentry</span></a><a class="next" href="../../works/strike/"><span class="dir">Next →</span><span class="ttl">STRĪKE</span></a></nav>
+<nav class="post-nav" aria-label="Continue reading"><a href="../../works/sentry/"><span class="dir"><span class="i-arrow left" aria-hidden="true"></span> Previous</span><span class="ttl">Sentry</span></a><a class="next" href="../../works/strike/"><span class="dir">Next <span class="i-arrow right" aria-hidden="true"></span></span><span class="ttl">STRĪKE</span></a></nav>
 <footer class="sub-footer">
   <span class="copy">© <span data-year>2026</span> Olabisi Adigun</span>
-  <a href="../../" class="back-home">olabisiadigun.xyz ↗</a>
+  <a href="../../" class="back-home">olabisiadigun.xyz <span class="i-arrow" aria-hidden="true"></span></a>
 </footer>
 
 <script>
