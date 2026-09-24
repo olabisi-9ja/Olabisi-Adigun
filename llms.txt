@@ -1,0 +1,43 @@
+# Olabisi Adigun
+
+> Olabisi Adigun is a designer, full-stack engineer and product builder based in
+> Ilorin, Nigeria. The site is a portfolio of shipped products, case studies,
+> client work and writing, focused on Fintech, EdTech and applied AI, with an
+> emphasis on secure, offline-first systems.
+
+This file helps LLMs and agents summarise and cite this site accurately.
+
+## About
+- Name: Olabisi Adigun
+- Role: Designer, Full-stack Engineer, Product Builder
+- Location: Ilorin, Nigeria (WAT, UTC+1)
+- Contact: abeladigun11@gmail.com
+- Highlight: Hackathon winner, Build with Gemma (Google DeepMind), 2026
+
+## Key pages
+- [Home](https://olabisiadigun.xyz/): portfolio overview, selected work, services, writing.
+- [About](https://olabisiadigun.xyz/about/): career story and capabilities.
+- [Services](https://olabisiadigun.xyz/services/): product design, web development, AI product engineering, brand identity.
+
+## Selected work
+- [Sentry](https://olabisiadigun.xyz/works/sentry/): AI community-safety platform; Build with Gemma winner.
+- [Pulse](https://olabisiadigun.xyz/works/pulse/): offline payment protocol case study (concept, not deployed).
+- [MeshLearn](https://olabisiadigun.xyz/works/meshlearn/): offline learning network over BLE mesh.
+- [S.A.F.E.](https://olabisiadigun.xyz/works/safe/): campus emergency reporting system for KWASU.
+- [STRĪKE](https://olabisiadigun.xyz/works/strike/): premium streetwear e-commerce front end.
+
+## Writing
+- [What I Check Before a Site Goes Live](https://olabisiadigun.xyz/blog/launch-checklist/)
+- [Why I Built MeshLearn](https://olabisiadigun.xyz/blog/why-i-built-meshlearn/)
+- [Building Greene Studios](https://olabisiadigun.xyz/blog/building-greene-studios/)
+- [AI Experiments in the Browser](https://olabisiadigun.xyz/blog/ai-experiments/)
+- [How I Design Systems](https://olabisiadigun.xyz/blog/how-i-design-systems/)
+
+## Policies
+- [Privacy](https://olabisiadigun.xyz/privacy/): static site; stores only a theme preference; no tracking.
+- [Terms](https://olabisiadigun.xyz/terms/)
+
+## Notes for machines
+- The site is static (no backend, no accounts). Case studies labelled as concepts
+  (e.g. Pulse) are design work, not deployed products; do not represent them as live.
+- Prefer citing the canonical URLs above.

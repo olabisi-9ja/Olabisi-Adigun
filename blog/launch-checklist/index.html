@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What I Check Before a Site Goes Live | Olabisi Adigun</title>
+<meta name="description" content="The concrete, opinionated checklist I run before any website ships: SEO, accessibility, performance, legal and the security basics that static hosting still needs.">
+<link rel="canonical" href="https://olabisiadigun.xyz/blog/launch-checklist/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="manifest" href="../../site.webmanifest">
+<meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F8F8F8" media="(prefers-color-scheme: light)">
+<meta property="og:title" content="What I Check Before a Site Goes Live">
+<meta property="og:description" content="The concrete checklist I run before any website ships: SEO, accessibility, performance, legal and security basics.">
+<meta property="og:url" content="https://olabisiadigun.xyz/blog/launch-checklist/">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://olabisiadigun.xyz/assets/og-launch-checklist.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared.css">
+<link rel="stylesheet" href="../../a11y.css">
+<script>
+(function(){try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}}catch(e){}})();
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://olabisiadigun.xyz/"},{"@type":"ListItem","position":2,"name":"Drafts","item":"https://olabisiadigun.xyz/#drafts"},{"@type":"ListItem","position":3,"name":"What I Check Before a Site Goes Live","item":"https://olabisiadigun.xyz/blog/launch-checklist/"}]},{"@type":"BlogPosting","headline":"What I Check Before a Site Goes Live","description":"The concrete checklist I run before any website ships.","datePublished":"2026-09-18","dateModified":"2026-09-18","url":"https://olabisiadigun.xyz/blog/launch-checklist/","image":"https://olabisiadigun.xyz/assets/og-launch-checklist.jpg","author":{"@id":"https://olabisiadigun.xyz/#person"}}]}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<nav class="sub-nav">
+  <a href="../../#drafts" class="back-link">← Back to Drafts</a>
+  <span class="site-name">Olabisi Adigun</span>
+  <button id="themeBtn" class="theme-btn">☀ Light</button>
+</nav>
+
+<nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../#drafts">Drafts</a></li><li><span aria-current="page">Launch Checklist</span></li></ol></nav>
+
+<div class="page-header" id="main-content">
+  <div class="tag-row"><span class="tag">Shipping</span><span class="tag">Process</span><span class="tag">09.18.2026</span></div>
+  <h1>What I Check Before a Site Goes Live</h1>
+  <p class="lead">A concrete, opinionated launch checklist, drawn from actually applying it to this very site. No vague advice; each item is something you can verify.</p>
+</div>
+
+<div class="page-body">
+  <p>Every time I ship a site I run the same checklist. Not because I enjoy checklists, but because the things that embarrass you after launch are always the small, verifiable ones. Here is the current version, with the numbers from applying it to this site.</p>
+
+  <h2>Performance: kill the heavy things first</h2>
+  <p>Performance work is 90% removing weight, not micro-optimising. On this site the two heaviest offenders were a 1.8&nbsp;MB PNG screenshot and a ~600&nbsp;KB third-party 3D library loaded from a CDN. Converting the image to WebP at a sensible size brought it to ~60&nbsp;KB, and replacing the 3D library with a tiny canvas-2D projection removed the dependency entirely. That single change cut the JavaScript payload by an order of magnitude.</p>
+  <ul>
+    <li>Compress and resize images; use WebP/AVIF and set <code>width</code>/<code>height</code> to avoid layout shift.</li>
+    <li>Drop or self-host third-party scripts you do not strictly need.</li>
+    <li>Defer non-critical JS and CSS; preload only the true critical path.</li>
+  </ul>
+
+  <h2>SEO: make the page describable and discoverable</h2>
+  <ul>
+    <li>One <code>&lt;title&gt;</code> and one meta description per page, unique across the site.</li>
+    <li>A canonical URL on every page, plus <code>robots.txt</code>, <code>sitemap.xml</code> and (newly) <code>llms.txt</code>.</li>
+    <li>Open Graph and Twitter card tags with a real 1200×630 image, in a format scrapers accept.</li>
+    <li>Structured data (JSON-LD) for the person, the site, articles and breadcrumbs.</li>
+    <li>A custom 404 page so dead links lead somewhere useful.</li>
+  </ul>
+
+  <h2>Accessibility: the cheapest wins</h2>
+  <ul>
+    <li>Skip-to-content link and a single <code>&lt;main&gt;</code> landmark.</li>
+    <li>Visible keyboard focus and full keyboard operability (the FAQ here is native <code>&lt;details&gt;</code>, so it works with no JS).</li>
+    <li>Contrast ratios that pass WCAG AA, in <em>both</em> themes.</li>
+    <li>Respect <code>prefers-reduced-motion</code>.</li>
+    <li>Real alt text that describes the image, not "image1".</li>
+  </ul>
+
+  <h2>Legal and trust</h2>
+  <p>A portfolio still needs a privacy policy and terms, even if the honest privacy policy is "we store a theme preference". Saying so plainly builds more trust than a generic policy generator. Add real contact details and, if you display reviews, only real ones.</p>
+
+  <h2>Security, even on static hosting</h2>
+  <ul>
+    <li>No secrets in the repo or the bundle. Static sites should have nothing to leak.</li>
+    <li><code>rel="noopener noreferrer"</code> on every external link.</li>
+    <li>A published <code>security.txt</code> so researchers can reach you.</li>
+    <li>If you add CDN scripts, pin them with Subresource Integrity; better, self-host.</li>
+  </ul>
+
+  <h2>The final gate</h2>
+  <p>Before I call anything done, I load every page in a real browser on a real (small) screen, watch the console for errors, and scroll for horizontal overflow. A clean build is not the same as a working page. If the console is quiet, the overflow is gone and the links resolve, then, and only then, is it live.</p>
+
+  <div class="callout">
+    <h4>The one-line version</h4>
+    <p>Remove weight, describe the page, make it usable by keyboard, be honest about data, and verify in a browser. Everything else is polish.</p>
+  </div>
+  <p class="last-updated">Last updated <time datetime="2026-09-18">Sep 18, 2026</time></p>
+</div>
+
+<nav class="post-nav" aria-label="Continue reading"><a href="../why-i-built-meshlearn/"><span class="dir">← Previous</span><span class="ttl">Why I Built MeshLearn</span></a><span></span></nav>
+
+<footer class="sub-footer">
+  <span class="copy">© <span data-year>2026</span> Olabisi Adigun</span>
+  <a href="../../" class="back-home">olabisiadigun.xyz ↗</a>
+</footer>
+
+<script defer src="../../shared.js"></script>
+</body>
+</html>
