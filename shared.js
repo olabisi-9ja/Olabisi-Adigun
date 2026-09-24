@@ -3,24 +3,24 @@
 /* ── THEME TOGGLE ──────────────────── */
 const themeBtn = document.getElementById('themeBtn');
 if (themeBtn) {
-  // Check the initial state set by the inline head script
-  const isLight = document.documentElement.dataset.theme === 'light';
-  themeBtn.textContent = isLight ? '🌙 Dark' : '☀ Light';
+  const syncThemeBtn = (theme) => {
+    const isLight = theme === 'light';
+    themeBtn.textContent = isLight ? 'Dark' : 'Light';
+    themeBtn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+  };
+  syncThemeBtn(document.documentElement.dataset.theme);
 
   themeBtn.addEventListener('click', () => {
-    const currentIsLight = document.documentElement.dataset.theme === 'light';
-    const newTheme = currentIsLight ? 'dark' : 'light';
-    
+    const newTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
     document.documentElement.dataset.theme = newTheme;
-    localStorage.setItem('theme', newTheme);
-    themeBtn.textContent = newTheme === 'light' ? '🌙 Dark' : '☀ Light';
+    try { localStorage.setItem('theme', newTheme); } catch (e) {}
+    syncThemeBtn(newTheme);
   });
 
-  // Sync theme across multiple tabs
   window.addEventListener('storage', (e) => {
     if (e.key === 'theme') {
       document.documentElement.dataset.theme = e.newValue;
-      themeBtn.textContent = e.newValue === 'light' ? '🌙 Dark' : '☀ Light';
+      syncThemeBtn(e.newValue);
     }
   });
 }

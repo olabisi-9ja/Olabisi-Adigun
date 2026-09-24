@@ -31,6 +31,8 @@
   --font-body:'Inter',sans-serif;
   --font-mono:'JetBrains Mono',monospace;
   --ease: cubic-bezier(.16,1,.3,1);
+  --icon-sun:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/%3E%3C/svg%3E");
+  --icon-moon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
 }
 
 /* ── RESET ───────────────────────────── */
@@ -67,6 +69,18 @@ body::before{
   background:none;border:1px solid var(--line2);border-radius:20px;padding:0.4rem 0.9rem;
   font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;
   color:var(--muted);cursor:pointer;transition:border-color 0.3s,color 0.3s;
+  display:inline-flex;align-items:center;gap:0.45rem;
+}
+.theme-btn::before{
+  content:'';width:14px;height:14px;flex-shrink:0;background:currentColor;
+  -webkit-mask:var(--icon-sun) center / contain no-repeat;
+  mask:var(--icon-sun) center / contain no-repeat;
+  --icon-sun:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/%3E%3C/svg%3E");
+  --icon-moon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
+}
+html[data-theme="light"] .theme-btn::before{
+  -webkit-mask:var(--icon-moon) center / contain no-repeat;
+  mask:var(--icon-moon) center / contain no-repeat;
 }
 .theme-btn:hover{border-color:var(--accent);color:var(--accent);}
 
@@ -461,7 +475,7 @@ html[data-theme="light"] body::before{mix-blend-mode:multiply;opacity:0.03;}
 <nav class="sub-nav">
   <a href="../../" class="back-link"><span>←</span> Portfolio</a>
   <span class="site-name">Olabisi Adigun</span>
-  <button id="themeBtn" class="theme-btn">☀ Light</button>
+  <button id="themeBtn" class="theme-btn" type="button" aria-label="Switch to light mode">Light</button>
 </nav>
 
 <!-- HERO -->
@@ -574,21 +588,24 @@ html[data-theme="light"] body::before{mix-blend-mode:multiply;opacity:0.03;}
 /* ── THEME TOGGLE ──────────────────── */
 const themeBtn = document.getElementById('themeBtn');
 if (themeBtn) {
-  const isLight = document.documentElement.dataset.theme === 'light';
-  themeBtn.textContent = isLight ? '🌙 Dark' : '☀ Light';
+  const syncThemeBtn = (theme) => {
+    const isLight = theme === 'light';
+    themeBtn.textContent = isLight ? 'Dark' : 'Light';
+    themeBtn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+  };
+  syncThemeBtn(document.documentElement.dataset.theme);
 
   themeBtn.addEventListener('click', () => {
-    const currentIsLight = document.documentElement.dataset.theme === 'light';
-    const newTheme = currentIsLight ? 'dark' : 'light';
+    const newTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
     document.documentElement.dataset.theme = newTheme;
-    localStorage.setItem('theme', newTheme);
-    themeBtn.textContent = newTheme === 'light' ? '🌙 Dark' : '☀ Light';
+    try { localStorage.setItem('theme', newTheme); } catch (e) {}
+    syncThemeBtn(newTheme);
   });
 
   window.addEventListener('storage', (e) => {
     if (e.key === 'theme') {
       document.documentElement.dataset.theme = e.newValue;
-      themeBtn.textContent = e.newValue === 'light' ? '🌙 Dark' : '☀ Light';
+      syncThemeBtn(e.newValue);
     }
   });
 }

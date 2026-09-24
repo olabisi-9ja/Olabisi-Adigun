@@ -274,7 +274,7 @@ document.querySelectorAll('[data-copy-email]').forEach(btn => {
     try {
       await navigator.clipboard.writeText(email);
       const old = btn.textContent;
-      btn.textContent = 'Copied ✓';
+      btn.textContent = 'Copied';
       setTimeout(() => { btn.textContent = old; }, 1600);
     } catch (e) { /* clipboard unavailable (permissions/insecure) */ }
   });
