@@ -477,13 +477,16 @@
       }).then(function () {
         store.set('brief-name', data.name.split(' ')[0]);
         location.href = '/thanks/';
-      }).catch(function () {
+      }).catch(function (err) {
         submit.disabled = false;
         submit.innerHTML = old;
         status.hidden = false;
         status.className = 'form-status error';
         var mail = 'mailto:' + form.dataset.email + '?subject=' + encodeURIComponent('Project brief') + '&body=' + encodeURIComponent(summary());
-        status.innerHTML = 'That didn’t send, and nothing was lost. <a href="' + mail + '">Send the same answers by email instead</a>.';
+        // FormSubmit explains itself (e.g. the form still needs activating); show its reason as text
+        var reason = err && err.message && err.message !== 'Request failed' && err.message !== 'Failed to fetch' ? err.message : '';
+        status.innerHTML = 'That didn’t send, and nothing was lost. <a href="' + mail + '">Send the same answers by email instead</a>.' + (reason ? '<br><small class="reason"></small>' : '');
+        if (reason) $('.reason', status).textContent = 'Reason: ' + reason;
         status.focus();
       });
     });
