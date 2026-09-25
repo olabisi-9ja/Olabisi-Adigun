@@ -162,7 +162,7 @@
       start: 'Start with <a href="/works/sentry/">Sentry</a>. I pivoted mid-hackathon, rebuilt it in one night on Gemma 4, and it took first place at Build with Gemma. Then <a href="/works/meshlearn/">MeshLearn</a> for the long game.',
       stack: 'Figma for design. React, Next.js and Node.js on the web, React Native on mobile, Python and FastAPI for ML services, PostgreSQL and Supabase for data.',
       hire: 'Yes, for selected freelance work, product collaborations, and engineering roles where design and technical depth both matter. The quickest way in is the <a href="/contact/">project questionnaire</a>.',
-      where: 'Ilorin, Nigeria. I work remotely with teams anywhere.'
+      where: 'Nigeria, though I travel a lot. I work remotely with teams anywhere.'
     };
     var openAsk = function (e) {
       if (e) e.preventDefault();

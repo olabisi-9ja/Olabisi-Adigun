@@ -1,6 +1,6 @@
 # Olabisi Adigun
 
-> Designer and full-stack engineer in Ilorin, Nigeria, and founder of Greene Studios. Builds AI, fintech, education and safety products that work in low-connectivity conditions, plus brand systems.
+> Designer and full-stack engineer in Nigeria, and founder of Greene Studios. Builds AI, fintech, education and safety products that work in low-connectivity conditions, plus brand systems.
 
 Contact: abeladigun11@gmail.com or https://olabisiadigun.xyz/contact/
 
@@ -16,6 +16,7 @@ Contact: abeladigun11@gmail.com or https://olabisiadigun.xyz/contact/
 - [Bloom](https://olabisiadigun.xyz/works/bloom/): Care that keeps up with you. Calm and legible. AAA contrast on body text, an 18px base, 48px touch targets, and colour that never carries me
 - [Vera](https://olabisiadigun.xyz/works/vera/): Made from things you can name. Warm and tactile. A palette taken from clay, sand and moss, a high-contrast serif given room to breathe, and 
 - [Luminary](https://olabisiadigun.xyz/works/luminary/): Every number, one keystroke away. A precision instrument. Neutral graphite so the data is the only thing with colour, tabular figures throug
+- [What My Playlist Taught Me About Building](https://olabisiadigun.xyz/blog/what-my-playlist-taught-me/): Harry Styles, Lola Young, sombr, Gorillaz and Drake on repeat, and what each of them has taught me about designing and building products.
 - [Why I Built MeshLearn](https://olabisiadigun.xyz/blog/why-i-built-meshlearn/): The story behind MeshLearn why I decided to solve the offline education problem in Nigerian universities using BLE mesh networking.
 - [Building Greene Studios](https://olabisiadigun.xyz/blog/building-greene-studios/): Why I started a design agency at 20, what I got wrong about running a creative business, and what Greene Studios is really about.
 - [AI Experiments in the Browser](https://olabisiadigun.xyz/blog/ai-experiments/): Notes from six months of running machine learning models directly in the browser what works, what doesn't, and what surprised me most.
