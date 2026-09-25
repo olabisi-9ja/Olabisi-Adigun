@@ -1,6 +1,6 @@
 # Olabisi Adigun
 
-> Designer and full-stack engineer in Nigeria, and founder of Greene Studios. Builds AI, fintech, education and safety products that work in low-connectivity conditions, plus brand systems.
+> Designer and full-stack engineer in Nigeria, and founder of Greene Studios. Designs and builds brands, websites, apps and AI features across fintech, education, safety, healthcare and e-commerce.
 
 Contact: abeladigun11@gmail.com or https://olabisiadigun.xyz/contact/
 
@@ -22,7 +22,7 @@ Contact: abeladigun11@gmail.com or https://olabisiadigun.xyz/contact/
 - [AI Experiments in the Browser](https://olabisiadigun.xyz/blog/ai-experiments/): Notes from six months of running machine learning models directly in the browser what works, what doesn't, and what surprised me most.
 - [How I Design Systems](https://olabisiadigun.xyz/blog/how-i-design-systems/): My approach to building design systems from tokens and primitives to the decisions I've changed my mind about after building several product
 - [Writing](https://olabisiadigun.xyz/blog/): All notes and essays.
-- [Home](https://olabisiadigun.xyz/): Low signal. High stakes. Selected work, how I decide, and FAQ.
+- [Home](https://olabisiadigun.xyz/): Designs it. Builds it. Selected work, how I decide, and FAQ.
 - [About](https://olabisiadigun.xyz/about/): How I work, capabilities, stack, journey and what I’m building now.
 - [Work](https://olabisiadigun.xyz/works/): All projects, filterable, plus the brand identity gallery.
 - [Start a project](https://olabisiadigun.xyz/contact/): Six quick questions. Answers go straight to my inbox.

@@ -494,27 +494,42 @@
   var thanksName = $('[data-thanks-name]');
   if (thanksName) { var n = store.get('brief-name'); if (n) thanksName.textContent = ', ' + n; }
 
-  /* ── Hero: pixel signal bars, one bar lit ── */
+  /* ── Hero: pixel-noise pointer ── */
   var canvas = $('.hero-canvas');
   if (canvas && canvas.getContext) {
     var ctx = canvas.getContext('2d');
-    var G = 48;
+    var GW = 48, GH = 64;
     var off = document.createElement('canvas');
-    off.width = G; off.height = G;
+    off.width = GW; off.height = GH;
     var octx = off.getContext('2d');
-    var img = octx.createImageData(G, G);
-    // four bars: x-start, width, height (grid units), bottom-aligned
-    var bars = [[2, 9, 14], [14, 9, 24], [26, 9, 34], [38, 9, 44]];
-    var cell = new Int8Array(G * G); // 0 empty, 1 lit bar, 2 outline bar
-    bars.forEach(function (b, i) {
-      for (var y = G - b[2]; y < G; y++) for (var x = b[0]; x < b[0] + b[1]; x++) {
-        var edge = x === b[0] || x === b[0] + b[1] - 1 || y === G - b[2];
-        if (i === 0) cell[y * G + x] = 1;
-        else if (edge) cell[y * G + x] = 2;
+    var img = octx.createImageData(GW, GH);
+    // classic pointer silhouette, in grid units
+    var poly = [[6, 2], [6, 50], [17, 40], [26, 60], [34, 56], [25, 37], [41, 36]];
+    var inside = function (x, y) {
+      var c = false;
+      for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+        var xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+        if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) c = !c;
       }
-    });
-    var yellow = [[255, 210, 63], [255, 222, 102], [245, 196, 0], [255, 232, 140]];
-    var blue = [[33, 70, 255], [22, 52, 214], [72, 104, 255]];
+      return c;
+    };
+    var edge = function (x, y) {
+      var best = 1e9;
+      for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+        var ax = poly[j][0], ay = poly[j][1], dx = poly[i][0] - ax, dy = poly[i][1] - ay;
+        var t = Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / (dx * dx + dy * dy)));
+        var ex = ax + t * dx - x, ey = ay + t * dy - y;
+        best = Math.min(best, ex * ex + ey * ey);
+      }
+      return Math.sqrt(best);
+    };
+    var mask = new Float32Array(GW * GH);
+    for (var y = 0; y < GH; y++) for (var x = 0; x < GW; x++) {
+      var d = edge(x + .5, y + .5);
+      mask[y * GW + x] = inside(x + .5, y + .5) ? 1 : (d < 2.2 ? -d : 0);
+    }
+    var yellow = [[255, 210, 63], [255, 222, 102], [245, 196, 0], [255, 232, 140], [250, 204, 40]];
+    var blue = [[33, 70, 255], [72, 104, 255]];
     var hash = function (x, y, t) { var n = Math.sin(x * 127.1 + y * 311.7 + t * 74.7) * 43758.5453; return n - Math.floor(n); };
     var size = function () {
       var r = canvas.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
@@ -527,26 +542,23 @@
     var draw = function () {
       frame++;
       var t = Math.floor(frame / 6), data = img.data;
-      var searching = (Math.floor(frame / 40) % 4); // outline bars flicker as if searching for signal
-      for (var i = 0; i < G * G; i++) {
-        var c = cell[i], k = i * 4, px = i % G, py = (i / G) | 0;
-        if (!c) { data[k + 3] = 0; continue; }
-        var h = hash(px, py, t), col;
-        if (c === 1) { if (h < 0.04) { data[k + 3] = 0; continue; } col = yellow[(hash(px + 5, py, t) * yellow.length) | 0]; }
-        else {
-          var barIdx = px < 14 ? 0 : px < 26 ? 1 : px < 38 ? 2 : 3;
-          var on = barIdx === searching ? h > 0.1 : h > 0.55;
-          if (!on) { data[k + 3] = 0; continue; }
-          col = blue[(hash(px, py + 3, t) * blue.length) | 0];
-        }
-        data[k] = col[0]; data[k + 1] = col[1]; data[k + 2] = col[2]; data[k + 3] = 255;
+      for (var i = 0; i < GW * GH; i++) {
+        var m = mask[i], px = i % GW, py = (i / GW) | 0, k = i * 4, h = hash(px, py, t);
+        var on = m === 1 ? h > 0.035 : (m < 0 ? h > 0.72 + (-m) * 0.12 : false);
+        if (!on) { data[k + 3] = 0; continue; }
+        var c = hash(px + 3, py + 7, t) < 0.08 ? blue[(h * blue.length) | 0] : yellow[(hash(px + 5, py, t) * yellow.length) | 0];
+        data[k] = c[0]; data[k + 1] = c[1]; data[k + 2] = c[2]; data[k + 3] = 255;
       }
       octx.putImageData(img, 0, 0);
       var W = canvas.width, H = canvas.height;
       ctx.clearRect(0, 0, W, H);
       ctx.imageSmoothingEnabled = false;
-      var s = Math.min(W, H) / G;
-      ctx.drawImage(off, (W - G * s) / 2, (H - G * s) / 2, G * s, G * s);
+      ctx.save();
+      ctx.translate(W / 2, H / 2);
+      ctx.rotate(-14 * Math.PI / 180);
+      var s = Math.min(W / GW, H / GH) * 0.9;
+      ctx.drawImage(off, -GW * s / 2, -GH * s / 2, GW * s, GH * s);
+      ctx.restore();
     };
     var tick = function () { if (visible) draw(); requestAnimationFrame(tick); };
     draw();
