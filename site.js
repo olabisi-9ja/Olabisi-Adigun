@@ -369,7 +369,7 @@
     lb.setAttribute('role', 'dialog');
     lb.setAttribute('aria-modal', 'true');
     lb.setAttribute('aria-label', 'Image viewer');
-    lb.innerHTML = '<img alt=""><p></p><button class="nav-prev" type="button" aria-label="Previous image">&larr;</button><button class="nav-next" type="button" aria-label="Next image">&rarr;</button><button class="lb-close" type="button" aria-label="Close">&times;</button>';
+    lb.innerHTML = '<img alt=""><p></p><button class="nav-prev" type="button" aria-label="Previous image"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M14 8H2.5M7 3.5L2.5 8 7 12.5" stroke="currentColor" stroke-width="1.5"/></svg></button><button class="nav-next" type="button" aria-label="Next image"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M2 8h11.5M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5"/></svg></button><button class="lb-close" type="button" aria-label="Close"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5"/></svg></button>';
     body.appendChild(lb);
     var lbImg = $('img', lb), lbCap = $('p', lb), idx = 0, back = null;
     var show = function (i) {
@@ -399,7 +399,7 @@
     });
   }
 
-  /* ── Project questionnaire → email via FormSubmit ── */
+  /* ── Project questionnaire: email via FormSubmit ── */
   var form = $('#brief');
   if (form) {
     var status = $('.form-status', form), submit = $('button[type="submit"]', form);
@@ -477,13 +477,16 @@
       }).then(function () {
         store.set('brief-name', data.name.split(' ')[0]);
         location.href = '/thanks/';
-      }).catch(function () {
+      }).catch(function (err) {
         submit.disabled = false;
         submit.innerHTML = old;
         status.hidden = false;
         status.className = 'form-status error';
         var mail = 'mailto:' + form.dataset.email + '?subject=' + encodeURIComponent('Project brief') + '&body=' + encodeURIComponent(summary());
-        status.innerHTML = 'That didn’t send, and nothing was lost. <a href="' + mail + '">Send the same answers by email instead</a>.';
+        // FormSubmit explains itself (e.g. the form still needs activating); show its reason as text
+        var reason = err && err.message && err.message !== 'Request failed' && err.message !== 'Failed to fetch' ? err.message : '';
+        status.innerHTML = 'That didn’t send, and nothing was lost. <a href="' + mail + '">Send the same answers by email instead</a>.' + (reason ? '<br><small class="reason"></small>' : '');
+        if (reason) $('.reason', status).textContent = 'Reason: ' + reason;
         status.focus();
       });
     });
