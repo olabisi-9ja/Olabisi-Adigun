@@ -62,7 +62,8 @@
 <section class="s-paper case-body" data-surface="paper">
 <div class="wrap">
 <article class="chapter reveal"><h2><small>01</small>Context</h2><div class="prose">
-<h3></h3>
+<div class="callout">
+    <h3>About this case study</h3>
     <p>PayVault is a <strong>concept and case study</strong>, not a shipped product. It has never been deployed, has no production users, and no real transaction volume, so there are no measured results to report. What follows is the design thinking: the problem, the protocol architecture, the trade-offs, and what a real pilot would have to prove.</p>
   </div>
 </div></article>
@@ -76,7 +77,8 @@
   <p><em>This is desk research and reasoning about known failure modes, not field research, the case study stopped short of the merchant and user study a real launch would need.</em></p>
 </div></article>
 <article class="chapter reveal"><h2><small>04</small>Challenges</h2><div class="prose">
-<h3></h3>
+<div class="callout">
+    <h3>The Double-Spend Problem</h3>
     <p>The hardest problem in the case study was designing an escrow mechanism that prevents double-spending without access to a shared ledger. The proposed approach is a deterministic nonce tied to the device clock plus a monotonic counter, so a captured transaction cannot be replayed even while both devices are offline.</p>
     <p>This is a design position, not a validated one: the scheme has never been load-tested, adversarially tested, or reviewed by a cryptographer, and clock drift on low-end devices is an open risk I flag rather than solve here.</p>
   </div>

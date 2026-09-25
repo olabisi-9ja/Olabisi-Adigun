@@ -725,3 +725,8 @@ body.search-open .search { opacity: 1; visibility: visible; transform: translate
   .tl-body { grid-template-rows: 1fr !important; }
   img { break-inside: avoid; }
 }
+
+/* inline arrows inside running text */
+.ext .arrow, .prose .arrow, .chip .arrow, .flow .edge .arrow { width: .8em; height: .8em; vertical-align: -0.05em; }
+.ext { white-space: nowrap; }
+.chip .arrow { margin: 0 4px; }

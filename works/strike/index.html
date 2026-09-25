@@ -53,7 +53,7 @@
   <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/works/">Work</a></li><li aria-current="page">STRĪKE</li></ol></nav>
   <p class="label label-accent" style="margin:0 0 22px">E-Commerce · Frontend Engineer · Shipped · 2024</p>
   <h1 class="display lines">STRĪKE</h1>
-  <div class="case-top"><p class="lede reveal">A premium streetwear e-commerce experience built as a single, tightly composed React application with a focus on cinematic visual design, buttery-smooth animations, and a checkout flow that converts.</p><dl class="facts reveal d1"><div><dt>Role</dt><dd>Frontend Engineer</dd></div><div><dt>Year</dt><dd>2024</dd></div><div><dt>Status</dt><dd>Shipped</dd></div><div><dt>Stack</dt><dd>React · Framer Motion · Stripe · Sanity CMS</dd></div><div><dt>Live</dt><dd><a href="https://str-ke.vercel.app/" target="_blank" rel="noopener">str-ke.vercel.app ↗</a></dd></div></dl></div>
+  <div class="case-top"><p class="lede reveal">A premium streetwear e-commerce experience built as a single, tightly composed React application with a focus on cinematic visual design, buttery-smooth animations, and a checkout flow that converts.</p><dl class="facts reveal d1"><div><dt>Role</dt><dd>Frontend Engineer</dd></div><div><dt>Year</dt><dd>2024</dd></div><div><dt>Status</dt><dd>Shipped</dd></div><div><dt>Stack</dt><dd>React · Framer Motion · Stripe · Sanity CMS</dd></div><div><dt>Live</dt><dd><a class="ext" href="https://str-ke.vercel.app/" target="_blank" rel="noopener">str-ke.vercel.app <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></dd></div></dl></div>
 </div>
 </section>
 <section class="s-paper " data-surface="paper">
@@ -69,7 +69,8 @@
 <p>I approached STRĪKE as a <strong>fashion editorial, not a product catalog</strong>. The design language draws from high-fashion lookbooks: full-bleed imagery, deliberate negative space, a monochromatic base palette punctuated by a single saturated accent, and typography that commands attention.</p>
   <p>Every interaction hovering a product card, adding to cart, proceeding to checkout is animated with purpose. The animations aren't decorative; they communicate state and guide the user's attention.</p>
 
-  <h3></h3>
+  <div class="callout">
+    <h3>Performance Challenge</h3>
     <p>High-fidelity fashion imagery and smooth animations are often at war with page performance. On STRĪKE, I implemented a custom image loading pipeline: progressive JPEG loading with a blurred placeholder, intersection-observer-based lazy loading, and a WebP conversion step in the Sanity CMS asset pipeline. Lighthouse score: 94.</p>
   </div>
 </div></article>
