@@ -202,7 +202,7 @@ body.menu-open .nav { --nav-fg: var(--cream); background: transparent; backdrop-
 .hero-title .r1 { color: var(--yellow); }
 .hero-title .r2 { color: var(--cream); padding-left: 8%; }
 .hero-title .dot { color: var(--blue); }
-.hero-canvas { position: absolute; z-index: 3; pointer-events: none; right: var(--gutter); top: 50%; width: min(22vw, 320px); aspect-ratio: 1 / 1; transform: translateY(-84%); }
+.hero-canvas { position: absolute; z-index: 3; pointer-events: none; right: calc(var(--gutter) + 6vw); top: 50%; width: min(20vw, 300px); aspect-ratio: 3 / 4; transform: translateY(-80%); }
 .hero-foot { position: relative; z-index: 4; padding-top: 28px; }
 .hero-tag { font-size: clamp(16px, 1.35vw, 20px); letter-spacing: -0.02em; line-height: 1.35; margin: 0 0 24px; max-width: 540px; }
 .hero-actions { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
@@ -220,7 +220,7 @@ html.no-js .hero-title .row > span { transform: none; }
   .hero { padding-top: 100px; }
   .hero-title { font-size: clamp(40px, 13.6vw, 104px); }
   .hero-title .r2 { padding-left: 0; }
-  .hero-canvas { top: 96px; width: 34vw; transform: none; }
+  .hero-canvas { top: 90px; right: var(--gutter); width: 30vw; transform: none; }
   .hero-strip { flex-wrap: wrap; gap: 14px 24px; }
   .ticker { flex-basis: 100%; }
 }
