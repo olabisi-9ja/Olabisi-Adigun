@@ -1,66 +1,80 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" class="no-js" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co; form-action https://formsubmit.co; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Writing · Olabisi Adigun</title>
 <meta name="description" content="Notes on product building, software engineering, startups, AI and design by Olabisi Adigun.">
 <link rel="canonical" href="https://olabisiadigun.xyz/blog/">
+<meta property="og:site_name" content="Olabisi Adigun">
 <meta property="og:title" content="Writing · Olabisi Adigun">
 <meta property="og:description" content="Notes on product building, software engineering, startups, AI and design by Olabisi Adigun.">
-<meta property="og:image" content="https://olabisiadigun.xyz/assets/avatar.webp">
+<meta property="og:image" content="https://olabisiadigun.xyz/assets/og.png">
 <meta property="og:url" content="https://olabisiadigun.xyz/blog/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Writing · Olabisi Adigun">
 <meta name="twitter:description" content="Notes on product building, software engineering, startups, AI and design by Olabisi Adigun.">
-<meta name="twitter:image" content="https://olabisiadigun.xyz/assets/avatar.webp">
-<meta name="theme-color" content="#131313">
+<meta name="twitter:image" content="https://olabisiadigun.xyz/assets/og.png">
+<meta name="theme-color" content="#0d0d0e">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<script src="/theme.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
 <link rel="stylesheet" href="/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://olabisiadigun.xyz/#person", "name": "Olabisi Adigun", "url": "https://olabisiadigun.xyz/", "image": "https://olabisiadigun.xyz/assets/me/olabisi-vest.webp", "jobTitle": "Designer and full-stack engineer", "email": "mailto:abeladigun11@gmail.com", "worksFor": {"@type": "Organization", "name": "Greene Studios"}, "address": {"@type": "PostalAddress", "addressLocality": "Ilorin", "addressCountry": "NG"}, "sameAs": ["https://github.com/olabisi-9ja", "https://www.linkedin.com/in/abel-adigun-ab1bb4255", "https://x.com/Olabisi_9ja", "https://www.instagram.com/olabisi_9ja"], "knowsAbout": ["Product design", "Brand identity", "Full-stack development", "React", "Python", "AI products", "Offline-first systems"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://olabisiadigun.xyz/"}, {"@type": "ListItem", "position": 2, "name": "Writing", "item": "https://olabisiadigun.xyz/blog/"}]}, {"@type": "Blog", "name": "Notes from the build", "url": "https://olabisiadigun.xyz/blog/", "author": {"@id": "https://olabisiadigun.xyz/#person"}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="nav" data-tone="dark">
+<header class="nav" data-tone="ink">
   <div class="nav-in">
     <a class="brand" href="/" aria-label="Olabisi Adigun, home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 22" fill="none"><circle cx="8.5" cy="12" r="6.6" stroke="currentColor" stroke-width="3.6"/><circle cx="25" cy="12" r="6.6" stroke="currentColor" stroke-width="3.6"/><path d="M33.4 4.6V19.6" stroke="currentColor" stroke-width="3.6"/></svg></span><span class="brand-text"><b>Olabisi Adigun</b><span>Designer &amp; Engineer</span></span></a>
-    <nav aria-label="Primary"><ul class="nav-links"><li><a href="/works/">Work</a></li><li><a href="/about/">About</a></li><li><a href="/blog/" aria-current="page">Writing</a></li><li class="sep" aria-hidden="true"></li><li><button type="button" data-ask>Ask Olabisi</button></li></ul></nav>
-    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+    <div class="nav-right">
+      <nav aria-label="Primary"><ul class="nav-links"><li><a href="/works/">Work</a></li><li><a href="/about/">About</a></li><li><a href="/blog/" aria-current="page">Writing</a></li><li><button type="button" data-ask>Ask me</button></li></ul></nav>
+      <button class="icon-btn" type="button" data-search aria-label="Search the site (press /)"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.6" cy="8.6" r="5.6" stroke="currentColor" stroke-width="1.5"/><path d="M12.8 12.8L17.5 17.5" stroke="currentColor" stroke-width="1.5"/></svg></button>
+      <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark mode" aria-pressed="false"><svg class="sun" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="3.6" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.5v2.2M10 16.3v2.2M1.5 10h2.2M16.3 10h2.2M4 4l1.6 1.6M14.4 14.4L16 16M4 16l1.6-1.6M14.4 5.6L16 4" stroke="currentColor" stroke-width="1.5"/></svg><svg class="moon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16.5 12.3A7 7 0 017.7 3.5a7 7 0 108.8 8.8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></button>
+      <a class="nav-cta" href="/contact/">Start a project</a>
+      <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+    </div>
   </div>
 </header>
 <div class="mobile-menu" id="mobile-menu">
-  <ul><li><a href="/works/">Work</a></li><li><a href="/about/">About</a></li><li><a href="/blog/">Writing</a></li><li><button type="button" data-ask>Ask Olabisi</button></li></ul>
+  <ul><li><a href="/works/">Work</a></li><li><a href="/about/">About</a></li><li><a href="/blog/">Writing</a></li><li><button type="button" data-ask>Ask me</button></li><li><button type="button" data-search>Search</button></li></ul>
+  <a class="btn yellow" href="/contact/">Start a project <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a>
   <div class="foot"><a href="https://github.com/olabisi-9ja" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/abel-adigun-ab1bb4255" target="_blank" rel="noopener">LinkedIn</a><a href="https://x.com/Olabisi_9ja" target="_blank" rel="noopener">X</a><a href="https://www.instagram.com/olabisi_9ja" target="_blank" rel="noopener">Instagram</a><a href="mailto:abeladigun11@gmail.com">Email</a></div>
 </div>
-<main>
-<section class="s-paper phero" id="main" data-surface="dark">
+<main id="main">
+<section class="s-paper phero" data-surface="paper">
 <div class="wrap">
-  <span class="label">Writing · Notes, ideas and experiments</span>
-  <div class="head-title" style="margin-bottom:0"><h1 class="display display-xl lines">Notes from<br><span class="dim">the build.</span></h1><p class="lede reveal" style="max-width:34ch">Product building, software engineering, startups, AI and design. What I’m learning, what I’m building, and the lessons along the way.</p></div>
+  <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Writing</li></ol></nav>
+  <div class="head-title" style="margin-bottom:0"><h1 class="display display-xl lines">Notes from<br><span class="dim">the build.</span></h1><p class="lede reveal" style="max-width:34ch">Product building, software engineering, startups, AI and design. What I’m learning, what I’m building, and what went wrong along the way.</p></div>
 </div>
 </section>
-<section class="s-paper section" data-surface="dark" style="padding-top:0">
-<div class="wrap"><ul class="posts reveal"><li><a class="post-link" href="/blog/why-i-built-meshlearn/"><time class="date" datetime="2026-07-04">07.04.2026</time><div><h3>Why I Built MeshLearn</h3><p>The story behind MeshLearn why I decided to solve the offline education problem in Nigerian universities using BLE mesh networking.</p></div><span class="tags">Essay · Education · Product</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></li><li><a class="post-link" href="/blog/building-greene-studios/"><time class="date" datetime="2026-06-12">06.12.2026</time><div><h3>Building Greene Studios</h3><p>Why I started a design agency at 20, what I got wrong about running a creative business, and what Greene Studios is really about.</p></div><span class="tags">Essay · Design · Business</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></li><li><a class="post-link" href="/blog/ai-experiments/"><time class="date" datetime="2026-05-28">05.28.2026</time><div><h3>AI Experiments in the Browser</h3><p>Notes from six months of running machine learning models directly in the browser what works, what doesn't, and what surprised me most.</p></div><span class="tags">Technical · AI · Browser</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></li><li><a class="post-link" href="/blog/how-i-design-systems/"><time class="date" datetime="2026-04-10">04.10.2026</time><div><h3>How I Design Systems</h3><p>My approach to building design systems from tokens and primitives to the decisions I've changed my mind about after building several production systems.</p></div><span class="tags">Design · Systems · Engineering</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></li></ul></div>
+<section class="s-paper section" data-surface="paper" style="padding-top:0">
+<div class="wrap"><ul class="posts reveal"><li><a class="post-link" href="/blog/why-i-built-meshlearn/"><time class="date" datetime="2026-07-04">07.04.2026</time><div><h2>Why I Built MeshLearn</h2><p>The story behind MeshLearn why I decided to solve the offline education problem in Nigerian universities using BLE mesh networking.</p></div><span class="tags">Essay · Education · Product</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></li><li><a class="post-link" href="/blog/building-greene-studios/"><time class="date" datetime="2026-06-12">06.12.2026</time><div><h2>Building Greene Studios</h2><p>Why I started a design agency at 20, what I got wrong about running a creative business, and what Greene Studios is really about.</p></div><span class="tags">Essay · Design · Business</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></li><li><a class="post-link" href="/blog/ai-experiments/"><time class="date" datetime="2026-05-28">05.28.2026</time><div><h2>AI Experiments in the Browser</h2><p>Notes from six months of running machine learning models directly in the browser what works, what doesn't, and what surprised me most.</p></div><span class="tags">Technical · AI · Browser</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></li><li><a class="post-link" href="/blog/how-i-design-systems/"><time class="date" datetime="2026-04-10">04.10.2026</time><div><h2>How I Design Systems</h2><p>My approach to building design systems from tokens and primitives to the decisions I've changed my mind about after building several production systems.</p></div><span class="tags">Design · Systems · Engineering</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></li></ul></div>
 </section>
 </main>
-<footer class="s-ink foot" data-surface="light" id="contact">
+<footer class="s-ink foot" data-surface="ink" id="contact">
   <div class="wrap">
     <p class="label">Get in touch</p>
-    <a class="foot-cta" href="mailto:abeladigun11@gmail.com?subject=Let%27s%20build%20something"><h2 class="display lines">Let’s build something<br><span class="hi">worth using.</span></h2><span class="big-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" width="100%" height="100%"><path d="M3 13L13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.1"/></svg></span></a>
-    <p class="foot-mail">Or write to me: <a href="mailto:abeladigun11@gmail.com">abeladigun11@gmail.com</a></p>
+    <a class="foot-cta" href="/contact/"><h2 class="display lines">Let’s build something<br><span class="hi">worth using.</span></h2><span class="big-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" width="100%" height="100%"><path d="M3 13L13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.1"/></svg></span></a>
+    <p class="foot-mail">Or write to me at <a href="mailto:abeladigun11@gmail.com">abeladigun11@gmail.com</a> <button class="copy-btn" type="button" data-copy="abeladigun11@gmail.com" aria-label="Copy email address"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" stroke="currentColor" stroke-width="1.3"/><path d="M11 5V2.5H2.5V11H5" stroke="currentColor" stroke-width="1.3"/></svg><span>Copy</span></button></p>
     <div class="foot-bar">
       <small>© <span data-year>2026</span> Olabisi Adigun · Ilorin, Nigeria</small>
-      <nav aria-label="Footer"><a href="/about/">About</a><a href="/works/">Work</a><a href="/blog/">Writing</a><a href="https://github.com/olabisi-9ja" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><a href="https://www.linkedin.com/in/abel-adigun-ab1bb4255" target="_blank" rel="noopener">LinkedIn <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><a href="https://x.com/Olabisi_9ja" target="_blank" rel="noopener">X <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><a href="https://www.instagram.com/olabisi_9ja" target="_blank" rel="noopener">Instagram <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></nav>
+      <nav aria-label="Footer"><a href="/about/">About</a><a href="/works/">Work</a><a href="/blog/">Writing</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="https://github.com/olabisi-9ja" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><a href="https://www.linkedin.com/in/abel-adigun-ab1bb4255" target="_blank" rel="noopener">LinkedIn <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><a href="https://x.com/Olabisi_9ja" target="_blank" rel="noopener">X <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><a href="https://www.instagram.com/olabisi_9ja" target="_blank" rel="noopener">Instagram <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></nav>
     </div>
   </div>
 </footer>
-<div class="ask-scrim" aria-hidden="true"></div>
+<button class="to-top" type="button" data-top aria-label="Back to top"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 14V2.5M3.5 7L8 2.5 12.5 7" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<div class="m-cta"><a class="btn yellow" href="/contact/">Start a project <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><button class="btn up" type="button" data-top aria-label="Back to top"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 14V2.5M3.5 7L8 2.5 12.5 7" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
+<div class="scrim" aria-hidden="true"></div>
 <aside class="ask" role="dialog" aria-modal="true" aria-label="Ask Olabisi" aria-hidden="true">
-  <div class="ask-head"><div><b>Ask Olabisi</b><div class="label">Quick answers, in my words</div></div><button class="ask-close" type="button" aria-label="Close"><svg viewBox="0 0 16 16" width="14" height="14" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
-  <div class="ask-log" aria-live="polite"><div class="msg them">Hi, I’m Olabisi. Pick a question below. Anything else, just email me.</div></div>
+  <div class="ask-head"><div><b>Ask Olabisi</b><div class="label">Quick answers, in my words</div></div><button class="ask-close" type="button" aria-label="Close"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
+  <div class="ask-log" aria-live="polite"><div class="msg them">Hi, I’m Olabisi. Pick a question below. For anything else, email me.</div></div>
   <div class="ask-qs">
     <button type="button" data-q="what">What do you do?</button>
     <button type="button" data-q="now">What are you building now?</button>
@@ -71,6 +85,11 @@
   </div>
   <p class="ask-note">These answers are written ahead of time. For a real conversation, email <a href="mailto:abeladigun11@gmail.com">abeladigun11@gmail.com</a>.</p>
 </aside>
+<div class="search" role="dialog" aria-modal="true" aria-label="Search the site">
+  <div class="search-field"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.6" cy="8.6" r="5.6" stroke="currentColor" stroke-width="1.5"/><path d="M12.8 12.8L17.5 17.5" stroke="currentColor" stroke-width="1.5"/></svg><label class="vh" for="q">Search</label><input id="q" type="search" placeholder="Search projects, notes, pages" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="search-results"><kbd>Esc</kbd></div>
+  <ul class="search-results" id="search-results" role="listbox" aria-label="Results"></ul>
+  <p class="search-empty" hidden>Nothing matches that. Try “fintech”, “offline” or “brand”.</p>
+</div>
 <script src="/site.js" defer></script>
 </body>
 </html>
