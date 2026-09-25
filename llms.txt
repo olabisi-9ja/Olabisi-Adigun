@@ -1,0 +1,30 @@
+# Olabisi Adigun
+
+> Designer and full-stack engineer in Nigeria, and founder of Greene Studios. Builds AI, fintech, education and safety products that work in low-connectivity conditions, plus brand systems.
+
+Contact: abeladigun11@gmail.com or https://olabisiadigun.xyz/contact/
+
+## Pages
+
+- [MeshLearn](https://olabisiadigun.xyz/works/meshlearn/): A decentralized offline learning platform that uses Bluetooth Low Energy mesh networking to keep coursework moving even when there is no int
+- [STRĪKE](https://olabisiadigun.xyz/works/strike/): A premium streetwear e-commerce experience built as a single, tightly composed React application with a focus on cinematic visual design, bu
+- [PayVault](https://olabisiadigun.xyz/works/payvault/): A case study in offline-first fintech infrastructure: a protocol concept for emerging markets that would deliver offline payment guarantees 
+- [Sentry](https://olabisiadigun.xyz/works/sentry/): An AI-powered community safety platform that uses Gemma 4 to analyze incident reports, generate actionable insights, and improve emergency r
+- [S.A.F.E.](https://olabisiadigun.xyz/works/safe/): Smart Alert and Field Emergency: a campus-wide safety platform for KWASU, with AI triage, real-time dispatch, and offline mesh networking.
+- [AiPal](https://olabisiadigun.xyz/works/aipal/): Website design for AiPal Assist, an AI assistant. Calm, device-first, and live on its own domain.
+- [Crypto with Shola](https://olabisiadigun.xyz/works/crypto-with-shola/): A redesign of Crypto with Shola’s website, rebuilt around what a first-time visitor needs to know: what she teaches, who it’s for, and where
+- [Bloom](https://olabisiadigun.xyz/works/bloom/): Care that keeps up with you. Calm and legible. AAA contrast on body text, an 18px base, 48px touch targets, and colour that never carries me
+- [Vera](https://olabisiadigun.xyz/works/vera/): Made from things you can name. Warm and tactile. A palette taken from clay, sand and moss, a high-contrast serif given room to breathe, and 
+- [Luminary](https://olabisiadigun.xyz/works/luminary/): Every number, one keystroke away. A precision instrument. Neutral graphite so the data is the only thing with colour, tabular figures throug
+- [What My Playlist Taught Me About Building](https://olabisiadigun.xyz/blog/what-my-playlist-taught-me/): Harry Styles, Lola Young, sombr, Gorillaz and Drake on repeat, and what each of them has taught me about designing and building products.
+- [Why I Built MeshLearn](https://olabisiadigun.xyz/blog/why-i-built-meshlearn/): The story behind MeshLearn why I decided to solve the offline education problem in Nigerian universities using BLE mesh networking.
+- [Building Greene Studios](https://olabisiadigun.xyz/blog/building-greene-studios/): Why I started a design agency at 20, what I got wrong about running a creative business, and what Greene Studios is really about.
+- [AI Experiments in the Browser](https://olabisiadigun.xyz/blog/ai-experiments/): Notes from six months of running machine learning models directly in the browser what works, what doesn't, and what surprised me most.
+- [How I Design Systems](https://olabisiadigun.xyz/blog/how-i-design-systems/): My approach to building design systems from tokens and primitives to the decisions I've changed my mind about after building several product
+- [Writing](https://olabisiadigun.xyz/blog/): All notes and essays.
+- [Home](https://olabisiadigun.xyz/): Low signal. High stakes. Selected work, how I decide, and FAQ.
+- [About](https://olabisiadigun.xyz/about/): How I work, capabilities, stack, journey and what I’m building now.
+- [Work](https://olabisiadigun.xyz/works/): All projects, filterable, plus the brand identity gallery.
+- [Start a project](https://olabisiadigun.xyz/contact/): Six quick questions. Answers go straight to my inbox.
+- [Privacy policy](https://olabisiadigun.xyz/privacy/): What this site collects, and what it doesn’t.
+- [Terms of use](https://olabisiadigun.xyz/terms/): The ground rules for using this site.

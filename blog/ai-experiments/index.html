@@ -1,37 +1,65 @@
-﻿<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!DOCTYPE html>
+<html lang="en" class="no-js" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Experiments in the Browser | Olabisi Adigun</title>
-<meta name="description" content="Notes from six months of running machine learning models directly in the browser what works, what doesn't, and what surprised me most.">
-<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co; form-action https://formsubmit.co; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>AI Experiments in the Browser · Olabisi Adigun</title>
+<meta name="description" content="Notes from six months of running machine learning models directly in the browser what works, what doesn&#x27;t, and what surprised me most.">
+<link rel="canonical" href="https://olabisiadigun.xyz/blog/ai-experiments/">
+<meta property="og:site_name" content="Olabisi Adigun">
+<meta property="og:title" content="AI Experiments in the Browser · Olabisi Adigun">
+<meta property="og:description" content="Notes from six months of running machine learning models directly in the browser what works, what doesn&#x27;t, and what surprised me most.">
+<meta property="og:image" content="https://olabisiadigun.xyz/assets/og.png">
+<meta property="og:url" content="https://olabisiadigun.xyz/blog/ai-experiments/">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Experiments in the Browser · Olabisi Adigun">
+<meta name="twitter:description" content="Notes from six months of running machine learning models directly in the browser what works, what doesn&#x27;t, and what surprised me most.">
+<meta name="twitter:image" content="https://olabisiadigun.xyz/assets/og.png">
+<meta name="theme-color" content="#0d0d0e">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<script src="/theme.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../shared.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://olabisiadigun.xyz/#person", "name": "Olabisi Adigun", "url": "https://olabisiadigun.xyz/", "image": "https://olabisiadigun.xyz/assets/me/olabisi-vest.webp", "jobTitle": "Designer and full-stack engineer", "email": "mailto:abeladigun11@gmail.com", "worksFor": {"@type": "Organization", "name": "Greene Studios"}, "address": {"@type": "PostalAddress", "addressCountry": "NG"}, "sameAs": ["https://github.com/olabisi-9ja", "https://www.linkedin.com/in/abel-adigun-ab1bb4255", "https://x.com/Olabisi_9ja", "https://www.instagram.com/olabisi_9ja"], "knowsAbout": ["Product design", "Brand identity", "Full-stack development", "React", "Python", "AI products", "Offline-first systems"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://olabisiadigun.xyz/"}, {"@type": "ListItem", "position": 2, "name": "Writing", "item": "https://olabisiadigun.xyz/blog/"}, {"@type": "ListItem", "position": 3, "name": "AI Experiments in the Browser", "item": "https://olabisiadigun.xyz/blog/ai-experiments/"}]}, {"@type": "BlogPosting", "headline": "AI Experiments in the Browser", "description": "Notes from six months of running machine learning models directly in the browser what works, what doesn't, and what surprised me most.", "datePublished": "2026-05-28", "dateModified": "2026-05-28", "author": {"@id": "https://olabisiadigun.xyz/#person"}, "url": "https://olabisiadigun.xyz/blog/ai-experiments/", "wordCount": 636, "keywords": "Technical, AI, Browser"}]}</script>
 </head>
 <body>
-
-<nav class="sub-nav">
-  <a href="../../#drafts" class="back-link"><span class="i-arrow left" aria-hidden="true"></span> Back to Drafts</a>
-  <span class="site-name">Olabisi Adigun</span>
-  <button id="themeBtn" class="theme-btn">Light</button>
-</nav>
-
-<div class="page-header">
-  <div class="tag-row">
-    <span class="tag">Technical</span>
-    <span class="tag">AI</span>
-    <span class="tag">Browser</span>
-    <span class="tag">05.28.2026</span>
+<a class="skip" href="#main">Skip to content</a>
+<div class="read-bar" aria-hidden="true"></div>
+<header class="nav" data-tone="ink">
+  <div class="nav-in">
+    <a class="brand" href="/" aria-label="Olabisi Adigun, home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 22" fill="none"><circle cx="8.5" cy="12" r="6.6" stroke="currentColor" stroke-width="3.6"/><circle cx="25" cy="12" r="6.6" stroke="currentColor" stroke-width="3.6"/><path d="M33.4 4.6V19.6" stroke="currentColor" stroke-width="3.6"/></svg></span><span class="brand-text"><b>Olabisi Adigun</b><span>Designer &amp; Engineer</span></span></a>
+    <div class="nav-right">
+      <nav aria-label="Primary"><ul class="nav-links"><li><a href="/works/">Work</a></li><li><a href="/about/">About</a></li><li><a href="/blog/" aria-current="page">Writing</a></li><li><button type="button" data-ask>Ask me</button></li></ul></nav>
+      <button class="icon-btn" type="button" data-search aria-label="Search the site (press /)"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.6" cy="8.6" r="5.6" stroke="currentColor" stroke-width="1.5"/><path d="M12.8 12.8L17.5 17.5" stroke="currentColor" stroke-width="1.5"/></svg></button>
+      <button class="icon-btn theme-btn" type="button" aria-label="Switch to dark mode" aria-pressed="false"><svg class="sun" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="3.6" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.5v2.2M10 16.3v2.2M1.5 10h2.2M16.3 10h2.2M4 4l1.6 1.6M14.4 14.4L16 16M4 16l1.6-1.6M14.4 5.6L16 4" stroke="currentColor" stroke-width="1.5"/></svg><svg class="moon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16.5 12.3A7 7 0 017.7 3.5a7 7 0 108.8 8.8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></button>
+      <a class="nav-cta" href="/contact/">Start a project</a>
+      <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+    </div>
   </div>
-  <h1>AI Experiments in the Browser</h1>
-  <p class="lead">Notes from six months of running machine learning models directly in the browser using TensorFlow.js, ONNX Runtime Web, and WebGPU what works, what doesn't, and what genuinely surprised me.</p>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <ul><li><a href="/works/">Work</a></li><li><a href="/about/">About</a></li><li><a href="/blog/">Writing</a></li><li><button type="button" data-ask>Ask me</button></li><li><button type="button" data-search>Search</button></li></ul>
+  <a class="btn yellow" href="/contact/">Start a project <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a>
+  <div class="foot"><a href="https://github.com/olabisi-9ja" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/abel-adigun-ab1bb4255" target="_blank" rel="noopener">LinkedIn</a><a href="https://x.com/Olabisi_9ja" target="_blank" rel="noopener">X</a><a href="https://www.instagram.com/olabisi_9ja" target="_blank" rel="noopener">Instagram</a><a href="mailto:abeladigun11@gmail.com">Email</a></div>
 </div>
-
-<div class="page-body">
-  <p>The browser is becoming a legitimate ML inference environment. That sentence would have sounded absurd five years ago. Today, with WebGPU shipping in major browsers and quantized model formats that compress a 7B parameter model into something that fits in a few gigabytes of GPU memory, it's increasingly real.</p>
+<main id="main">
+<section class="s-paper article-hero" data-surface="paper">
+<div class="wrap">
+  <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/blog/">Writing</a></li><li aria-current="page">AI Experiments in the Browser</li></ol></nav>
+  <div class="article-meta reveal"><span class="label label-accent">Technical · AI · Browser</span><span class="label"><time datetime="2026-05-28">May 28, 2026</time></span><span class="label">3 min read</span></div>
+  <h1 class="display lines">AI Experiments in the Browser</h1>
+  <p class="lede reveal">Notes from six months of running machine learning models directly in the browser using TensorFlow.js, ONNX Runtime Web, and WebGPU what works, what doesn't, and what genuinely surprised me.</p>
+</div>
+</section>
+<section class="s-paper article" data-surface="paper">
+<div class="wrap"><div class="prose">
+<p>The browser is becoming a legitimate ML inference environment. That sentence would have sounded absurd five years ago. Today, with WebGPU shipping in major browsers and quantized model formats that compress a 7B parameter model into something that fits in a few gigabytes of GPU memory, it's increasingly real.</p>
   <p>Over the last six months, I've been running experiments mostly in the context of MeshLearn's on-device recommendation system, but also as standalone explorations. Here's what I've learned.</p>
 
   <h2>The Stack That Actually Works</h2>
@@ -46,8 +74,7 @@
   <p>The arrival of WebGPU in Chrome 113 and Firefox Nightly is genuinely significant. WebGL was designed for graphics, not compute it works for ML inference but it's a workaround. WebGPU exposes compute shaders directly, which is the right primitive for matrix multiplication at scale.</p>
   <p>In my benchmarks, the same ONNX model running with WebGPU is roughly 3–4× faster than WebGL on an M1 MacBook. On machines with dedicated GPUs, the gap is larger.</p>
 
-  <div class="callout">
-    <h4>Benchmark: Sentiment Classification</h4>
+  <h3></h3>
     <p>Model: DistilBERT-base-uncased-finetuned-sst-2 (quantized INT8, 67MB)<br>
     WebGL backend: ~185ms per inference<br>
     WebGPU backend: ~48ms per inference<br>
@@ -71,23 +98,50 @@
   <h2>What I'll Keep Exploring</h2>
   <p>The area I'm most excited about right now is <strong>retrieval-augmented generation (RAG) in the browser</strong>. The pieces are coming together: small embedding models (all-MiniLM-L6-v2 is 23MB quantized), client-side vector stores like LanceDB-WASM, and small language models that can run inference at reasonable speeds on modern hardware.</p>
   <p>The vision: a web application that can perform sophisticated contextual retrieval and generation entirely on the client, with no API calls, no data leaving the device, and no usage costs. For certain categories of application, this is now buildable.</p>
-</div>
-
-<div class="page-cta">
-  <h2>Experimenting with something similar?</h2>
-  <p>I love talking about ML in constrained environments. Let's compare notes.</p>
-  <div class="cta-btns">
-    <a href="https://x.com/olabisi_9ja" target="_blank" rel="noopener" class="btn-primary">Find me on X <span class="i-arrow" aria-hidden="true"></span></a>
-    <a href="../../#drafts" class="btn-outline"><span class="i-arrow left" aria-hidden="true"></span> More Drafts</a>
+</div></div>
+</section>
+<section class="s-yellow section" data-surface="yellow" style="padding:clamp(70px,8vw,120px) 0">
+<div class="wrap"><div class="head-title" style="margin:0">
+  <div><h2 class="display display-md lines">Experimenting with something similar?</h2><p class="small reveal" style="margin:18px 0 0;max-width:44ch">I love talking about ML in constrained environments. Let's compare notes.</p></div>
+  <div class="chips reveal" style="gap:10px"><a class="btn solid" href="https://x.com/Olabisi_9ja" target="_blank" rel="noopener">Find me on X <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><a class="btn" href="/blog/">More writing <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M2 8h11.5M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></div>
+</div></div>
+</section>
+<section class="s-paper " data-surface="paper">
+<div class="wrap"><a class="next-case" href="/blog/how-i-design-systems/"><div><span class="label">Next note</span><h2 class="display display-md" style="margin-top:14px;max-width:18ch">How I Design Systems</h2></div><span class="big-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" width="100%" height="100%"><path d="M3 13L13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.1"/></svg></span></a></div>
+</section>
+</main>
+<footer class="s-ink foot" data-surface="ink" id="contact">
+  <div class="wrap">
+    <p class="label">Get in touch</p>
+    <a class="foot-cta" href="/contact/"><h2 class="display lines">Let’s build something<br><span class="hi">worth using.</span></h2><span class="big-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" width="100%" height="100%"><path d="M3 13L13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.1"/></svg></span></a>
+    <p class="foot-mail">Or write to me at <a href="mailto:abeladigun11@gmail.com">abeladigun11@gmail.com</a> <button class="copy-btn" type="button" data-copy="abeladigun11@gmail.com" aria-label="Copy email address"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" stroke="currentColor" stroke-width="1.3"/><path d="M11 5V2.5H2.5V11H5" stroke="currentColor" stroke-width="1.3"/></svg><span>Copy</span></button></p>
+    <div class="foot-bar">
+      <small>© <span data-year>2026</span> Olabisi Adigun · Nigeria</small>
+      <nav aria-label="Footer"><a href="/about/">About</a><a href="/works/">Work</a><a href="/blog/">Writing</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="https://github.com/olabisi-9ja" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><a href="https://www.linkedin.com/in/abel-adigun-ab1bb4255" target="_blank" rel="noopener">LinkedIn <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><a href="https://x.com/Olabisi_9ja" target="_blank" rel="noopener">X <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><a href="https://www.instagram.com/olabisi_9ja" target="_blank" rel="noopener">Instagram <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a></nav>
+    </div>
   </div>
-</div>
-
-<footer class="sub-footer">
-  <span class="copy">© 2026 Olabisi Adigun</span>
-  <a href="../../" class="back-home">olabisiadigun.xyz <span class="i-arrow" aria-hidden="true"></span></a>
 </footer>
-
-<script src="../../shared.js"></script>
+<button class="to-top" type="button" data-top aria-label="Back to top"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 14V2.5M3.5 7L8 2.5 12.5 7" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<div class="m-cta"><a class="btn yellow" href="/contact/">Start a project <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.4"/></svg></span></a><button class="btn up" type="button" data-top aria-label="Back to top"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 14V2.5M3.5 7L8 2.5 12.5 7" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
+<div class="scrim" aria-hidden="true"></div>
+<aside class="ask" role="dialog" aria-modal="true" aria-label="Ask Olabisi" aria-hidden="true">
+  <div class="ask-head"><div><b>Ask Olabisi</b><div class="label">Quick answers, in my words</div></div><button class="ask-close" type="button" aria-label="Close"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
+  <div class="ask-log" aria-live="polite"><div class="msg them">Hi, I’m Olabisi. Pick a question below. For anything else, email me.</div></div>
+  <div class="ask-qs">
+    <button type="button" data-q="what">What do you do?</button>
+    <button type="button" data-q="now">What are you building now?</button>
+    <button type="button" data-q="start">Which project should I see first?</button>
+    <button type="button" data-q="stack">What’s your stack?</button>
+    <button type="button" data-q="hire">Are you available?</button>
+    <button type="button" data-q="where">Where are you based?</button>
+  </div>
+  <p class="ask-note">These answers are written ahead of time. For a real conversation, email <a href="mailto:abeladigun11@gmail.com">abeladigun11@gmail.com</a>.</p>
+</aside>
+<div class="search" role="dialog" aria-modal="true" aria-label="Search the site">
+  <div class="search-field"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.6" cy="8.6" r="5.6" stroke="currentColor" stroke-width="1.5"/><path d="M12.8 12.8L17.5 17.5" stroke="currentColor" stroke-width="1.5"/></svg><label class="vh" for="q">Search</label><input id="q" type="search" placeholder="Search projects, notes, pages" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="search-results"><kbd>Esc</kbd></div>
+  <ul class="search-results" id="search-results" role="listbox" aria-label="Results"></ul>
+  <p class="search-empty" hidden>Nothing matches that. Try “fintech”, “offline” or “brand”.</p>
+</div>
+<script src="/site.js" defer></script>
 </body>
 </html>
-
