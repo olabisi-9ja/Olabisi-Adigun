@@ -736,6 +736,9 @@
     });
   }
 
+  /* ── Resume: print button ── */
+  $$('[data-print]').forEach(function (b) { b.addEventListener('click', function () { window.print(); }); });
+
   /* ── Current year ── */
   $$('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
