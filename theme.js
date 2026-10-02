@@ -6,4 +6,6 @@
   d.setAttribute('data-theme', t);
   d.classList.remove('no-js');
   d.classList.add('js');
+  // The home loader plays once per session.
+  try { if (sessionStorage.getItem('loaded')) d.classList.add('no-loader'); } catch (e) {}
 })();

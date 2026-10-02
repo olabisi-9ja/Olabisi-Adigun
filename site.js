@@ -63,8 +63,31 @@
   } else {
     revealables.forEach(function (el) { el.classList.add('in'); });
   }
-  var hero = $('.hero');
-  if (hero) requestAnimationFrame(function () { setTimeout(function () { hero.classList.add('in'); }, 60); });
+  /* ── Loader: the mark shimmers until the window has loaded, once per session ── */
+  var hero = $('.hero'), heroStarted = false;
+  var startHero = function () {
+    if (heroStarted) return;
+    heroStarted = true;
+    if (hero) hero.classList.add('in');
+    document.dispatchEvent(new CustomEvent('hero:start'));
+  };
+  var loader = $('.loader');
+  if (loader && getComputedStyle(loader).display !== 'none') {
+    var finish = function () {
+      // keep it up long enough to read as intentional, not as a flash
+      var wait = Math.max(0, (reduce ? 400 : 1200) - performance.now());
+      setTimeout(function () {
+        loader.classList.add('done');
+        try { sessionStorage.setItem('loaded', '1'); } catch (e) {}
+        setTimeout(startHero, reduce ? 0 : 420);
+        setTimeout(function () { loader.parentNode && loader.parentNode.removeChild(loader); }, 1000);
+      }, wait);
+    };
+    if (document.readyState === 'complete') finish(); else window.addEventListener('load', finish);
+  } else {
+    if (loader) loader.parentNode.removeChild(loader);
+    requestAnimationFrame(function () { setTimeout(startHero, 60); });
+  }
 
   /* ── Image skeletons: fade each image in once it has loaded ── */
   $$('.sk > img').forEach(function (img) {
@@ -494,75 +517,223 @@
   var thanksName = $('[data-thanks-name]');
   if (thanksName) { var n = store.get('brief-name'); if (n) thanksName.textContent = ', ' + n; }
 
-  /* ── Hero: pixel-noise pointer ── */
-  var canvas = $('.hero-canvas');
-  if (canvas && canvas.getContext) {
-    var ctx = canvas.getContext('2d');
-    var GW = 48, GH = 64;
-    var off = document.createElement('canvas');
-    off.width = GW; off.height = GH;
-    var octx = off.getContext('2d');
-    var img = octx.createImageData(GW, GH);
-    // classic pointer silhouette, in grid units
-    var poly = [[6, 2], [6, 50], [17, 40], [26, 60], [34, 56], [25, 37], [41, 36]];
-    var inside = function (x, y) {
-      var c = false;
-      for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-        var xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
-        if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) c = !c;
+  /* ── Hero: ID tag on a lanyard ──
+     A small verlet rope hangs from above the viewport. The tag is a rigid
+     two-point body (buckle + centre) on the end of it, so it drops, catches
+     on the strap, swings and settles like the real thing. Drag it to throw it. */
+  var stage = $('.tag-stage');
+  if (stage) {
+    var tagEl = $('.tag', stage), strapSvg = $('.tag-strap', stage), strapPath = $('#strap-path');
+    var band = $('.strap-band', stage), edge = $('.strap-edge', stage), strapText = $('.strap-text', stage);
+    var AX = 0.51, AY = 0.03, RATIO = 1448 / 595; // buckle position in the tag image, image aspect
+    var SEGS = 12, DT = 1 / 120, G = 2400, AIR = 0.994;
+    var pts = [], links = [], dim = null, running = false, dropped = false, still = 0, visibleTag = true, drag = null, acc = 0, last = 0;
+    var P = function (x, y, w) { return { x: x, y: y, px: x, py: y, w: w }; };
+
+    var measure = function () {
+      var W = stage.clientWidth, H = Math.min(stage.clientHeight, window.innerHeight), small = W < 760;
+      var th = small ? H * 0.36 : H * 0.58;
+      var tw = th / RATIO, maxW = small ? W * 0.4 : W * 0.21;
+      if (tw > maxW) { tw = maxW; th = tw * RATIO; }
+      var top = small ? 112 : H * 0.13;
+      return { W: W, H: H, tw: tw, th: th, ax: W * (small ? 0.5 : 0.75), ay: -320, top: top, len: top + 320, d: th * 0.47 };
+    };
+    var build = function (offY, offX) {
+      dim = measure();
+      tagEl.style.width = dim.tw + 'px';
+      // on phones the tag gets its own room above the headline instead of covering it
+      hero.style.setProperty('--tag-room', Math.round(dim.top + dim.th + 28) + 'px');
+      tagEl.style.transformOrigin = (AX * 100) + '% ' + (AY * 100) + '%';
+      var sw = dim.tw * 0.13;
+      band.style.strokeWidth = sw; edge.style.strokeWidth = sw;
+      strapText.style.fontSize = (sw * 0.42) + 'px';
+      pts = []; links = [];
+      var bx = dim.ax + (offX || 0), by = dim.ay + dim.len + (offY || 0);
+      for (var i = 0; i <= SEGS; i++) {
+        var t = i / SEGS;
+        pts.push(P(dim.ax + (bx - dim.ax) * t, dim.ay + (by - dim.ay) * t, i === 0 ? 0 : 1));
       }
-      return c;
+      pts[SEGS].w = 0.12;                        // buckle: heavy
+      pts.push(P(bx, by + dim.d, 0.12));         // tag centre: heavy
+      var seg = dim.len / SEGS;
+      for (var k = 0; k < SEGS; k++) links.push({ a: k, b: k + 1, l: seg, slack: true });
+      links.push({ a: SEGS, b: SEGS + 1, l: dim.d, slack: false });
     };
-    var edge = function (x, y) {
-      var best = 1e9;
-      for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-        var ax = poly[j][0], ay = poly[j][1], dx = poly[i][0] - ax, dy = poly[i][1] - ay;
-        var t = Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / (dx * dx + dy * dy)));
-        var ex = ax + t * dx - x, ey = ay + t * dy - y;
-        best = Math.min(best, ex * ex + ey * ey);
+    var step = function () {
+      for (var i = 0; i < pts.length; i++) {
+        var p = pts[i];
+        if (!p.w) continue;
+        var vx = (p.x - p.px) * AIR, vy = (p.y - p.py) * AIR;
+        p.px = p.x; p.py = p.y;
+        p.x += vx; p.y += vy + G * DT * DT;
       }
-      return Math.sqrt(best);
-    };
-    var mask = new Float32Array(GW * GH);
-    for (var y = 0; y < GH; y++) for (var x = 0; x < GW; x++) {
-      var d = edge(x + .5, y + .5);
-      mask[y * GW + x] = inside(x + .5, y + .5) ? 1 : (d < 2.2 ? -d : 0);
-    }
-    var yellow = [[255, 210, 63], [255, 222, 102], [245, 196, 0], [255, 232, 140], [250, 204, 40]];
-    var blue = [[33, 70, 255], [72, 104, 255]];
-    var hash = function (x, y, t) { var n = Math.sin(x * 127.1 + y * 311.7 + t * 74.7) * 43758.5453; return n - Math.floor(n); };
-    var size = function () {
-      var r = canvas.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
-      canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
-    };
-    size();
-    window.addEventListener('resize', size);
-    var visible = true, frame = 0;
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(canvas);
-    var draw = function () {
-      frame++;
-      var t = Math.floor(frame / 6), data = img.data;
-      for (var i = 0; i < GW * GH; i++) {
-        var m = mask[i], px = i % GW, py = (i / GW) | 0, k = i * 4, h = hash(px, py, t);
-        var on = m === 1 ? h > 0.035 : (m < 0 ? h > 0.72 + (-m) * 0.12 : false);
-        if (!on) { data[k + 3] = 0; continue; }
-        var c = hash(px + 3, py + 7, t) < 0.08 ? blue[(h * blue.length) | 0] : yellow[(hash(px + 5, py, t) * yellow.length) | 0];
-        data[k] = c[0]; data[k + 1] = c[1]; data[k + 2] = c[2]; data[k + 3] = 255;
+      // damp the tag's twist against the strap so it swings, not flails
+      var bk = pts[SEGS], ct = pts[SEGS + 1];
+      ct.px += ((ct.x - ct.px) - (bk.x - bk.px)) * 0.05;
+      ct.py += ((ct.y - ct.py) - (bk.y - bk.py)) * 0.05;
+      if (drag) { ct.x = drag.x; ct.y = drag.y; }
+      for (var it = 0; it < 14; it++) {
+        for (var j = 0; j < links.length; j++) {
+          var L = links[j], a = pts[L.a], b = pts[L.b];
+          var dx = b.x - a.x, dy = b.y - a.y, dist = Math.sqrt(dx * dx + dy * dy) || 1e-6;
+          if (L.slack && dist <= L.l) continue;   // a strap can go slack, never stretch
+          var wa = a.w, wb = (drag && L.b === SEGS + 1) ? 0 : b.w, ws = wa + wb;
+          if (!ws) continue;
+          var diff = (dist - L.l) / dist / ws * (L.slack ? 0.9 : 1);
+          a.x += dx * diff * wa; a.y += dy * diff * wa;
+          b.x -= dx * diff * wb; b.y -= dy * diff * wb;
+        }
       }
-      octx.putImageData(img, 0, 0);
-      var W = canvas.width, H = canvas.height;
-      ctx.clearRect(0, 0, W, H);
-      ctx.imageSmoothingEnabled = false;
-      ctx.save();
-      ctx.translate(W / 2, H / 2);
-      ctx.rotate(-14 * Math.PI / 180);
-      var s = Math.min(W / GW, H / GH) * 0.9;
-      ctx.drawImage(off, -GW * s / 2, -GH * s / 2, GW * s, GH * s);
-      ctx.restore();
     };
-    var tick = function () { if (visible) draw(); requestAnimationFrame(tick); };
-    draw();
-    if (!reduce) requestAnimationFrame(tick);
+    var render = function () {
+      var b = pts[SEGS], c = pts[SEGS + 1];
+      var ang = Math.atan2(c.x - b.x, c.y - b.y);
+      tagEl.style.transform = 'translate(' + (b.x - AX * dim.tw).toFixed(2) + 'px,' + (b.y - AY * dim.th).toFixed(2) + 'px) rotate(' + (-ang * 180 / Math.PI).toFixed(3) + 'deg)';
+      // strap: smooth curve through the rope, tucked a little over the buckle
+      var ux = (c.x - b.x) / dim.d, uy = (c.y - b.y) / dim.d, tuck = dim.th * 0.035;
+      var r = pts.slice(0, SEGS + 1).concat([{ x: b.x + ux * tuck, y: b.y + uy * tuck }]);
+      var d = 'M' + r[0].x.toFixed(1) + ' ' + r[0].y.toFixed(1);
+      for (var i = 1; i < r.length - 1; i++) {
+        d += ' Q' + r[i].x.toFixed(1) + ' ' + r[i].y.toFixed(1) + ' ' + ((r[i].x + r[i + 1].x) / 2).toFixed(1) + ' ' + ((r[i].y + r[i + 1].y) / 2).toFixed(1);
+      }
+      d += ' L' + r[r.length - 1].x.toFixed(1) + ' ' + r[r.length - 1].y.toFixed(1);
+      strapPath.setAttribute('d', d);
+    };
+    var loop = function (now) {
+      if (!running) return;
+      if (!visibleTag) { running = false; return; }  // off-screen: sleep, the observer wakes it
+      acc += Math.min(0.05, (now - (last || now)) / 1000);
+      while (acc >= DT) { step(); acc -= DT; }
+      render();
+      var c = pts[SEGS + 1], v = Math.abs(c.x - c.px) + Math.abs(c.y - c.py);
+      still = (v < 0.01 && !drag) ? still + 1 : 0;
+      if (still > 90) { running = false; return; }  // asleep until touched
+      last = now;
+      requestAnimationFrame(loop);
+    };
+    var wake = function () { if (!running) { running = true; still = 0; last = 0; acc = 0; requestAnimationFrame(loop); } };
+    var show = function () { tagEl.classList.add('on'); strapSvg.classList.add('on'); };
+
+    build(0, 0);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visibleTag = en[en.length - 1].isIntersecting; if (visibleTag && dropped) wake(); }).observe(stage);
+    var drop = function () {
+      if (dropped) return;
+      dropped = true;
+      if (reduce) { build(0, 0); render(); show(); return; }
+      build(-(dim.len + dim.th + 160), dim.tw * 0.25);  // start above the viewport, slightly off-centre
+      render(); show(); wake();
+    };
+    document.addEventListener('hero:start', drop);
+    if (heroStarted) drop();
+
+    var rw;
+    window.addEventListener('resize', function () {
+      clearTimeout(rw);
+      rw = setTimeout(function () { if (Math.abs(measure().W - dim.W) < 2 && Math.abs(measure().H - dim.H) < 80) return; build(0, 0); render(); if (dropped && !reduce) wake(); }, 120);
+    });
+
+    var toStage = function (e) { var r = stage.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    tagEl.addEventListener('pointerdown', function (e) {
+      if (reduce || !dropped) return;
+      var p = toStage(e), c = pts[SEGS + 1];
+      drag = { ox: c.x - p.x, oy: c.y - p.y, x: c.x, y: c.y };
+      tagEl.classList.add('grab');
+      try { tagEl.setPointerCapture(e.pointerId); } catch (err) {}
+      e.preventDefault();
+      wake();
+    });
+    tagEl.addEventListener('pointermove', function (e) {
+      if (!drag) {
+        // brushing past it with the cursor nudges it, like flicking a real badge
+        if (reduce || !dropped || e.pointerType !== 'mouse') return;
+        var c = pts[SEGS + 1], k = 0.06;
+        c.px -= Math.max(-40, Math.min(40, e.movementX)) * k;
+        c.py -= Math.max(-40, Math.min(40, e.movementY)) * k * 0.4;
+        wake();
+        return;
+      }
+      var p = toStage(e);
+      drag.x = p.x + drag.ox; drag.y = p.y + drag.oy;
+    });
+    var release = function () { if (!drag) return; drag = null; tagEl.classList.remove('grab'); wake(); };
+    tagEl.addEventListener('pointerup', release);
+    tagEl.addEventListener('pointercancel', release);
+  }
+
+  /* ── Mockup marquee → viewer ── */
+  var mq = $('[data-mq]'), lb = $('.lb');
+  if (mq && lb) {
+    var shots = $$('.mq-track:not([aria-hidden]) .mq-item', mq).map(function (b) {
+      var im = $('img', b);
+      return { src: im.getAttribute('src'), w: im.getAttribute('width'), h: im.getAttribute('height'), title: b.getAttribute('data-title'), sub: b.getAttribute('data-sub'), href: b.getAttribute('data-href') };
+    });
+    var lbImg = $('.lb-img', lb), lbTitle = $('.lb-title', lb), lbSub = $('.lb-sub', lb), lbCount = $('.lb-count', lb), lbLink = $('.lb-link', lb), lbClose = $('.lb-close', lb);
+    var cur = 0, lbBack = null, lbTimer;
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var paint = function (i, dir) {
+      cur = (i + shots.length) % shots.length;
+      var s = shots[cur];
+      lbImg.setAttribute('width', s.w); lbImg.setAttribute('height', s.h);
+      lbImg.src = s.src; lbImg.alt = s.title + ': ' + s.sub;
+      lbTitle.textContent = s.title; lbSub.textContent = s.sub;
+      lbCount.textContent = pad(cur + 1) + ' / ' + pad(shots.length);
+      lbLink.href = s.href;
+      lbLink.firstChild.nodeValue = s.href === '/works/' ? 'See all the work ' : 'See the case study ';
+      if (dir && !reduce) {
+        lbImg.style.setProperty('--from', (dir * 32) + 'px');
+        lbImg.classList.remove('swap'); void lbImg.offsetWidth; lbImg.classList.add('swap');
+      }
+    };
+    var openLb = function (i, from) {
+      clearTimeout(lbTimer);
+      lbBack = document.activeElement;
+      mq.classList.add('paused');
+      lb.hidden = false;
+      paint(i, 0);
+      if (!reduce && from && lbImg.animate) {
+        var r0 = from.getBoundingClientRect(), r1 = lbImg.getBoundingClientRect();
+        if (r1.width && r1.height) {
+          lbImg.animate([
+            { transform: 'translate(' + (r0.left - r1.left) + 'px,' + (r0.top - r1.top) + 'px) scale(' + (r0.width / r1.width) + ',' + (r0.height / r1.height) + ')' },
+            { transform: 'none' }
+          ], { duration: 560, easing: 'cubic-bezier(.2,.7,.1,1)' });
+        }
+      }
+      requestAnimationFrame(function () { lb.classList.add('open'); });
+      lbClose.focus({ preventScroll: true });
+    };
+    var closeLb = function () {
+      if (lb.hidden) return;
+      lb.classList.remove('open');
+      lbTimer = setTimeout(function () { lb.hidden = true; mq.classList.remove('paused'); }, reduce ? 0 : 320);
+      if (lbBack && lbBack.focus) lbBack.focus({ preventScroll: true });
+    };
+    mq.addEventListener('click', function (e) {
+      var b = e.target.closest('.mq-item');
+      if (b) openLb(+b.getAttribute('data-i'), $('img', b));
+    });
+    $('.lb-prev', lb).addEventListener('click', function () { paint(cur - 1, -1); });
+    $('.lb-next', lb).addEventListener('click', function () { paint(cur + 1, 1); });
+    $$('[data-lb-close]', lb).forEach(function (el) { el.addEventListener('click', closeLb); });
+    document.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') { e.preventDefault(); closeLb(); }
+      else if (e.key === 'ArrowLeft') paint(cur - 1, -1);
+      else if (e.key === 'ArrowRight') paint(cur + 1, 1);
+      else if (e.key === 'Tab') {
+        var f = $$('button, a[href]', lb).filter(function (el) { return el.offsetParent !== null; });
+        var i = f.indexOf(document.activeElement);
+        if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+      }
+    });
+    var sx = null;
+    lb.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') sx = e.clientX; });
+    lb.addEventListener('pointerup', function (e) {
+      if (sx === null) return;
+      var dx = e.clientX - sx; sx = null;
+      if (Math.abs(dx) > 50) paint(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+    });
   }
 
   /* ── Current year ── */
